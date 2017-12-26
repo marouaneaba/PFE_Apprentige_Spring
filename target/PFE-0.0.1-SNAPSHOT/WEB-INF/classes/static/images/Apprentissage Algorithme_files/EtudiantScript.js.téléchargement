@@ -1,0 +1,127 @@
+
+ var elem =  document.getElementById("button_algo");
+
+    elem.addEventListener("click",function(event){
+
+
+            switch(event.target.text){
+                case "Ajouter Ligne":
+                    var code = document.getElementById("code");
+                    var li = document.createElement("li");
+                    li.id = "ch";
+                    //li.appendChild(document.createTextNode("...")); 
+                    code.appendChild(li);
+                    console.log(event.target.text);
+                    break;
+                case "Supprimer Ligne":
+                    var result = confirm("étes vous sùr de supprimer se ligne!!!");
+                    console.log(result);
+                    console.log(event.target.text);
+                    if(result === true){
+                        if(document.getElementById("s")){
+                            var supp = document.getElementById("s");
+                            supp.parentNode.removeChild(supp);
+                        }else alert("Veuillez selectionner un ligne à supprimer !!");
+                    }
+                    break;
+                case "Declarer Variable":
+                var nomVariable = prompt("Rentrez le nom de la variable");
+                    var variable = document.getElementById("variable");
+                    for(var i=0;i<variable.childElementCount;i++){
+                        if(variable.children[i].innerHTML === nomVariable)
+                            console.log("varibale existe deja");
+                        else{
+                            var texteNode =  document.createTextNode(nomVariable);
+                            var li = document.createElement("li");
+                            li.id = "ch";
+                            li.appendChild(texteNode);
+                            variable.appendChild(li);
+                            return;
+                        }
+                    }
+                    
+
+                    console.log(event.target.text);
+                    break;
+                case "Lire Variable":
+                    console.log(event.target.text);
+                    $dialog.showModal();
+                    var dialog = document.getElementById("mydialog");
+                    var variable = document.getElementById("variable");
+                    var ajout = document.getElementById("sel");
+
+                    
+                    while(ajout.childElementCount!=0){
+                        //supprimer tout les enfant de select(ajout).
+                        var el = document.getElementById("option");
+                        el.parentNode.removeChild(el);
+                        console.log(ajout.childElementCount);
+                        
+                    }
+                    
+                    //console.log(variable.childElementCount);
+                    for(var i=0;i<variable.childElementCount;i++){
+                            var option = document.createElement("option");
+                            option.id = "option";
+                            ajout.appendChild(option);
+                            
+                            //console.log(document.createTextNode(variable.children[0].innerHTML));
+                            option.appendChild(document.createTextNode(variable.children[i].innerHTML));
+                    }
+
+                    dialog.appendChild(sel);
+                    //dialog.append(" <b>Appended text</b>.");
+                    //dialog.appendChild(document.createTextNode("mmmmmmmm"));
+                    break;
+                case "Aff valeur a une Variable":
+                    console.log(event.target.text);
+                    break;
+                case "Afficher Variable":
+                    console.log(event.target.text);
+                    break;
+                case "Condition Si":
+                    console.log(event.target.text);
+                    break;
+                case "Boucle Pour":
+                    console.log(event.target.text);
+                    break;
+                case "Boucle Tant Que":
+                    console.log(event.target.text);
+                    break;
+
+            }
+        
+    });
+
+
+
+var selectVariable = document.getElementById("variable");
+var selectCode = document.getElementById("code");
+
+
+selectVariable.addEventListener("click",modifiable);
+selectCode.addEventListener("click",modifiable);
+
+
+function modifiable(event){
+    console.log(event.target);
+
+    if(document.getElementById("s")){
+        document.getElementById("s").removeAttribute("style");
+        document.getElementById("s").id = "ch";
+
+
+    }
+    if(event.target.id==="variable" || event.target.id === "code"){
+        event.target.style.background="";
+    }else if(event.target.id != "variable"){
+        event.target.style.background = "red";
+        event.target.id = "s";
+    }
+    /*for(var i=0;i<select.length;i++){
+        select.item(i).style.background = "red";
+        console.log("eeeee");
+    }*/
+    //if(event.targer.id = "ch")
+        //console.log("oui");
+}

@@ -35,7 +35,7 @@ public class ControllerAdmin extends MainController{
 	
 		HttpSession session = request.getSession();
 		pModel.addAttribute("user", ((Personne)session.getAttribute("user")).getNom());
-		pModel.addAttribute("nombreConnaissanceFalseUser", mRepositoryConnaissance.findConnaissanceByValider(false));
+		pModel.addAttribute("nombreConnaissanceFalseUser", mRepositoryConnaissance.findConnaissanceByValider(false).size());
 		return "admin";
         
     }

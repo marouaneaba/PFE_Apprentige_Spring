@@ -165,7 +165,7 @@ public class ControllerConnaissance {
     public RedirectView ValiderConnaissanceAdmin(@PathVariable("id_ExEtu")Long idCon,ModelMap pModel) {
 		
 		mConnaissanceService.updateConnaissanceToTrue(idCon);
-		
+		sessionGlobal.deleteConnaissance(idCon);
 		return new RedirectView("/validerConnaissance");
     }
 }

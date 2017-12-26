@@ -1,0 +1,54 @@
+#saisir{
+	background: #F0E68C;
+	border: 3px blue dashed;
+
+}
+
+#sec{
+		margin-top: 0px;
+		margin-bottom: 30px;
+}
+body
+{
+    background: url('images/fond_jaune.png');
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    color: #181818;
+}
+#bloc_page{
+	left: 10%;
+	width: 80%;
+	height: 10%;
+}
+#select_button{
+
+	margin-top: 30px;
+}
+table
+{
+    border-collapse: collapse;
+}
+td, th /* Mettre une bordure sur les td ET les th */
+{
+    border: 1px solid black;
+    padding: 10px;
+    
+}
+#btn{
+	width: 5px;
+}
+#exo{
+	width:800px;
+}
+#ecriture{
+	font-style: italic;
+	font-family:"Comic Sans Ms";
+	font-size: 12px;
+}
+.apprentissage{
+	font-size: 12px;
+	margin-bottom: 5px;	
+	width: 190px;
+}
+
+
+
