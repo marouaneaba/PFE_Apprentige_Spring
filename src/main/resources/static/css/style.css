@@ -1,0 +1,212 @@
+
+body{
+    background: url('images/images.jpg');
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    color: #181818;
+    font-size: 110%;
+}
+
+#bloc_page
+{
+    width: 1000px;
+    margin: auto;
+}
+
+section h1, nav a
+{
+    font-family: Dayrom, serif;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+header
+{
+    background: url('images/separateur.png') repeat-x bottom;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+#titre_principal
+{
+    display: flex;
+    flex-direction: column;
+}
+
+#logo
+{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+#logo img
+{
+    bottom :20px;
+    width: 80px;
+    height: 80px;
+}
+
+header h1
+{
+    font-family: 'BallparkWeiner', serif;
+    font-size: 2.5em;
+    font-weight: normal;
+    margin: 0 0 0 10px;
+}
+
+header h2
+{
+    font-family: Dayrom, serif;
+    font-size: 1.1em;
+    margin-top: 0px;
+    font-weight: normal;
+}
+
+/* Navigation */
+
+nav ul
+{
+    list-style-type: none;
+    display: flex;
+}
+
+nav li
+{
+    margin-right: 15px;
+}
+
+nav a
+{
+    font-size: 1.3em;
+    color: #181818;
+    padding-bottom: 3px;
+    text-decoration: none;
+}
+
+nav a:hover
+{
+    color: #008000;
+    border-bottom: 3px solid #008000;
+}
+/****************************************/
+/* footer */
+footer
+{
+    display: flex;
+    padding-top: 25px;
+}
+
+footer p, footer ul
+{
+    font-size: 0.8em;
+}
+footer h1
+{
+    font-size: 1.1em;
+}
+
+#information
+{
+    width: 28%;
+}
+#mes_photos
+{
+    width: 35%;
+}
+
+#mes_amis
+{
+    width: 31%;
+}
+
+#mes_photos img
+{
+    border: 1px solid #181818;
+    margin-right: 2px;
+}
+
+#listes_amis
+{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+}
+
+#mes_amis ul
+{
+    list-style-image: url('images/ico_liensexterne.png');
+    padding-left: 2px;
+}
+
+#mes_amis a
+{
+    text-decoration: none;
+    color: #760001;
+}
+
+
+/* saissie */
+#par {
+    padding: 1em;
+}
+
+#par #ch,#par #ch #par #ch {
+    position:relative;
+    top:0;
+    bottom:0;
+    padding-bottom: 7px;
+	color: #428bca;
+}
+
+#par #ch {
+    margin-left: 2em;
+}
+
+#ch {
+    list-style-type: none;
+}
+
+#ch {
+    padding:0 0 0 10px;
+    position: relative;
+    top:1em;
+}
+
+#ch:hover {
+    text-decoration: none;
+}
+
+#ch.addBorderBefore:before {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 28px;
+    position: absolute;
+    left: -47px;
+    top:-16px;
+    border-left: 1px solid gray;
+}
+
+#ch:before {
+    content: "";
+    display: inline-block;
+    width: 25px;
+    height: 0;
+    position: relative;
+    left: -1em;
+    top:-0.2em;
+	bottom:1.5em;
+    border-top: 2px solid gray;
+}
+#par #ch #par #ch:last-child:after, #par #ch:last-child:after {
+    content: '';
+    display: block;
+    width: 1em;
+    height: 1em;
+    position: relative;
+    background: #fff;
+    top: 9px;
+    left: -1px;
+}
+

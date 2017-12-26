@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="css/style2.css" />
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <title>Apprentissage Algorithme</title>
+        <link href="bootstarp/css/bootstrap.css" rel="stylesheet">
+        <!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">-->
+
+    </head>
+    
+    <body style="background: #eeeaea ;">
+            <div id="bloc_page" class ="col-xs-12">
+              
+            <!--    <div style=" overflow:scroll;width:300; height:200 border:#000000 1px solid;">
+     
+                Code html
+             
+            </div> -->
+          <header class ="row">
+                <div id="titre_principal" class ="col-xs-12">
+                    <div id="logo" class ="row">
+                        <img class ="col-xs-2" height="122" width="142" src="images/lille_logo1.png" alt="Logo d'univérsité lille 1" />
+                        <h1 class ="col-xs-12">Universit&egrave; Lille 1</h1>    
+                        <h2>Science Technologie</h2>
+                    </div>
+                    
+                </div>
+
+                <div id="exercice" class="col-xs-offset-6">
+                    <div id="banniere_description">
+                        Université Lille 1 Science Technologie
+                        <a href="http://www.fil.univ-lille1.fr/portail/index.php?dipl=MInfo&sem=ESERVICE&ue=ACCUEIL&label=Pr%C3%A9sentation" class="bouton_rouge">Acceder au Formation <img height="22" width="22" src="images/flesh.png" alt="" /></a>
+                    </div>
+                </div>
+
+                <!--<nav class ="col-xs-push-3 col-xs-12" >
+                    <ul class="nav nav-pills" >
+                        <li class="active"><a href="#accueil">Accueil</a></li>
+                        <li><a href="#livres">Livres</a></li>
+                        <li><a href="#temoignages">Témoignages</a></li>
+                    </ul>
+                    <ul id="menu">
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">propos</a></li>
+                        <li><a href="#">Deconexion</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>-->
+                <nav class ="col-xs-push-1 col-xs-12" style="margin-bottom:40px;margin-top:20px;">
+                    <ul class="nav nav-pills" id="menu">
+                        <li class="active"><a href="/aceuil">Accueil</a></li>
+                        <li class="disabled"><a href="#">propos</a></li>
+                        <li><a href="login.html">Deconexion</a></li>
+                        <li ><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+    
+            <section class="row" >
+                <div class="col-xs-12" style="margin-bottom:2 0px;">
+                    <img height="92" width="72" src="images/algo.png" alt="" class="ico_categorie" />
+                    <label>Rentrez le nom d'exercice : </label>
+                    <input type="text" id="nameExercice" name="nom exercice" >
+                </div>
+                <label>Rentrez l'exercice :</label>
+                
+
+                <textarea  id="enoncer_exo" class ="col-xs-11" style="height: 300px;">	
+                
+                </textarea>
+                
+                
+            </section>
+<div class="boutons"><!-- <button onclick="$dialog.showModal()">Ouvrir en mode modal</button></div>  -->
+   
+
+    
+    <div id="condition1">   
+        <div class="col-xs-12">
+             <!-- condition if/ tantque-->
+            <dialog id="mydialog" close> 
+                
+                <center>
+                <label id="si" class="dropdown-content">Si :</label>
+                <label id="tantque" class="dropdown-content">TantQue :</label>
+                <label id="typeVar" class="dropdown-content"> Type : </label>
+                <select id="NameVariable" class="dropdown-content list">
+                    <option>variable1</option>
+                    <option>variable2</option>
+                </select>
+                <select id="typeVariable" class="dropdown-content list">
+                    <option>INTEGER</option>
+                    <option>CHARACTER</option>
+                </select>
+                <label id="fleche" class="dropdown-content"> = </label>
+                
+                <select id="typeConditionSi" class="dropdown-content list">
+                    <option><</option>
+                    <option>==</option>
+                    <option><=</option>
+                    <option>></option>
+                    <option>>=</option>
+                </select>
+
+                <input style="height: 20px;width: 50px;" list="variables" type="text" id="choix_variables" class="dropdown-content ">
+                <datalist id="variables">
+                  <option value="var1">
+                  <option value="var2">
+                  <option value="var3">
+                </datalist>
+
+                <label id="alors" class="dropdown-content">Alors :</label>
+                
+                <label id="de" class="dropdown-content">De :</label>
+                <label id="nameVariable" class="dropdown-content">Name Variable : </label>
+                <input id="input1" class="dropdown-content" placeholder="" />
+                
+                <label id="jusqu" class="dropdown-content">Jusqu'aù :</label>
+                
+                <input id="input2" class="dropdown-content" placeholder="" />
+
+                <input id="checkbox" type="checkbox" class="dropdown-content" placeholder="" />
+                
+                <select id="choix_con" class="dropdown-content list">
+                    <option><</option>
+                    <option>==</option>
+                    <option><=</option>
+                    <option>></option>
+                    <option>>=</option>
+                </select>
+
+                <input style="height: 20px;width: 50px;" list="variables" type="text" id="saisie" class="dropdown-content ">
+                <datalist id="variables">
+                  <option value="var1">
+                  <option value="var2">
+                  <option value="var3">
+                </datalist>
+                </center>
+                <center><div id ="button" class="boutons"><button onclick="Annuler()">Fermer</button>&nbsp;<button onclick="valider(document.getElementsByClassName('list'),document.getElementById('input1').value)">OK</button></div> </center>
+            </dialog> 
+            
+            
+ 
+        </div> 
+
+    </div>
+            <div class ="col-xs-12" id="connaissance" style="text-align: center;font-family:Comic Sans Ms;">
+            <section  class ="col-xs-10" style="margin-bottom: 50px;">
+               
+                    <center class="row"><br/>
+                    	
+                     		{{#connaissances}}
+                     		<p class ="col-xs-4">
+                                <input id="connaissances" style="margin-left: 60px;" class="btn-success" type="checkbox" name="connaissancesSelect" value="{{nom}}">
+                                <label>{{nom}}</label>
+                            </p>
+                            {{/connaissances}}
+                            {{#connaissancesNonValider}}
+                            <p class ="col-xs-4">
+                                **<input id="connaissances" style="margin-left: 60px;" class="btn-success" type="checkbox" name="connaissancesSelect" value="{{nom}}">
+                                <label>{{nom}}</label>
+                            </p>
+                            {{/connaissancesNonValider}}
+                            {{^connaissances}}
+                            <p class ="col-xs-12"><br/>
+                                Aucun Connaissance Enregistrer
+                            </p>
+                            {{/connaissances}}
+                            {{^connaissancesNonValider}}
+                            <p class ="col-xs-12"><br/>
+                                Tout vos Connaissance son valider
+                            </p>
+                            {{/connaissancesNonValider}}
+                         
+                    </center>
+            </section>
+            </div> <br/><br/>
+
+            <section class ="col-xs-8" id="saisir" style="height: 500px;overflow:scroll;width:300; height:500 ;">
+            
+                
+                <ul id="par" style="">
+                <li><h5 style="color:#C41C1C;font-weight:bold;"> Variable </h5></li>
+                    <ul id="variable" class="ligne">
+                    
+                    </ul>
+                </li>
+                    <li><h5 style="color:#C41C1C;font-weight:bold;"> DEBUT ALGORITHME </h5></li>
+                    <ul id="code" class="ligne">
+                    
+                    </ul>
+                </li>
+                    <li><h5 style="color:#C41C1C;font-weight:bold;"> FIN ALGORITHME </h5></li>
+                </ul>
+
+            
+            </section>
+            <div class ="col-xs-3 col-xs-offset-1" id="select_button" style="font-size: 0px;text-align: center;color: #2F4F4F;font-family:Comic Sans Ms;">
+                <section id="button_algo">
+                    <ul >
+                        <li><a class ="btn btn btn-primary" id="apprentissage">Ajouter Ligne</a></li>
+                        <li><a class ="btn btn btn-danger" id="apprentissage">Supprimer Ligne</a></li>
+
+
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Declarer Variable</a></li>-->
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Lire Variable</a></li>
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Aff valeur a une Variable</a></li>
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Afficher Variable</a></li>
+
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Condition Si</a></li>
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Sinon si</a></li>
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Boucle Pour</a></li>
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Boucle Tant Que</a></li>
+                    </ul>
+                </section>
+            </div>
+        </div>   
+            <div class="col-xs-8 col-xs-offset-4" id="validate" style="font-size: 16px;text-align: center;color: #2F4F4F;font-family:Comic Sans Ms">
+                
+                <a id="transmettre"  class="col-xs-4 btn col-xs-offset-4 btn btn btn-success ">Transsmetre</a>
+
+            </div>
+
+            
+            
+        </div>  
+            
+            <footer class="col-xs-12">
+                <div id="information" class="col-xs-offset-1 col-xs-4">
+                    <h3>Projet Apprentissage Algorithme</h3>
+                    <p>ecrire sur le projet</p>
+                    <p>la date de sotenus</p>
+                </div>
+
+                <div id="mes_amis" class="col-xs-3 col-xs-offset-2">
+                    <h1>Contact</h1>
+                    <div id="listes_amis">
+                        <ul>
+                            <li><a href="#">Mr Soulaimane</a></li>
+                            <li><a href="#">Maouane Abakarim</a></li>
+                            <li><a href="#">Amed Idrissi</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
+<script type="text/javascript" src="js/EtudiantScript.js"></script>
+
+
+<script> 
+			function getXMLHttpRequest() {
+				var xhr = null;
+				
+				if (window.XMLHttpRequest || window.ActiveXObject) {
+					if (window.ActiveXObject) {
+						try {
+							xhr = new ActiveXObject("Msxml2.XMLHTTP");
+						} catch(e) {
+							xhr = new ActiveXObject("Microsoft.XMLHTTP");
+						}
+					} else {
+						xhr = new XMLHttpRequest(); 
+					}
+				} else {
+					alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
+					return null;
+				}
+				
+				return xhr;
+			}
+			function request() {
+				
+				var xhr   = getXMLHttpRequest();
+				
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+						
+					} else if (xhr.readyState < 4) {
+					}
+				};
+				/*var nomExercice = encodeURIComponent(document.getElementById("nameExercice").value);
+				var exercice = encodeURIComponent(document.getElementById("enoncer_exo").value);
+				var variable = encodeURIComponent(document.getElementById("variable").innerHTML);
+				var code = encodeURIComponent(document.getElementById("code").innerHTML);*/
+				
+				var nomExercice = document.getElementById("nameExercice").value;
+				var exercice =  document.getElementById("enoncer_exo").value;				
+				var variable = document.getElementById("variable").innerHTML;
+				var code = document.getElementById("code").innerHTML;
+				document.getElementById("nameExercice").innerHTML = "";
+				document.getElementById("enoncer_exo").innerHTML="";
+				document.getElementById("variable").innerHTML="";
+				document.getElementById("code").innerHTML="";
+				
+				//var connaissanceSel = document.getElementById("connaissances").value;
+				//console.log(connaissanceSel);
+				
+				xhr.open("POST", "/AjouterExercice", true);
+				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				//xhr.send('IdEditor='+nomExercice+"&lorem="+exercice+"&name="+variable);
+				xhr.send('nomExercice='+nomExercice+"&exercice="+exercice+"&variable="+variable+"&code="+code);
+				
+				s.ligneSelected = null;
+			}
+			
+			document.getElementById("transmettre").addEventListener("click",request);
+			//request();
+			
+    var dialog = document.getElementById('mydialog'); 
+               /* if(!('show' in $dialog)){ 
+                        document.getElementById('promptCompat').className = 'no_dialog'; 
+                } */
+                dialog.addEventListener('close', function() { 
+                    
+                    document.getElementById("si").classList.remove('show');
+                    document.getElementById("alors").classList.remove('show');
+                    document.getElementById("tantque").classList.remove('show');
+                    document.getElementById("choix_variables").classList.remove('show');
+                    document.getElementById("de").classList.remove('show');
+                    document.getElementById("jusqu").classList.remove('show');
+                    document.getElementById("typeVar").classList.remove("show");
+                    document.getElementById("nameVariable").classList.remove("show");
+
+                    document.getElementById("tantque").classList.remove("show");
+                    document.getElementById("NameVariable").classList.remove("show");
+
+                    //document.getElementById("sel").classList.remove('show');
+                        //console.log('Fermeture. ', this.returnValue); 
+                });
+                
+        </script> 
+
