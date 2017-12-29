@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.lille1.PFE.Entity.Connaissance;
-import com.lille1.PFE.Entity.Enseignant;
+import com.lille1.PFE.Entity.Exercice;
 import com.lille1.PFE.Entity.Personne;
 import com.lille1.PFE.Repository.RepositoryConnaissance;
+import com.lille1.PFE.Repository.RepositoryEnseignant;
+import com.lille1.PFE.Repository.RepositoryExercice;
 import com.lille1.PFE.Service.ConnaissanceService;
-import com.lille1.PFE.Service.EnseignantService;
 
 @Controller
 public class ControllerConnaissance {
@@ -34,7 +35,10 @@ public class ControllerConnaissance {
 	private ConnaissanceService mConnaissanceService;
 	
 	@Autowired
-	private EnseignantService mEnseignantService;
+	private RepositoryExercice mRepositoryExercice;
+	
+	@Autowired
+	private RepositoryEnseignant mRepositoryEnseignant;
 	
 	@Resource(name="globalSessionMessage")
 	ClassScope sessionGlobal;
@@ -65,7 +69,10 @@ public class ControllerConnaissance {
 		
 		if(trouver && ((Personne)session.getAttribute("user")).getRole().equals("enseignant")){
 			
-			Connaissance co = mRepositoryConnaissance.save(new Connaissance(nom,ordre,null,false));
+			Connaissance co = new Connaissance(nom,ordre,null,false);
+			mRepositoryConnaissance.save(co);
+			co.setEnseignant(mRepositoryEnseignant.findOne(((Personne)session.getAttribute("user")).getIdEns()));
+			mRepositoryEnseignant.save(mRepositoryEnseignant.findOne(((Personne)session.getAttribute("user")).getIdEns()));
 			System.out.println("con : "+co);
 			sessionGlobal.addConnaissance(co);
 			return new RedirectView("/enseignant");
@@ -92,8 +99,18 @@ public class ControllerConnaissance {
 		}
 		//Enseignant enseignant = mEnseignantService.getEnseignantById(personne.getIdEns());
 		//pModel.addAttribute("connaissances",mEnseignantService.getAllConnaissaneEnseignantById(enseignant.getIdEns()));
-		List<Connaissance> connaissances = sessionGlobal.getConnaissance();
-		System.out.println(connaissances);
+		List<Connaissance> Allconnaissances =mRepositoryConnaissance.findConnaissanceByValider(false); //sessionGlobal.getConnaissance();
+		List<Connaissance> connaissances = new ArrayList<>();
+		for(int i=0;i<Allconnaissances.size();i++){
+			if(Allconnaissances.get(i).getEnseignant() != null)
+			System.out.println(Allconnaissances.get(i).getEnseignant().getIdEns()+" , "+ personne.getIdEns());
+			if(Allconnaissances.get(i).getEnseignant() != null &&
+					Allconnaissances.get(i).getEnseignant().getIdEns() == personne.getIdEns()){
+				connaissances.add(Allconnaissances.get(i));
+			}
+				
+		}
+		System.out.println("teste : "+connaissances);
 		pModel.addAttribute("connaissances",connaissances);
 		
 		return "ConsulterConnaissances";
@@ -105,12 +122,15 @@ public class ControllerConnaissance {
 		HttpSession session = request.getSession();
 		Personne personne = (Personne)session.getAttribute("user");
 		if(personne.getRole().equals("admin")){
+			pModel.addAttribute("Affvalider", false);
 			pModel.addAttribute("consulter", true);
 		}else if(personne.getRole().equals("enseignant")){
+			pModel.addAttribute("Affvalider", false);
 			pModel.addAttribute("consulter", false);
 		}
 		
-		Enseignant enseignant = mEnseignantService.getEnseignantById(personne.getIdEns());
+		
+		//Enseignant enseignant = mEnseignantService.getEnseignantById(personne.getIdEns());
 		pModel.addAttribute("connaissances",mRepositoryConnaissance.findConnaissanceByValider(true));
 		
 		return "ConsulterConnaissances";
@@ -122,12 +142,14 @@ public class ControllerConnaissance {
 		HttpSession session = request.getSession();
 		Personne personne = (Personne)session.getAttribute("user");
 		if(personne.getRole().equals("admin")){
+			pModel.addAttribute("Affvalider", true);
 			pModel.addAttribute("consulter", true);
 		}else if(personne.getRole().equals("enseignant")){
+			pModel.addAttribute("Affvalider", false);
 			pModel.addAttribute("consulter", false);
 		}
 		
-		Enseignant enseignant = mEnseignantService.getEnseignantById(personne.getIdEns());
+		//Enseignant enseignant = mEnseignantService.getEnseignantById(personne.getIdEns());
 		pModel.addAttribute("connaissances",mRepositoryConnaissance.findConnaissanceByValider(false));
 		
 		return "ConsulterConnaissances";
@@ -137,8 +159,10 @@ public class ControllerConnaissance {
     public RedirectView supprimerConnaissances(Model pModel,@PathVariable("id_ExEtu") Long idCon) {
 		
 		mConnaissanceService.supprimerConnaissances(idCon);
+		sessionGlobal.deleteConnaissance(idCon);
 		pModel.addAttribute("connaissances",mConnaissanceService.getAllConnaissance());
-		return new RedirectView("/consultConnaissance");
+		//return new RedirectView("/consultConnaissance");
+		return new RedirectView("/dashbord");
     }
 	
 	
@@ -156,9 +180,11 @@ public class ControllerConnaissance {
 			,ModelMap pModel) {
 		
 		mConnaissanceService.updateConnaissance(idCon,nom,ordre);
+		sessionGlobal.updateConnaissance(idCon, nom, ordre);
 		pModel.addAttribute("connaissances",mConnaissanceService.getAllConnaissance());
 		
-		return new RedirectView("/consultConnaissance");
+		//return new RedirectView("/consultConnaissance");
+		return new RedirectView("/dashbord");
     }
 	
 	@RequestMapping(value ="/consultConnaissance/valider/{id_ExEtu}",method = RequestMethod.GET)
@@ -167,5 +193,28 @@ public class ControllerConnaissance {
 		mConnaissanceService.updateConnaissanceToTrue(idCon);
 		sessionGlobal.deleteConnaissance(idCon);
 		return new RedirectView("/validerConnaissance");
+    }
+	
+	@RequestMapping(value ="/consultConnaissance/deleteOfExercice/{id_ExEtu}/{idExercice}",method = RequestMethod.GET)
+    public RedirectView SuuprimerConnaissanceOfExercice(@PathVariable("id_ExEtu")Long idCon,
+    		@PathVariable("idExercice")Long idExercice,ModelMap pModel) {
+		
+		System.out.println("idconnaissance : "+idCon+" ,idExercice : "+idExercice);
+		Exercice exercice = mRepositoryExercice.findOne(idExercice);
+		List<Connaissance> connaissances = exercice.getConnaissance();
+		
+		for(int i=0;i<connaissances.size();i++){
+			if(connaissances.get(i).getId_ExEtu() ==idCon ){
+				connaissances.remove(i);
+				break;
+			}
+		}
+		exercice.getConnaissance().clear();
+		exercice.setConnaissance(null);
+		exercice.setConnaissance(connaissances);
+		mRepositoryExercice.save(exercice);
+		
+		System.out.println("marouane abakarim");
+		return new RedirectView("/consulterExercice");
     }
 }

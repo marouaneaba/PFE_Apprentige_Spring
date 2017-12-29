@@ -19,6 +19,9 @@ public interface RepositoryEtudiant extends PersonneBaseRepository<Etudiant>{
 			@Param("password")String password,@Param("email")String email );
 	
 	public Etudiant findByNomAndPassword(String pseudo,String password);
-	public Etudiant findByNom(String pseudo);
+	
+	
+	@Query("select e from Etudiant e where e.nom = :nom")
+	public Etudiant findByNome(@Param("nom")String nom);
 
 }

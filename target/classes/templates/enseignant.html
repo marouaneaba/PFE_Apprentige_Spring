@@ -34,7 +34,7 @@
                     <ul class="nav nav-pills" id="menu">
                         <li class="active"><a href="/aceuil">Accueil</a></li>
                         <li ><a href="#">propos</a></li>
-                        <li><a href="deconnexion">Deconexion</a></li>
+                        <li><a href="/logout">Deconexion</a></li>
                         <li class="disabled"><a href="#">Contact</a></li>
                     </ul>
                 </nav>
@@ -56,7 +56,7 @@
             
             <div class="col-lg-9 btn col-lg-offset-1">
             <a href="AjouterExercice" class="btn btn btn-block" style="background: #ffffff;margin-top: 20px;font-style: italic;font-family:Comic Sans Ms";>Ajouter Un Exercice</a>
-            <a href="consulterExercice" class="btn btn btn-block" style="background: #ffffff;margin-top: 10px;font-style: italic;font-family:Comic Sans Ms";>Les exercices</a>
+            <a href="consulterExercice" class="btn btn btn-block" style="background: #ffffff;margin-top: 10px;font-style: italic;font-family:Comic Sans Ms";><span style="color:red">"{{nombreExerciceZeroConnaissance}}"</span> n'a aucun connaissance [ Les exercices ]</a>
             
             <a href="Ajoutconnaissance" class="btn btn btn-block" style="background: #ffffff;margin-top: 10px;font-style: italic;font-family:Comic Sans Ms";>Ajouter Une Connaissance</a>
             <a href="/consultConnaissance" class="btn btn btn-block" style="background: #ffffff;margin-top: 10px;font-style: italic;font-family:Comic Sans Ms";><span style="color:red">"{{nombreConnaissanceFalseUser}}"</span>  connaissances n'est pas valider</a>

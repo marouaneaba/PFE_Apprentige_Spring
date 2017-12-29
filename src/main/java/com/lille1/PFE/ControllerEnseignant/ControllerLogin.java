@@ -15,14 +15,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.lille1.PFE.Entity.Admin;
-import com.lille1.PFE.Entity.Enseignant;
-import com.lille1.PFE.Entity.Etudiant;
 import com.lille1.PFE.Entity.Personne;
-import com.lille1.PFE.Repository.RepositoryAdmin;
 import com.lille1.PFE.Repository.RepositoryPersonne;
-import com.lille1.PFE.Service.EnseignantService;
-import com.lille1.PFE.Service.EtudiantService;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -30,17 +24,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/login")
 public class ControllerLogin{
 
-	@Autowired
+	/*@Autowired
 	private EtudiantService mEtudiantService;
 	
 	@Autowired
 	private EnseignantService mEnseignantService;
 	
 	@Autowired
-	private RepositoryPersonne mRepositoryPersonne;
+	private RepositoryAdmin mRepositoryAdmin;*/
 	
 	@Autowired
-	private RepositoryAdmin mRepositoryAdmin;
+	private RepositoryPersonne mRepositoryPersonne;
+	
+	
 	
 	
 	
@@ -64,9 +60,9 @@ public class ControllerLogin{
 		
 		HttpSession session = request.getSession();
 		
-		Etudiant etudiant = mEtudiantService.VerifyEtudiant(pseudo, password);
+		/*Etudiant etudiant = mEtudiantService.VerifyEtudiant(pseudo, password);
 		Enseignant enseignant = mEnseignantService.VerifyEnseignant(pseudo, password);
-		Admin admin = 	mRepositoryAdmin.findAdminByNomAndPassword(pseudo,password);
+		Admin admin = 	mRepositoryAdmin.findAdminByNomAndPassword(pseudo,password);*/
 		Personne personne = mRepositoryPersonne.findByNomAndPassword(pseudo, password);
 		
 		

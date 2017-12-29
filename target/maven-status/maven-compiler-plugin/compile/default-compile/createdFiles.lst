@@ -3,7 +3,6 @@ com\lille1\PFE\Entity\Connaissance.class
 com\lille1\PFE\Service\EtudiantService.class
 com\lille1\PFE\ControllerEnseignant\ControllerConsulterExercice.class
 com\lille1\PFE\Service\ExerciceService.class
-com\lille1\PFE\ControllerEnseignant\ControllerDeconexion.class
 com\lille1\PFE\Service\ConnaissanceService.class
 com\lille1\PFE\Entity\Admin_.class
 com\lille1\PFE\Entity\Enseignant_.class
@@ -36,9 +35,11 @@ com\lille1\PFE\Service\EnseignantService.class
 com\lille1\PFE\ControllerEnseignant\RequestAPI.class
 com\lille1\PFE\Entity\Connaissance_.class
 com\lille1\PFE\Entity\Exercice_.class
+com\lille1\PFE\ControllerEnseignant\ControllerPassword.class
 com\lille1\PFE\MainController.class
 com\lille1\PFE\Entity\Exercice.class
 com\lille1\PFE\Entity\Personne.class
+com\lille1\PFE\Service\AdminService.class
 com\lille1\PFE\Repository\RepositoryConnaissance.class
 com\lille1\PFE\Entity\Personne_.class
 com\lille1\PFE\Application.class

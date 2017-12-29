@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.lille1.PFE.Entity.Exercice;
 import com.lille1.PFE.Entity.Personne;
+import com.lille1.PFE.Repository.RepositoryEnseignant;
 import com.lille1.PFE.Service.ConnaissanceService;
 import com.lille1.PFE.Service.ExerciceService;
 
@@ -27,6 +28,8 @@ public class ControllerConsulterExercice {
 	private ExerciceService mExerciceService;
 	@Autowired
 	private ConnaissanceService mConnaissanceService;
+	@Autowired 
+	private RepositoryEnseignant mRepositoryEnseignant;
 	
 	@RequestMapping(method = RequestMethod.GET)
     public String recupererExercice(HttpServletRequest request,ModelMap pModel) {
@@ -42,8 +45,7 @@ public class ControllerConsulterExercice {
 		}
 		
 		
-		//pModel.addAttribute("exercices", mExerciceService.getExerciceEnseignant(personne.getIdEns()));
-		//pModel.addAttribute("exercices", mExerciceService.getAllExercices());
+	
 		
 		return "ConsulterExercices";
     }
@@ -54,13 +56,17 @@ public class ControllerConsulterExercice {
 		Exercice exercice = mExerciceService.getExerciceById(idEx);
 		
 		model.addAttribute("exercice", exercice);
+		model.addAttribute("exerciceXML", exercice.getXMLSolution());
 		model.addAttribute("connaissancees",mConnaissanceService.getAllConnaissance() );
 		
+		System.out.println("sol : "+exercice.getXMLSolution());
+		System.out.println("solNE : "+exercice.getXMLSolutionNettoyer());
 		return "ModifierExercice";
 	}
 	
 	@RequestMapping(value = "/delete/{id_ex}", method = RequestMethod.GET)
     public RedirectView deleteExerciceGet(Model model,@PathVariable("id_ex") Long idEx) {
+		
 		mExerciceService.deleteExercice(idEx);
 		
 		

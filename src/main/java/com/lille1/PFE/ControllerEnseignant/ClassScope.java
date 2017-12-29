@@ -45,6 +45,16 @@ public class ClassScope {
 		}
 	}
 	
+	public void updateConnaissance(Long id,String nom,String ordre){
+		for(int i=0;i<this.connaisances.size();i++){
+			if(this.connaisances.get(i).getId_ExEtu() == id){
+				this.connaisances.get(i).setNom(nom);
+				this.connaisances.get(i).setOrdre(ordre);
+				break;
+			}
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "ClassScope [message=" + connaisances + "]";

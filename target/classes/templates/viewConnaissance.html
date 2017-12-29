@@ -58,7 +58,7 @@
                     <ul class="nav nav-pills" id="menu">
                         <li class="active"><a href="/aceuil">Accueil</a></li>
                         <li class="disabled"><a href="#">propos</a></li>
-                        <li><a href="login.html">Deconexion</a></li>
+                        <li><a href="/logout">Deconexion</a></li>
                         <li ><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
@@ -74,25 +74,23 @@
 				
 					<div class="af-outer af-required">
 						<div class="af-inner">
-							<label for="input-title">Nom</label>
-							<label>{{connaissances.nom}}</label>
+							<label style="color:blue;" for="input-title">Nom : </label>
+							<label style="margin-left:20px;">{{connaissances.nom}}</label>
 						</div>
 					</div>
 				
 					<div class="af-outer af-required">
 						<div class="af-inner">
-							<label for="input-name">Ordre</label>
-							<label>{{connaissances.ordre}}</label>
+							<label style="color:blue;" for="input-name">Ordre : </label>
+							<label style="margin-left:20px;" >{{connaissances.ordre}}</label>
 						</div>
 					</div>
 					
-					<div class="af-outer af-required">
-						<div class="af-inner">
-							<label for="input-name">Score</label>
-							<label>{{connaissances.score}}</label>
-						</div>
-					</div>
-					<a href="">Quitterr</a> <a href="">Modifier</a> <a href="">Supprimer</a>
+					
+					<a href="/consulterExercice">Quitterr</a> 
+					<a href="/consultConnaissance/update/{{connaissances.id_ExEtu}}">Modifier</a> 
+					
+					<a href="/consultConnaissance/deleteOfExercice/{{connaissances.id_ExEtu}}/{{idExercice}}">Supprimer</a>
 				</center>	
 					
 					

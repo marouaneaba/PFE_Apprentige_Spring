@@ -34,7 +34,7 @@
                     <ul class="nav nav-pills" id="menu">
                         <li class="active"><a href="/aceuil">Accueil</a></li>
                         <li ><a href="#">propos</a></li>
-                        <li><a href="#">Deconexion</a></li>
+                        <li><a href="/logout">Deconexion</a></li>
                         <li class="disabled"><a href="#">Contact</a></li>
                     </ul>
                 </nav>
@@ -69,7 +69,7 @@
                     <tr>
                         <td>{{id_ex}}</td>
                         <td>{{nomExercice}}</td>
-                        <td>{{#connaissance}}<a href="/viewConnaissance/view/{{id_ExEtu}}">{{nom}}</a><br/>{{/connaissance}}</td>
+                        <td>{{#connaissance}}<a href="/viewConnaissance/view/{{id_ExEtu}}/{{id_ex}}">{{nom}}</a><br/>{{/connaissance}}</td>
                         {{#consulter}}
                         <td><a href="/consulterExercice/update/{{id_ex}}" class="btn btn-success " id="ecriture">Modifier l'exercice</a></td>
                         <td><a href="/consulterExercice/delete/{{id_ex}}" class="btn btn-success " id="ecriture">Supprimer l'exercice</a></td>

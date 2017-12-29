@@ -79,7 +79,8 @@ public class ControllerApprentissage {
 		
 		//System.out.println(connaissance_proposer);
 		System.out.println(exercice_fournie);
-		pModel.addAttribute("exercice",exercice_fournie.get(0));
+		//pModel.addAttribute("exercice",exercice_fournie.get(0));
+		pModel.addAttribute("exercice",mRepositoryExercice.findOne(1L));
 		return "apprentissage";
         
     }

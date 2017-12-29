@@ -11,6 +11,7 @@ C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\Repository\PersonneBaseR
 C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\Service\EtudiantService.java
 C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\ControllerEnseignant\ControllerConsulterExercice.java
 C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\Repository\RepositoryPersonne.java
+C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\Service\AdminService.java
 C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\ControllerEtudiant\ControllerApprentissage.java
 C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\ControllerEnseignant\ControllerLogin.java
 C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\ControllerEnseignant\ControllerExercice.java
@@ -24,7 +25,7 @@ C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\Entity\Variable.java
 C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\Entity\Etudiant.java
 C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\ControllerEnseignant\ControllerConnaissance.java
 C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\Entity\Exercice.java
-C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\ControllerEnseignant\ControllerDeconexion.java
+C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\ControllerEnseignant\ControllerPassword.java
 C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\Entity\Connaissance.java
 C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\WebSecurityConfig.java
 C:\Users\abk\workspace\PFE\src\main\java\com\lille1\PFE\ControllerEnseignant\ControllerEnseignant.java

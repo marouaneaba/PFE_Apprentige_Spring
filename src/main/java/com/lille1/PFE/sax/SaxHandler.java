@@ -23,7 +23,7 @@ private static String result="" ;
 	 * @see org.xml.sax.ContentHandler#startDocument()
 	 */
 	public void startDocument() throws SAXException {
-		System.out.println("Debut du document");
+		//System.out.println("Debut du document");
 	}
 	
 	/**
@@ -33,7 +33,7 @@ private static String result="" ;
 	 * @see org.xml.sax.ContentHandler#endDocument()
 	 */
 	public void endDocument() throws SAXException {
-		System.out.println("Fin du document" );
+		//System.out.println("Fin du document" );
 	}
 	
 	/**
@@ -57,11 +57,11 @@ private static String result="" ;
 		}
 		
 		
-		System.out.println("Ouverture de la balise : " + localName) ;
+		/*System.out.println("Ouverture de la balise : " + localName) ;
 		if (attributs.getLength() != 0) System.out.println("  Attributs de la balise : ") ;
 		for (int index = 0; index < attributs.getLength(); index++) { // on parcourt la liste des attributs
 			System.out.println("     - " +  attributs.getLocalName(index) + " = " + attributs.getValue(index));
-		}
+		}*/
 	}
 	
 	/**
@@ -72,7 +72,7 @@ private static String result="" ;
 		if(!localName.equals("li") && !localName.equals("span") && !localName.equals("ul"))
 			result =result+ "</"+localName+">";
 		
-		System.out.println("Fermeture de la balise : " + localName);
+		//System.out.println("Fermeture de la balise : " + localName);
 	}
 	
 	/**
@@ -85,7 +85,7 @@ private static String result="" ;
 	 */
 	public void characters(char[] ch, int start, int length) throws SAXException {
 		String s = new String(ch, start, length).trim() ;
-		if (s.length() > 0) System.out.println("     Contenu : |" + s + "|");
+		//if (s.length() > 0) System.out.println("     Contenu : |" + s + "|");
 	}
 	
 	/**
@@ -99,7 +99,7 @@ private static String result="" ;
 	 * @see org.xml.sax.ContentHandler#ignorableWhitespace(char[], int, int)
 	 */
 	public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {
-		System.out.println("espaces inutiles rencontres : ..." + new String(ch, start, length) +  "...");
+		//System.out.println("espaces inutiles rencontres : ..." + new String(ch, start, length) +  "...");
 	}
 	
 	/**
@@ -110,8 +110,8 @@ private static String result="" ;
 	 * @see org.xml.sax.ContentHandler#processingInstruction(java.lang.String, java.lang.String)
 	 */
 	public void processingInstruction(String target, String data) throws SAXException {
-		System.out.println("Instruction de traitement : " + target);
-		System.out.println("  dont les arguments sont : " + data);
+		//System.out.println("Instruction de traitement : " + target);
+		//System.out.println("  dont les arguments sont : " + data);
 	}
 	
 	public String parserString(String chaine){

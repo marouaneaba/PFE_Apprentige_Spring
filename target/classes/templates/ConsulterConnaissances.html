@@ -34,7 +34,7 @@
                     <ul class="nav nav-pills" id="menu">
                         <li class="active"><a href="/aceuil">Accueil</a></li>
                         <li ><a href="#">propos</a></li>
-                        <li><a href="#">Deconexion</a></li>
+                        <li><a href="/logout">Deconexion</a></li>
                         <li class="disabled"><a href="#">Contact</a></li>
                     </ul>
                 </nav>
@@ -61,7 +61,7 @@
                         <th  id="exo">Nom</th>
                         <th id="exo">Ordre</th>
                         {{#consulter}}
-                        <th id="btn">Valider</th>
+                        {{#Affvalider}}<th id="btn">Valider</th>{{/Affvalider}}
                         <th id="btn">Modifier</th>
                         <th id="btn">Supprimer</th>
                         {{/consulter}}
@@ -72,7 +72,7 @@
                         <td class="col-lg-3">{{nom}}</td>
                         <td>{{ordre}}</td>
                         {{#consulter}}
-                        <td><a href="/consultConnaissance/valider/{{id_ExEtu}}" class="btn btn-success" id="ecriture">Valider la connaissance</a></td>
+                        {{#Affvalider}}<td><a href="/consultConnaissance/valider/{{id_ExEtu}}" class="btn btn-success" id="ecriture">Valider la connaissance</a></td>{{/Affvalider}}
                         <td><a href="/consultConnaissance/update/{{id_ExEtu}}" class="btn btn-success" id="ecriture">Modifier la connaissance</a></td>
                         <td><a href="/consultConnaissance/delete/{{id_ExEtu}}" class="btn btn-success" id="ecriture">Supprimer la connaissance</a></td>
                     	{{/consulter}}

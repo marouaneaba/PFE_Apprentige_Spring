@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.lille1.PFE.Entity.Etudiant;
-import com.lille1.PFE.Entity.Exercice;
 import com.lille1.PFE.Repository.RepositoryEtudiant;
 
 @Service
@@ -19,7 +18,6 @@ public class EtudiantService {
 	
 	@Autowired
 	private RepositoryEtudiant mRepositoryEtudiant; 
-	private boolean connected = false;
 	
 
 	

@@ -1,6 +1,7 @@
 package com.lille1.PFE.ControllerEnseignant;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,10 +17,14 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.lille1.PFE.Entity.Admin;
 import com.lille1.PFE.Entity.Enseignant;
 import com.lille1.PFE.Entity.Etudiant;
+import com.lille1.PFE.Entity.Exercice;
 import com.lille1.PFE.Entity.Personne;
 import com.lille1.PFE.Repository.RepositoryAdmin;
 import com.lille1.PFE.Repository.RepositoryEnseignant;
 import com.lille1.PFE.Repository.RepositoryEtudiant;
+import com.lille1.PFE.Repository.RepositoryExercice;
+import com.lille1.PFE.Repository.RepositoryPersonne;
+import com.lille1.PFE.Service.ExerciceService;
 
 @Controller
 @RequestMapping("/dashbord")
@@ -36,31 +41,42 @@ public class ControllerDashbord {
 	@Autowired
 	private RepositoryEnseignant mRepositoryEnseignant;
 	
+	@Autowired
+	private RepositoryExercice mRepositoryExercice;
 	
+	@Autowired
+	private ExerciceService mExerciceService;
 	
 	@RequestMapping(method = RequestMethod.GET)
     public RedirectView VerifyLogin(HttpServletRequest request,ModelMap pModel,Principal principal) {
 		
-
 		
-		Etudiant etudiant = mRepositoryEtudiant.findByNom(principal.getName());
-		Enseignant enseignant = mRepositoryEnseignant.findByNom(principal.getName());
-		Admin admin = mRepositoryAdmin.findByNom(principal.getName());
+		
+		
+		Enseignant enseignant = mRepositoryEnseignant.findByNome(principal.getName());
+		/*
+		System.out.println("ens : dachbord : "+enseignant);
+		List<Exercice> exercices = mExerciceService.convertIterableToList(mRepositoryExercice.findAll());
+		for(int i=0;i<exercices.size();i++){
+			System.out.println("exercice : "+exercices.get(i));
+		}*/
+		
+		
+		Etudiant etudiant = mRepositoryEtudiant.findByNome(principal.getName());
+		//Enseignant enseignant = mRepositoryEnseignant.findByNome(principal.getName());
+		Admin admin = mRepositoryAdmin.findByNome(principal.getName());
 		
 		HttpSession session = request.getSession();
 		Personne personne =null;
 		if(etudiant != null){
 			personne = (Personne)etudiant;
 			session.setAttribute("user", (Personne)etudiant);
-			System.out.println("personne : "+(Personne)etudiant);
 		}else if(enseignant != null){
 			personne = (Personne)enseignant;
 			session.setAttribute("user", (Personne)enseignant);
-			System.out.println("personne : "+(Personne)enseignant);
 		}else if(admin != null){
 			personne = (Personne)admin;
 			session.setAttribute("user", (Personne)admin);
-			System.out.println("personne : "+(Personne)admin);
 		}
 		
 		

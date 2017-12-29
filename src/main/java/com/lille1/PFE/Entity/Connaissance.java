@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Connaissance  {
@@ -22,7 +23,8 @@ public class Connaissance  {
 	private String score;
 	@Column 
 	private boolean valider;
-	
+	@ManyToOne
+	private Enseignant enseignant;
 	
 	
 	public Connaissance() {}
@@ -65,9 +67,20 @@ public class Connaissance  {
 		this.valider = valider;
 	}
 
+	
+	
+	public Enseignant getEnseignant() {
+		return enseignant;
+	}
+
+	public void setEnseignant(Enseignant enseignant) {
+		this.enseignant = enseignant;
+	}
+
 	@Override
 	public String toString() {
-		return "Connaissance [id_ExEtu=" + id_ExEtu + ", nom=" + nom + ", ordre=" + ordre + ", score=" + score + "]";
+		return "Connaissance [id_ExEtu=" + id_ExEtu + ", nom=" + nom + ", ordre=" + ordre + 
+				", score=" + score + ", enseignat "+enseignant+"]";
 	}
 	
 	

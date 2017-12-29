@@ -19,5 +19,7 @@ public interface RepositoryEnseignant extends PersonneBaseRepository<Enseignant>
 									@Param("password")String password,@Param("email")String email);
 	
 	public Enseignant findByNomAndPassword(String nom, String password);
-	public Enseignant findByNom(String pseudo);
+	
+	@Query("select e from Enseignant e where e.nom = :nom")
+	public Enseignant findByNome(@Param("nom")String nom);
 }

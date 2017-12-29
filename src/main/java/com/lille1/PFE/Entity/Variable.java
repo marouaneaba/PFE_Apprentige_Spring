@@ -15,79 +15,47 @@ public class Variable {
 	@Column
 	private String Nom;
 	@Column
-	private String ordre;
-	@Column
-	private String score;
+	private String Type;
 	
 	
 	
 	
 	public Variable() {}
-	
-	public Variable(String nom, String ordre, String score) {
-		this.Nom = nom;
-		this.ordre = ordre;
-		this.score = score;
+
+	public Variable(String nom, String type) {
+		
+		Nom = nom;
+		Type = type;
 	}
-
-
 
 	public Long getId() {
 		return id;
 	}
 
-
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 
 	public String getNom() {
 		return Nom;
 	}
 
-
-
 	public void setNom(String nom) {
 		Nom = nom;
 	}
 
-
-
-	public String getOrdre() {
-		return ordre;
+	public String getType() {
+		return Type;
 	}
 
-
-
-	public void setOrdre(String ordre) {
-		this.ordre = ordre;
+	public void setType(String type) {
+		Type = type;
 	}
-
-
-
-	public String getScore() {
-		return score;
-	}
-
-
-
-	public void setScore(String score) {
-		this.score = score;
-	}
-
-
 
 	@Override
 	public String toString() {
-		return "Variable [id=" + id + ", Nom=" + Nom + ", ordre=" + ordre + ", score=" + score + "]";
+		return "Variable [id=" + id + ", Nom=" + Nom + ", Type=" + Type + "]";
 	}
-	
-	
-	
-	
 	
 	
 }

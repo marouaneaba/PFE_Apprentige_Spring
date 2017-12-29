@@ -53,13 +53,13 @@
                     <ul class="nav nav-pills" id="menu">
                         <li class="active"><a href="/aceuil">Accueil</a></li>
                         <li class="disabled"><a href="#">propos</a></li>
-                        <li><a href="login.html">Deconexion</a></li>
+                        <li><a href="/logout">Deconexion</a></li>
                         <li ><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </header>
             
-    
+    <center style="color:red;">{{message}} </center>
             <section class="row" >
                 <div class="col-xs-12" style="margin-bottom:2 0px;">
                     <img height="92" width="72" src="images/algo.png" alt="" class="ico_categorie" />
@@ -155,13 +155,13 @@
                     	
                      		{{#connaissances}}
                      		<p class ="col-xs-4">
-                                <input id="connaissances" style="margin-left: 60px;" class="btn-success" type="checkbox" name="connaissancesSelect" value="{{nom}}">
+                                <input id="{{id_ExEtu}}" style="margin-left: 60px;" class="btn-success" type="checkbox" name="connaissancesSelect" value="{{nom}}">
                                 <label>{{nom}}</label>
                             </p>
                             {{/connaissances}}
                             {{#connaissancesNonValider}}
                             <p class ="col-xs-4">
-                                **<input id="connaissances" style="margin-left: 60px;" class="btn-success" type="checkbox" name="connaissancesSelect" value="{{nom}}">
+                                **<input id="{{id_ExEtu}}" style="margin-left: 60px;" class="btn-success" type="checkbox" name="connaissancesSelect" value="{{nom}}">
                                 <label>{{nom}}</label>
                             </p>
                             {{/connaissancesNonValider}}
@@ -274,6 +274,7 @@
 				
 				return xhr;
 			}
+			
 			function request() {
 				
 				var xhr   = getXMLHttpRequest();
@@ -298,13 +299,22 @@
 				document.getElementById("variable").innerHTML="";
 				document.getElementById("code").innerHTML="";
 				
+				var tab = [];
+		         var check = document.getElementsByName("connaissancesSelect");
+		         for(var i=0;i<check.length;i++){
+		            if(check[i].checked === true){
+		                tab.push(check[i].id);
+		                console.log(check[i].id);
+		            }
+		         }
+				
 				//var connaissanceSel = document.getElementById("connaissances").value;
 				//console.log(connaissanceSel);
 				
 				xhr.open("POST", "/AjouterExercice", true);
 				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				//xhr.send('IdEditor='+nomExercice+"&lorem="+exercice+"&name="+variable);
-				xhr.send('nomExercice='+nomExercice+"&exercice="+exercice+"&variable="+variable+"&code="+code);
+				xhr.send('nomExercice='+nomExercice+"&exercice="+exercice+"&variable="+variable+"&code="+code+"&tab="+tab);
 				
 				s.ligneSelected = null;
 			}

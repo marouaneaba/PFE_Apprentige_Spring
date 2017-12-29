@@ -38,8 +38,11 @@ public class Exercice { // peux etre faut instancier les deux List par = new Arr
 		super();
 		this.nomExercice = nomExercice;
 		this.enonceExercice = enonceExercice;
-		XMLSolution = xMLSolution;
-		XMLSolutionNettoyer = xMLSolutionNettoyer;
+		this.XMLSolution = xMLSolution;
+		this.XMLSolutionNettoyer = xMLSolutionNettoyer;
+		this.connaissance = new ArrayList<>();
+		this.variables = new ArrayList<>();
+		
 	}
 
 	public Long getId_ex() {
@@ -89,6 +92,8 @@ public class Exercice { // peux etre faut instancier les deux List par = new Arr
 	public void setConnaissance(List<Connaissance> connaissance) {
 		this.connaissance = connaissance;
 	}
+
+	
 
 	public List<Variable> getVariables() {
 		return variables;

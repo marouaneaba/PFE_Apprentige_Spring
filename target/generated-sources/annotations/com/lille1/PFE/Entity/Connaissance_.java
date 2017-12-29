@@ -12,6 +12,7 @@ public abstract class Connaissance_ {
 	public static volatile SingularAttribute<Connaissance, Boolean> valider;
 	public static volatile SingularAttribute<Connaissance, Long> id_ExEtu;
 	public static volatile SingularAttribute<Connaissance, String> ordre;
+	public static volatile SingularAttribute<Connaissance, Enseignant> enseignant;
 	public static volatile SingularAttribute<Connaissance, String> nom;
 
 }

@@ -53,7 +53,7 @@
                     <ul class="nav nav-pills" id="menu">
                         <li class="active"><a href="/aceuil">Accueil</a></li>
                         <li class="disabled"><a href="#">propos</a></li>
-                        <li><a href="login.html">Deconexion</a></li>
+                        <li><a href="/logout">Deconexion</a></li>
                         <li ><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
@@ -173,7 +173,7 @@
                     </ul>
                 </li>
                     <li><h5 style="color:#C41C1C;font-weight:bold;"> DEBUT ALGORITHME </h5></li>
-                    <ul id="code" class="ligne">
+                    <ul id="code" class="ligne"/>
                     	
                     </ul>
                 </li>
@@ -236,7 +236,65 @@
 <script type="text/javascript" src="/js/EtudiantScript.js"></script>
 
 
-<script> 
+<script language="javaScript1.2" type="text/javascript"> 
+
+var a = document.createElement("span");
+a.innerHTML = "{{exercice.XMLSolution}}";7
+var b = document.createElement("span");
+b.innerHTML = "{{exercice.XMLSolution}}";
+console.log("marouane : "+"{{exercice.XMLSolution}}");
+console.log("marouane : "+"{{exercice.XMLSolutionNettoyer}}");
+		/*var template = document.createElement("span");
+		template.innerHTML = "{{exercice.XMLSolution}}";
+		//template.innetHTML.replace("\"","");
+		console.log(template.innerHTML);
+		var a = document.createElement("span");
+		a.innerHTML="<li></li>"
+		console.log(a);*/
+		
+		
+		/**/
+		
+
+	var input_str; //store input
+	
+	var output_html = "";
+	
+	input_str = "{{exercice.XMLSolution}}";
+	var y = document.createElement("span");
+	y.innerHTML = "{{exercice.XMLSolution}}";
+	console.log(y.firstChild.data);
+	var text_input = "<doc>"+y.firstChild.data+"</doc>"; 
+	//text_input=input_str.trim(); //trim() input
+	if(text_input.length > 0){
+		//output_html+="<p>"; //begin by creating paragraph
+		for(counter=0; counter < text_input.length; counter++){
+			output_html+=text_input[counter]
+				
+					
+		}
+		//output_html+="</p>"; //finally close paragraph
+	}
+
+console.log("ee"+output_html);
+/*
+var m = document.createElement("span");
+m.innerHTML = test;
+console.log(m.firstChild);*/
+var xmlString = output_html
+	  , parser = new DOMParser()
+	  , doc = parser.parseFromString(xmlString, "text/xml");
+	console.log(doc.firstChild); // => <div id="foo">...
+	console.log(doc.firstChild.firstChild); // => <a href="#">...
+
+	var mar = doc.firstChild.childNodes[2];
+	console.log(mar);
+		/**/
+		var cod = document.getElementById("code");
+		//cod.appendChild(doc.firstChild);
+		cod.appendChild(doc.firstChild.childNodes[1]);
+		
+		
 			function getXMLHttpRequest() {
 				var xhr = null;
 				

@@ -1,6 +1,7 @@
 package com.lille1.PFE.Service;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import org.jdom2.Document;
 import org.jdom2.input.SAXBuilder;
 import org.springframework.stereotype.Service;
 
+import com.lille1.PFE.Entity.Variable;
+
 
 @Service
 public class AjoutExerciceService  {
@@ -20,11 +23,13 @@ public class AjoutExerciceService  {
 	
 	
 	
-	public void SaveVaribale(String value){
+	public List<Variable> SaveVaribale(String value){
 		value = "<doc>"+value+"</doc>";
+		List<Variable> varibales = new ArrayList<>();
 		
 		Document document = null;
-		
+		String[] variables = null;
+		String[] types = null;
 	      try
 	      {
 	     
@@ -42,14 +47,16 @@ public class AjoutExerciceService  {
 		      Element courant = (Element)index.next();
 		      List<Element> nomVariableElement = courant.getChildren();
 		      
-		      String[] variables = nomVariableElement.get(0).getText().trim().split("\n");
-		      String[] types = nomVariableElement.get(2).getText().trim().split("\n");
-		      
-		      for(int i=0;i<variables.length;i++){
+		      variables = nomVariableElement.get(0).getText().trim().split("\n");
+		      types = nomVariableElement.get(2).getText().trim().split("\n");
+		   }
+		   for(int i=0;i<variables.length;i++){
+			   varibales.add(new Variable(variables[i],types[i]));
 		    	  System.out.println(variables[i]);
 		    	  System.out.println(types[i]);
-		      }
 		   }
+		   
+		   return varibales;
 	}
 	
 	

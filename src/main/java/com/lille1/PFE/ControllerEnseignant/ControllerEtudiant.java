@@ -1,6 +1,5 @@
 package com.lille1.PFE.ControllerEnseignant;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,7 +17,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.lille1.PFE.Entity.Etudiant;
 import com.lille1.PFE.Entity.Personne;
 import com.lille1.PFE.Service.ConnaissanceService;
-import com.lille1.PFE.Service.EnseignantService;
 import com.lille1.PFE.Service.EtudiantService;
 
 
@@ -32,8 +30,6 @@ public class ControllerEtudiant {
 	private EtudiantService mEtudiantService;
 	@Autowired
 	private ConnaissanceService mConnaissanceService;
-	@Autowired
-	private EnseignantService mEnseignantService;
 	
 	@RequestMapping(value="/ajoutEtudiant" ,method = RequestMethod.GET)
     public String GetFormAjoutEtudiant(ModelMap pModel) {
@@ -74,12 +70,12 @@ public class ControllerEtudiant {
 	@RequestMapping(value="/listEtudiant/update/{id}" ,method = RequestMethod.GET)
 	public String updateEtudiant(@PathVariable("id") Long id,Model pModel){
 		
-		pModel.addAttribute("etudiant",mEtudiantService.getEtudiantById(id));
-		return "modifierEtudiant";
+		pModel.addAttribute("enseignants",mEtudiantService.getEtudiantById(id));
+		return "modifierEnseignant";
 	}
 	
 	@RequestMapping(value="/listEtudiant/update/{id}" ,method = RequestMethod.POST)
-	public RedirectView POSTupdateEtudiant(@PathVariable("id") Long id,@RequestParam("pseudo")String pseudo,
+	public RedirectView POSTupdateEtudiant(@PathVariable("id") Long id,@RequestParam("name")String pseudo,
 			@RequestParam("password") String password,@RequestParam("email_address")String email){
 		
 		mEtudiantService.updateEtudiant(id, pseudo, password, email);
@@ -94,11 +90,12 @@ public class ControllerEtudiant {
 		return new RedirectView("/listEtudiant");
 	}
 	
-	@RequestMapping(value ="/viewConnaissance/view/{id}",method = RequestMethod.GET)
-    public String ViewConnaissance(@PathVariable("id")Long idCon,ModelMap pModel) {
+	@RequestMapping(value ="/viewConnaissance/view/{id}/{idExercice}",method = RequestMethod.GET)
+    public String ViewConnaissance(@PathVariable("id")Long idCon,
+    		@PathVariable("idExercice")Long idExercice,ModelMap pModel) {
 		
 		pModel.addAttribute("connaissances",mConnaissanceService.getConnaissances(idCon));
-		
+		pModel.addAttribute("idExercice",idExercice);
 		return "/viewConnaissance";
     }
 	
