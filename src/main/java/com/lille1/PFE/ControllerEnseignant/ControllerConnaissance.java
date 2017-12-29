@@ -209,8 +209,8 @@ public class ControllerConnaissance {
 				break;
 			}
 		}
-		exercice.getConnaissance().clear();
-		exercice.setConnaissance(null);
+		//exercice.getConnaissance().clear();
+		//exercice.setConnaissance(null);
 		exercice.setConnaissance(connaissances);
 		mRepositoryExercice.save(exercice);
 		

@@ -80,7 +80,7 @@ public class Connaissance  {
 	@Override
 	public String toString() {
 		return "Connaissance [id_ExEtu=" + id_ExEtu + ", nom=" + nom + ", ordre=" + ordre + 
-				", score=" + score + ", enseignat "+enseignant+"]";
+				", score=" + score + ", enseignat ]";
 	}
 	
 	
