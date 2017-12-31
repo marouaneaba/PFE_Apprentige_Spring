@@ -45,7 +45,7 @@ public class ClassScope {
 		}
 	}
 	
-	public void updateConnaissance(Long id,String nom,String ordre){
+	public void updateConnaissance(Long id,String nom,int ordre){
 		for(int i=0;i<this.connaisances.size();i++){
 			if(this.connaisances.get(i).getId_ExEtu() == id){
 				this.connaisances.get(i).setNom(nom);

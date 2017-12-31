@@ -46,7 +46,7 @@ public class ConnaissanceService {
 	}
 	
 	@Transactional
-	public void updateConnaissance(Long id,String nom,String ordre){
+	public void updateConnaissance(Long id,String nom,int ordre){
 		mRepositoryConnaissance.updateConnaissanceById(id,nom,ordre);
 	}
 	

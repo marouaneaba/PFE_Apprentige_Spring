@@ -15,4 +15,7 @@ public interface RepositoryExercice extends CrudRepository<Exercice, Long>{
 	List<Connaissance> findConnaissance();
 	
 	List<Exercice> findByConnaissance(Connaissance connaissances);
+	
+	List<Exercice> findByConnaissanceOrdre(int ordre);
+	
 }

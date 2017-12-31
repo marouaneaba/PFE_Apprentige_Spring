@@ -118,13 +118,9 @@
 				<ul id="par" style="">
 				<li><h5 style="color:#C41C1C;font-weight:bold;"> Variable </h5></li>
 					<ul id="variable" class="ligne">
-                        <!--<li id="ch">marouane</li>
-                        <li id="ch">aba</li>
-                        <li id="ch">aba</li> -->
-						<!--<li id="ch"> Level 1.1.1 </li>
-						<li id="ch"> Level 1.1.2 </li>
-						<li id="ch"> Level 1.1.3 </li>
-						<li id="ch"> Level 1.1.4 </li>-->
+                       {{#exercice.variables}}
+                       <li>{{Nom}}<span id='color'> EST_DU_TYPE </span>{{Type}}</li>
+                       {{/exercice.variables}}
 					</ul>
 				</li>
 					<li><h5 style="color:#C41C1C;font-weight:bold;"> DEBUT ALGORITHME </h5></li>
@@ -142,18 +138,18 @@
             <div class ="col-lg-3 col-lg-offset-1" id="select_button" style="font-size: 0px;text-align: center;color: #2F4F4F;font-family:Comic Sans Ms;">
                 <section id="button_algo">
                     <ul >
-                        <li><a class ="btn btn btn-primary " id="apprentissage">Ajouter Ligne</a></li>
-                        <li><a class ="btn btn btn-primary " id="apprentissage">Supprimer Ligne</a></li>
+                        <li><a class ="btn btn btn-primary" id="apprentissage">Ajouter Ligne</a></li>
+                        <li><a class ="btn btn btn-danger" id="apprentissage">Supprimer Ligne</a></li>
 
 
-                        <li><a class ="btn btn btn-danger " id="apprentissage">Declarer Variable</a></li>-->
-                        <li><a class ="btn btn btn-danger " id="apprentissage">Lire Variable</a></li>
-                        <li><a class ="btn btn btn-danger " id="apprentissage">Aff valeur a une Variable</a></li>
-                        <li><a class ="btn btn btn-danger " id="apprentissage">Afficher Variable</a></li>
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Lire Variable</a></li>
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Aff valeur a une Variable</a></li>
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Afficher Variable</a></li>
 
-                        <li><a class ="btn btn btn-warning " id="apprentissage">Condition Si</a></li>
-                        <li><a class ="btn btn btn-warning " id="apprentissage">Boucle Pour</a></li>
-                        <li><a class ="btn btn btn-warning " id="apprentissage">Boucle Tant Que</a></li>
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Condition Si</a></li>
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Sinon si</a></li>
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Boucle Pour</a></li>
+                        <li><a class ="btn btn" style="background: #ffffff" id="apprentissage">Boucle Tant Que</a></li>
                     </ul>
                 </section>
             </div>
@@ -188,18 +184,78 @@
         </div>
     </body>
 </html>
-<script type="text/javascript" src="EtudiantScript.js"></script>
+<script type="text/javascript" src="/js/EtudiantScript.js"></script>
 
 <script> 
+
+function getXMLHttpRequest() {
+	var xhr = null;
+	
+	if (window.XMLHttpRequest || window.ActiveXObject) {
+		if (window.ActiveXObject) {
+			try {
+				xhr = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch(e) {
+				xhr = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		} else {
+			xhr = new XMLHttpRequest(); 
+		}
+	} else {
+		alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
+		return null;
+	}
+	
+	return xhr;
+}
+
+function request() {
+	
+	var xhr   = getXMLHttpRequest();
+	
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+			
+		} else if (xhr.readyState < 4) {
+		}
+	};
+
+	
+
+			
+
+	var code = document.getElementById("code").innerHTML;
+	document.getElementById("code").innerHTML="";
+
+
+	
+	xhr.open("POST", "/apprentisage", true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	
+	xhr.send("code="+code);
+	
+	s.ligneSelected = null;
+}
+
+document.getElementById("transmettre").addEventListener("click",request);
+
+
                 var dialog = document.getElementById('mydialog'); 
                /* if(!('show' in $dialog)){ 
                         document.getElementById('promptCompat').className = 'no_dialog'; 
                 } */
                 dialog.addEventListener('close', function() { 
-                    document.getElementById("myDropdown").classList.remove('show');
-                    document.getElementById("typeVariable").classList.remove('show');
-                    document.getElementById("selection").classList.remove('show');
-                    document.getElementById("sel").classList.remove('show');
+                	document.getElementById("si").classList.remove('show');
+                    document.getElementById("alors").classList.remove('show');
+                    document.getElementById("tantque").classList.remove('show');
+                    document.getElementById("choix_variables").classList.remove('show');
+                    document.getElementById("de").classList.remove('show');
+                    document.getElementById("jusqu").classList.remove('show');
+                    document.getElementById("typeVar").classList.remove("show");
+                    document.getElementById("nameVariable").classList.remove("show");
+
+                    document.getElementById("tantque").classList.remove("show");
+                    document.getElementById("NameVariable").classList.remove("show");
                         //console.log('Fermeture. ', this.returnValue); 
                 });
                 

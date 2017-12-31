@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.lille1.PFE.Entity.Connaissance;
+import com.lille1.PFE.Entity.Enseignant;
 import com.lille1.PFE.Entity.Personne;
 import com.lille1.PFE.Repository.RepositoryConnaissance;
 import com.lille1.PFE.Repository.RepositoryEnseignant;
@@ -49,11 +50,14 @@ public class ControllerExercice {
 	@RequestMapping(value="/AjouterExercice" ,method = RequestMethod.GET)
     public String getPage(HttpServletRequest request,ModelMap pModel) {
 		
-		/*List<Connaissance> connaissances = mConnaissanceService.getAllConnaissance();
-		HttpSession session = request.getSession();*/
+		/*List<Connaissance> connaissances = mConnaissanceService.getAllConnaissance();*/
+		HttpSession session = request.getSession();
+		Enseignant enseignant = (Enseignant)session.getAttribute("user");
 		
 		pModel.addAttribute("connaissances",mRepositoryConnaissance.findConnaissanceByValider(true));
-		pModel.addAttribute("connaissancesNonValider",sessionGlobal.getConnaissance());
+		List<Connaissance> connaissanceNONValider = mRepositoryConnaissance.findConnaissanceByEnseignantAndValider(enseignant,false);
+		pModel.addAttribute("connaissancesNonValider",connaissanceNONValider);
+		//pModel.addAttribute("connaissancesNonValider",sessionGlobal.getConnaissance());
 		System.out.println("i'm here 22 ");	
 		if(message){
 			System.out.println("i'm here 22 message : "+message );	

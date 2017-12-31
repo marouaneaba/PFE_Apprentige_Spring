@@ -11,21 +11,21 @@ public class Etudiant extends Personne{
 	
 	
 	@ManyToMany
-	private List<Connaissance> connaissances;
+	private List<Connaissance> connaissances = new ArrayList<Connaissance>();
 	
 	public Etudiant(){}
 	
 	public Etudiant(String nom, String password, String email, String type) {
 		super(nom,password,email,type);
-		connaissances = new ArrayList<>();
+		
 	}
 
 	public List<Connaissance> getConnaissances() {
 		return connaissances;
 	}
 
-	public void setConnaissances(List<Connaissance> connaissances) {
-		this.connaissances = connaissances;
+	public void setConnaissances(Connaissance connaissances) {
+		this.connaissances.add(connaissances);
 	}
 
 	@Override

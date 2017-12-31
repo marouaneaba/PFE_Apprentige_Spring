@@ -51,7 +51,7 @@ public class ControllerConnaissance {
     }
 	
 	@RequestMapping(value ="/Ajoutconnaissance",method = RequestMethod.POST)
-    public RedirectView  ajoutConnaissance(HttpServletRequest request,@RequestParam("nom")String nom,@RequestParam("ordre")String ordre
+    public RedirectView  ajoutConnaissance(HttpServletRequest request,@RequestParam("nom")String nom,@RequestParam("ordre")int ordre
     							,ModelMap pModel) {
 		
 		HttpSession session = request.getSession();
@@ -69,7 +69,7 @@ public class ControllerConnaissance {
 		
 		if(trouver && ((Personne)session.getAttribute("user")).getRole().equals("enseignant")){
 			
-			Connaissance co = new Connaissance(nom,ordre,null,false);
+			Connaissance co = new Connaissance(nom,ordre,false);
 			mRepositoryConnaissance.save(co);
 			co.setEnseignant(mRepositoryEnseignant.findOne(((Personne)session.getAttribute("user")).getIdEns()));
 			mRepositoryEnseignant.save(mRepositoryEnseignant.findOne(((Personne)session.getAttribute("user")).getIdEns()));
@@ -78,7 +78,7 @@ public class ControllerConnaissance {
 			return new RedirectView("/enseignant");
 		}else if(trouver && ((Personne)session.getAttribute("user")).getRole().equals("admin")){
 		
-			mRepositoryConnaissance.save(new Connaissance(nom,ordre,null,true));
+			mRepositoryConnaissance.save(new Connaissance(nom,ordre,true));
 			return new RedirectView("/admin");
 		}else {
 			pModel.addAttribute("addConnaissance", trouver);
@@ -176,7 +176,7 @@ public class ControllerConnaissance {
 	
 	@RequestMapping(value ="/consultConnaissance/update/{id_ExEtu}",method = RequestMethod.POST)
     public RedirectView PostmodifierConnaissances(@PathVariable("id_ExEtu")Long idCon,
-    		@RequestParam("nom")String nom,@RequestParam("ordre")String ordre
+    		@RequestParam("nom")String nom,@RequestParam("ordre")int ordre
 			,ModelMap pModel) {
 		
 		mConnaissanceService.updateConnaissance(idCon,nom,ordre);
