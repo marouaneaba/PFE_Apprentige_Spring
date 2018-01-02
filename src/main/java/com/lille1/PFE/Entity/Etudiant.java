@@ -6,18 +6,17 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Etudiant extends Personne{
-	
-	
-	
+public class Etudiant extends Personne {
+
 	@ManyToMany
 	private List<Connaissance> connaissances = new ArrayList<Connaissance>();
-	
-	public Etudiant(){}
-	
+
+	public Etudiant() {
+	}
+
 	public Etudiant(String nom, String password, String email, String type) {
-		super(nom,password,email,type);
-		
+		super(nom, password, email, type);
+
 	}
 
 	public List<Connaissance> getConnaissances() {
@@ -30,11 +29,7 @@ public class Etudiant extends Personne{
 
 	@Override
 	public String toString() {
-		return "Etudiant [ Personne = "+super.toString()+" ,connaissances=" + connaissances + "]";
+		return "Etudiant [ Personne = " + super.toString() + " ,connaissances=" + connaissances + "]";
 	}
-	
-	
-	
-	
-	
+
 }

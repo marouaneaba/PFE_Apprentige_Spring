@@ -16,14 +16,12 @@ public class Variable {
 	private String Nom;
 	@Column
 	private String Type;
-	
-	
-	
-	
-	public Variable() {}
+
+	public Variable() {
+	}
 
 	public Variable(String nom, String type) {
-		
+
 		Nom = nom;
 		Type = type;
 	}
@@ -56,6 +54,5 @@ public class Variable {
 	public String toString() {
 		return "Variable [id=" + id + ", Nom=" + Nom + ", Type=" + Type + "]";
 	}
-	
-	
+
 }

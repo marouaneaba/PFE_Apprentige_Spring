@@ -1,4 +1,5 @@
 package com.lille1.PFE.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Exercice { // peux etre faut instancier les deux List par = new ArrayList dans le constructeur 
+public class Exercice { // peux etre faut instancier les deux List par = new
+						// ArrayList dans le constructeur
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,25 +26,26 @@ public class Exercice { // peux etre faut instancier les deux List par = new Arr
 	private String XMLSolution;
 	@Column
 	private String XMLSolutionNettoyer;
-	@ManyToMany 
+	@ManyToMany
 	private List<Connaissance> connaissance;
-	@ManyToMany 
+	@ManyToMany
 	private List<Variable> variables;
-	
+
 	@OneToOne
 	private Enseignant enseignant;
-	
-	public Exercice() {}
+
+	public Exercice() {
+	}
 
 	public Exercice(String nomExercice, String enonceExercice, String xMLSolution, String xMLSolutionNettoyer) {
-		super();
+		
 		this.nomExercice = nomExercice;
 		this.enonceExercice = enonceExercice;
 		this.XMLSolution = xMLSolution;
 		this.XMLSolutionNettoyer = xMLSolutionNettoyer;
 		this.connaissance = new ArrayList<>();
 		this.variables = new ArrayList<>();
-		
+
 	}
 
 	public Long getId_ex() {
@@ -93,8 +96,6 @@ public class Exercice { // peux etre faut instancier les deux List par = new Arr
 		this.connaissance = connaissance;
 	}
 
-	
-
 	public List<Variable> getVariables() {
 		return variables;
 	}
@@ -118,8 +119,4 @@ public class Exercice { // peux etre faut instancier les deux List par = new Arr
 				+ connaissance + ", variables=" + variables + ", enseignant=" + enseignant + "]";
 	}
 
-	
-	
-	
-	
 }

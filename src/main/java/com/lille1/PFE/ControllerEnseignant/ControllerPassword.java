@@ -9,16 +9,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 @Controller
 @RequestMapping("/forgetPassword")
 public class ControllerPassword {
 
 	@RequestMapping(method = RequestMethod.GET)
-    public String GetLogin(ModelMap pModel ) {
-	
-		
+	public String GetLogin(ModelMap pModel) {
+
 		return "login";
-        
-    }
+
+	}
 }
