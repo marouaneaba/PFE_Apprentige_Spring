@@ -16,6 +16,7 @@ com\lille1\PFE\Repository\RepositoryAdmin.class
 com\lille1\PFE\ControllerEnseignant\ControllerDashbord.class
 com\lille1\PFE\Entity\Variable_.class
 com\lille1\PFE\ControllerEnseignant\ControllerExercice.class
+com\lille1\PFE\ControllerEtudiant\ResultExercice.class
 com\lille1\PFE\ControllerEnseignant\ControllerAceuill.class
 com\lille1\PFE\sax\SaxHandler.class
 com\lille1\PFE\Repository\PersonneBaseRepository.class

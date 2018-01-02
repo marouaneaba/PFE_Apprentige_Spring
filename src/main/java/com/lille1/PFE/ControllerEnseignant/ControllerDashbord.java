@@ -39,6 +39,9 @@ public class ControllerDashbord {
 	private RepositoryEtudiant mRepositoryEtudiant;
 	
 	@Autowired
+	private RepositoryPersonne mRepositoryPersonne;
+	
+	@Autowired
 	private RepositoryEnseignant mRepositoryEnseignant;
 	
 	@Autowired
@@ -53,7 +56,7 @@ public class ControllerDashbord {
 		
 		
 		
-		Enseignant enseignant = mRepositoryEnseignant.findByNome(principal.getName());
+		//Enseignant enseignant = mRepositoryEnseignant.findByNome(principal.getName());
 		/*
 		System.out.println("ens : dachbord : "+enseignant);
 		List<Exercice> exercices = mExerciceService.convertIterableToList(mRepositoryExercice.findAll());
@@ -63,11 +66,12 @@ public class ControllerDashbord {
 		
 		
 		Etudiant etudiant = mRepositoryEtudiant.findByNome(principal.getName());
-		//Enseignant enseignant = mRepositoryEnseignant.findByNome(principal.getName());
+		Enseignant enseignant = mRepositoryEnseignant.findByNome(principal.getName());
 		Admin admin = mRepositoryAdmin.findByNome(principal.getName());
 		
 		HttpSession session = request.getSession();
-		Personne personne =null;
+		Personne personne = null;// mRepositoryPersonne.findByNome(principal.getName());
+		
 		if(etudiant != null){
 			personne = (Personne)etudiant;
 			session.setAttribute("user", (Personne)etudiant);
@@ -77,8 +81,7 @@ public class ControllerDashbord {
 		}else if(admin != null){
 			personne = (Personne)admin;
 			session.setAttribute("user", (Personne)admin);
-		}
-		
+		}		
 		
 		if(personne.getRole().equals("enseignant")){
 			return new RedirectView("/enseignant");

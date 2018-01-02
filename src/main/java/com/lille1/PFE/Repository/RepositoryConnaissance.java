@@ -32,6 +32,8 @@ public interface RepositoryConnaissance extends CrudRepository<Connaissance, Lon
 	@Query("select distinct ec from Etudiant e inner JOIN e.connaissances ec where ec != connai ")
 	public List<Connaissance> findConnaissaceNonEtudiant(@Param("connai")List<Connaissance> connaissanceEtudiant);
 	
+	public Connaissance findByOrdre(int order);
+	
 	
 	
 

@@ -44,6 +44,7 @@ public class ControllerApprentissage {
 	@Autowired
 	private ConnaissanceService mConnaissanceService;
 	
+	int niveaux ;
 	
 	@RequestMapping(value="/apprentisage",method = RequestMethod.GET)
     public String GetAceuill(HttpServletRequest request,ModelMap pModel) {
@@ -51,6 +52,8 @@ public class ControllerApprentissage {
 		HttpSession session = request.getSession();
 		Personne personne = (Personne)session.getAttribute("user");
 		Etudiant etudiant = mRepositoryEtudiant.findOne(personne.getIdEns());
+		
+		session.removeAttribute("result");
 		
 		/* connaissance lié à l'etudiant */
 		List<Connaissance> connaissancesEtudiant = mRepositoryEtudiant.findConnaissaceByEtudiant(etudiant.getIdEns());
@@ -61,94 +64,73 @@ public class ControllerApprentissage {
 		// trié Attrubt Ordre d'etity Connaissance dans l'ordre coissante.
 		Comparator<Connaissance> comparator = (x, y) -> (x.getOrdre() > y.getOrdre()) ? 1 : ((x.getOrdre() == y.getOrdre()) ? 0 : -1);
 		connaissancesNonEtudiant.sort(comparator);
-		//System.out.println("exercice Non Etudiant : "+connaissancesNonEtudiant);
-		if(connaissancesNonEtudiant == null){
+		niveaux = connaissancesNonEtudiant.get(0).getOrdre();
+		System.out.println("niveaux : " +niveaux);
+		List<Exercice> exercice = mRepositoryExercice.findByConnaissanceOrdre(niveaux);
+		
+		if(connaissancesNonEtudiant == null || connaissancesNonEtudiant.size() == 0 || exercice.size() == 0){
+			session.setAttribute("result", "finie");
+			System.out.println("finie , vous avez passé tout les connaissances où "
+					+ "exercice de cette connaissance n'est pas encore ajouté ");
 			// afficher au etudiant , vous avez réussi tout les niveaux liée a nos exercice ,
 			// Veuillez Attendre la mise à jour des nouvelle connaissances à faire.
 		}else{
-			int niveaux = connaissancesNonEtudiant.get(0).getOrdre();
-			List<Exercice> exercice = mRepositoryExercice.findByConnaissanceOrdre(niveaux);
+			//niveaux = connaissancesNonEtudiant.get(0).getOrdre();
+			//System.out.println("niveaux : " +niveaux);
+			//List<Exercice> exercice = mRepositoryExercice.findByConnaissanceOrdre(niveaux);
 			System.out.println("exercice by Ordre : "+exercice);
 			Collections.shuffle(exercice);
 			System.out.println("exercice by Ordre : "+exercice);
+			pModel.addAttribute("exercice", exercice.get(0));
 		}
 		
-		
-		/*System.out.println("-----");
-		List<Connaissance> distinctConnaissnceOfExercice = mRepositoryExercice.findConnaissance();
-		System.out.println("-----");
-		List<Connaissance> connaissanceEtudiant = null;
-		try{
-			connaissanceEtudiant = etudiant.getConnaissances() ;
-			// not null size betwen 0 and +00.
-		}catch(Exception e){}
-		List<Connaissance> connaissance_proposer = new ArrayList<>();
-		
-		if(connaissanceEtudiant.size() == 0 ){
-			
-			connaissance_proposer = distinctConnaissnceOfExercice;
-			System.out.println("t3 : "+connaissance_proposer);
-		}else if(connaissanceEtudiant != null && connaissanceEtudiant.size()>0){
-			
-
-			boolean find = false;
-			for(int i=0;i<distinctConnaissnceOfExercice.size();i++){
-				for(int j=0;j<connaissanceEtudiant.size();j++){
-					if(distinctConnaissnceOfExercice.get(i).getNom().equals(connaissanceEtudiant.get(j).getNom())){
-						find = true;
-						break;
-					}
-					//if(!find){
-						//connaissance_proposer.add(distinctConnaissnceOfExercice.get(i));
-					//}
-				}
-				if(find == false){
-					connaissance_proposer.add(distinctConnaissnceOfExercice.get(i));
-					//find = true;
-				}
-				find = false;
-			}
-			System.out.println("t3 : "+connaissance_proposer);
-		}
-		
-		List<Exercice> exercice_fournie = new ArrayList<>();
-		for(int i=0;i<connaissance_proposer.size();i++){
-			List<Exercice> exercices = mRepositoryExercice.findByConnaissance(connaissance_proposer.get(i));
-			for(int j=0;j<exercices.size();j++){
-				if(!exercice_fournie.contains(exercices.get(j))){
-					exercice_fournie.add(exercices.get(j));
-				}
-			}
-		}
-		
-		
-		//System.out.println(connaissance_proposer);
-		System.out.println(exercice_fournie);
-		//pModel.addAttribute("exercice",exercice_fournie.get(0));
-		pModel.addAttribute("exercice",exercice_fournie.get(0));*/
 		return "apprentissage";
-        
     }
 	
 	
 	@RequestMapping(value="/apprentisage",method = RequestMethod.POST)
-    public String POSTApprentissage(HttpServletRequest request,ModelMap pModel) {
+    public RedirectView POSTApprentissage(HttpServletRequest request,ModelMap pModel) {
+		
+		
+		System.out.println("POST arrivé");
+		
+		HttpSession session = request.getSession();
 		
 		String code = request.getParameter("code");
+		System.out.println("code : "+code);
+		
 		
 		code = code
 				.trim()
 				.replaceAll("\"", "'");
+		System.out.println("code : "+code);
+		
 		SaxHandler mSaxHandler = new SaxHandler();
 		mSaxHandler.setResult("");
 		String codeNetoyer = new SaxHandler().parserString( code);
 		
 		if( code.equals("") ){
-			System.out.println("i'm here ");	
+			System.out.println("vous avez rien saisier comme code ");	
 		}
 		
-		System.out.println("code : "+codeNetoyer);
+		System.out.println("code Netoyer : "+codeNetoyer);
 		
-		return null;
+		if(true){ // solution correct
+			
+			Connaissance connaissance = mRepositoryConnaissance.findByOrdre(niveaux);
+			Etudiant etudiant = mRepositoryEtudiant.findOne(((Etudiant)session.getAttribute("user")).getIdEns());
+			etudiant.setConnaissances(connaissance);
+			mRepositoryEtudiant.save(etudiant);
+			session.setAttribute("result", "oui");
+			session.setAttribute("niveaux", niveaux);
+			
+		}else if(true){ // solution non correct
+			
+			session.setAttribute("niveaux", niveaux-1);
+			session.setAttribute("result", "non");
+			
+		}
+		
+		return new RedirectView("/aceuil");
 	}
 }

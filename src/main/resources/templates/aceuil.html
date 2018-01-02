@@ -32,7 +32,7 @@
 
                 <nav class ="col-lg-push-1 col-lg-12" >
                     <ul class="nav nav-pills" id="menu">
-                        <li class="active"><a href="/aceuil">Accueil</a></li>
+                        <li class="active"><a href="/dashbord">Accueil</a></li>
                         <li class="disabled"><a href="#">propos</a></li>
                         <li><a href="/logout">Deconexion</a></li>
                         <li><a href="contact.html">Contact</a></li>
@@ -42,26 +42,43 @@
             
             
             <br/><br/>
-			<center><b> Bonjour : {{user}}</b><br/></center>
+			
             <section class="row">
             	<h1 class ="col-lg-12"><img height="92" width="72" src="images/algo.png" alt="" class="ico_categorie" />Appretissage d'algorithme</h1>
+                <center><b> Bonjour : <span style="color:red;">{{user}}</span></b><br/></center>
+                <div class ="col-xs-12" id="ac" style="text-align: center;font-family:Comic Sans Ms;">
+            		
+                {{^screen}}
+                <center><h3>Votre Niveaux : {{niveaux}}</h3></center>
+                </div>
+                <br/><br/>
                 <article style="font-size: 16px;text-align: justify;text-indent: 50px;color: #2F4F4F;font-family:Comic Sans Ms" class ="col-lg-10 col-lg-push-1">
+                    <b> Vous possédez les Connaissances Suivant: <br/><br/> {{#connaissanceEtu}}<li>{{ordre}} : {{nom}}</li>{{/connaissanceEtu}} <br/></b>
                     
-                    <b> vous étes dans une application pédagogique d’initiation à l’algorithmique
-                    A l’aide d’un langage algorithmique en français et des interface graphique simple, cette application permet de concevoir et de tester 
-                    facilement les algorithmes que l’on peut rencontrer dans l’enseignement des mathématiques au secondaire.
-                    Le code source des algorithmes se construit pas à pas à l’aide de commandes prêtes à l’emploi (lire, afficher, affecter, instruction si…alors, boucles 
-                    pour…de…à et tant que…) : cela permet de se concentrer principalement sur la logique algorithmique plutôt que sur l’apprentissage d’une syntaxe complexe. 
-                    Une fois l’algorithme mis au point, vous pouvez transmettre votre solution à un enseignant .
-                        </b>
                 </article>
+                {{/screen}}
                 
-            </section>
+                {{#screen}}
+                <center><h3>Votre Niveaux : {{screen.niveaux}}</h3></center>
+                <article style="font-size: 16px;text-align: justify;text-indent: 50px;color: #2F4F4F;font-family:Comic Sans Ms" class ="col-lg-10 col-lg-push-1">
+                    <b>{{screen.Tete}}</b><br/>
+                    <b>{{screen.leMot}}</b>
+                    
+                </article>
+                {{/screen}}
+              
+    
+            </section><br/><br/><br/>
         <div class="row" id="sec">    
 			
             
             <div class="col-lg-7 btn col-lg-offset-2">
-            <a href="/apprentisage" class="btn btn btn-block" style="background: #ffffff;margin-top: 10px;font-style: italic;font-family:Comic Sans Ms";>Cliquer ici pour Commancer l'apprentissage</a>
+            {{#screen}}
+            <a href="/apprentisage" class="btn btn btn-block" style="background: #ffffff;margin-top: 10px;font-style: italic;font-family:Comic Sans Ms";>Cliquer ici pour Commancer l'apprentissage Niv : <span style="color:red;">{{niveaux2}}</span></a>
+            {{/screen}}
+            {{^screen}}
+            <a href="/apprentisage" class="btn btn btn-block" style="background: #ffffff;margin-top: 10px;font-style: italic;font-family:Comic Sans Ms";>Cliquer ici pour Commancer l'apprentissage Niv : <span style="color:red;">{{niveauxSuivant}}</span></a>
+            {{/screen}}
             </div>
            
          </div>   

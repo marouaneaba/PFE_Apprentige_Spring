@@ -88,26 +88,66 @@
                 
             </section>
 <div class="boutons"><!-- <button onclick="$dialog.showModal()">Ouvrir en mode modal</button></div>  -->
-    <div class="row" id="sec">   
-            <div class="col-lg-12">
-              
-        <dialog id="mydialog" close> 
-           <h5>Selectionner</h5>
-            <div id="selection" class="dropdown-content">
-                <label id ="titre">Veuillez Selectionnez une variable : </label>
-                <select id ="sel" class="dropdown-content">
-                    
+    <div id="condition1">   
+        <div class="col-xs-12">
+             <!-- condition if/ tantque-->
+            <dialog id="mydialog" close> 
+                
+                <center>
+                <label id="si" class="dropdown-content">Si :</label>
+                <label id="tantque" class="dropdown-content">TantQue :</label>
+                <label id="typeVar" class="dropdown-content"> Type : </label>
+                <select id="NameVariable" class="dropdown-content list">
                 </select>
-            </div>
-            <select id="typeVariable" class="dropdown-content">
-                <option>NOMBRE</option>
-                <option>Chaine</option>
-            </select>
-            <div class="dropdown-content" id="myDropdown">Rentrez la valeur : <input id="Msg" placeholder="" /><input id="Msg2" class="dropdown-content" /></div>
-            <!-- <div>Remplir ce champ pour modifier le message de fermeture <input id="closeMsg" placeholder="Y compris des �l�ments de formulaire" /></div> -->
+                <select id="typeVariable" class="dropdown-content list">
+                    <option>INTEGER</option>
+                    <option>CHARACTER</option>
+                </select>
+                <label id="fleche" class="dropdown-content"> = </label>
+                
+                <select id="typeConditionSi" class="dropdown-content list">
+                    <option><</option>
+                    <option>==</option>
+                    <option><=</option>
+                    <option>></option>
+                    <option>>=</option>
+                </select>
 
-            <div class="boutons"><button onclick="Annuler()">Fermer</button>&nbsp;<button onclick="valider(document.getElementById('typeVariable').value,document.getElementById('sel').value)">OK</button></div> 
-        </dialog>
+                <input style="height: 20px;width: 50px;" list="variables" type="text" id="choix_variables" class="dropdown-content ">
+                <datalist id="variables">
+                </datalist>
+
+                <label id="alors" class="dropdown-content">Alors :</label>
+                
+                <label id="de" class="dropdown-content">De :</label>
+                <label id="nameVariable" class="dropdown-content">Name Variable : </label>
+                <input id="input1" class="dropdown-content" placeholder="" />
+                
+                <label id="jusqu" class="dropdown-content">Jusqu'aù :</label>
+                
+                <input id="input2" class="dropdown-content" placeholder="" />
+
+                <input id="checkbox" type="checkbox" class="dropdown-content" placeholder="" />
+                
+                <select id="choix_con" class="dropdown-content list">
+                    <option><</option>
+                    <option>==</option>
+                    <option><=</option>
+                    <option>></option>
+                    <option>>=</option>
+                </select>
+
+                <input style="height: 20px;width: 50px;" list="variables" type="text" id="saisie" class="dropdown-content ">
+                <datalist id="variables">
+                  <option value="var1">
+                  <option value="var2">
+                  <option value="var3">
+                </datalist>
+                </center>
+                <center><div id ="button" class="boutons"><button onclick="Annuler()">Fermer</button>&nbsp;<button onclick="valider(document.getElementsByClassName('list'),document.getElementById('input1').value)">OK</button></div> </center>
+            </dialog> 
+            
+            
  
         </div> 
 
@@ -119,16 +159,12 @@
 				<li><h5 style="color:#C41C1C;font-weight:bold;"> Variable </h5></li>
 					<ul id="variable" class="ligne">
                        {{#exercice.variables}}
-                       <li>{{Nom}}<span id='color'> EST_DU_TYPE </span>{{Type}}</li>
+                       <li></span>{{Nom}}</span><span id='color'> EST_DU_TYPE </span><span>{{Type}}</span></li>
                        {{/exercice.variables}}
 					</ul>
 				</li>
 					<li><h5 style="color:#C41C1C;font-weight:bold;"> DEBUT ALGORITHME </h5></li>
 					<ul id="code" class="ligne">
-						<!-- <li id="ch"> Level 1.2.1 </li>
-						<li id="ch"> Level 1.2.2 </li>
-						<li id="ch"> Level 1.2.3 </li>
-						<li id="ch"> Level 1.2.4 </li> -->
 					</ul>
 				</li>
 					<li><h5 style="color:#C41C1C;font-weight:bold;"> FIN ALGORITHME </h5></li>
@@ -154,9 +190,14 @@
                 </section>
             </div>
         </div>   
+			     <!-- <form id="test" action="le_lien_vers_ta_page">
+						<input type="hidden" name="code" value="javascript:document.getElementById('code').innerHTML"/>
+					</form>
+					<a href='#' onclick='document.getElementById("test").submit()'>Ton lien</a> -->
+			
             <div class="col-lg-12" id="validate" style="font-size: 16px;text-align: center;color: #2F4F4F;font-family:Comic Sans Ms">
-                <a class="col-lg-4 btn col-lg-offset-2 btn btn btn-success ">Abondonner Algorithme</a>
-                <a href="result.html" class="col-lg-2 btn col-lg-offset-2 btn btn btn-warning ">Envoyer</a>
+                <a href="/aceuil" class="col-lg-4 btn col-lg-offset-2 btn btn btn-success ">Abondonner Algorithme</a>
+                <a href="javascript:var form = document.createElement('form');hi = document.createElement('input');hi.setAttribute('type', 'hidden');hi.setAttribute('name', 'code');hi.setAttribute('value', document.getElementById('code').innerHTML);form.appendChild(hi);form.method='post';form.action='/apprentisage';document.body.appendChild(form);form.submit();" class="col-lg-2 btn col-lg-offset-2 btn btn btn-warning ">Envoyer</a>
             </div>
 
 			
@@ -188,64 +229,17 @@
 
 <script> 
 
-function getXMLHttpRequest() {
-	var xhr = null;
-	
-	if (window.XMLHttpRequest || window.ActiveXObject) {
-		if (window.ActiveXObject) {
-			try {
-				xhr = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch(e) {
-				xhr = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-		} else {
-			xhr = new XMLHttpRequest(); 
-		}
-	} else {
-		alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
-		return null;
-	}
-	
-	return xhr;
-}
-
-function request() {
-	
-	var xhr   = getXMLHttpRequest();
-	
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-			
-		} else if (xhr.readyState < 4) {
-		}
-	};
-
-	
-
-			
-
-	var code = document.getElementById("code").innerHTML;
-	document.getElementById("code").innerHTML="";
 
 
-	
-	xhr.open("POST", "/apprentisage", true);
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	
-	xhr.send("code="+code);
-	
-	s.ligneSelected = null;
-}
-
-document.getElementById("transmettre").addEventListener("click",request);
-
-
-                var dialog = document.getElementById('mydialog'); 
+           
+            
+    var dialog = document.getElementById('mydialog'); 
                /* if(!('show' in $dialog)){ 
                         document.getElementById('promptCompat').className = 'no_dialog'; 
                 } */
                 dialog.addEventListener('close', function() { 
-                	document.getElementById("si").classList.remove('show');
+                    
+                    document.getElementById("si").classList.remove('show');
                     document.getElementById("alors").classList.remove('show');
                     document.getElementById("tantque").classList.remove('show');
                     document.getElementById("choix_variables").classList.remove('show');
@@ -256,6 +250,8 @@ document.getElementById("transmettre").addEventListener("click",request);
 
                     document.getElementById("tantque").classList.remove("show");
                     document.getElementById("NameVariable").classList.remove("show");
+
+                    //document.getElementById("sel").classList.remove('show');
                         //console.log('Fermeture. ', this.returnValue); 
                 });
                 

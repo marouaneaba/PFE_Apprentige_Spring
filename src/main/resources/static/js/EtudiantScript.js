@@ -25,40 +25,37 @@
                 var li = document.createElement("li");
                 li.id= "ch";
                 
+                var p = s.ligneSelected;
+
                 if(s.ligneSelected == null){
                     s.code.appendChild(li);
+                    console.log("1");
                 }else if (s.ligneSelected.nextElementSibling != null && s.ligneSelected.nextElementSibling.localName === "ul"){
 
                     var ul = s.ligneSelected.nextElementSibling;
                     s.ligneSelected.nextElementSibling.insertBefore(li,ul.firstChild.nextElementSibling);
-
-                }else if (s.ligneSelected.firstChild != null ||
-                 (s.ligneSelected.firstChild.data != undefined && !s.ligneSelected.firstChild.data.startsWith("FIN"))){
+                    console.log("2");
+                }else if( s.ligneSelected.localName == "li" && s.ligneSelected.innerHTML === ""){
+                    s.ligneSelected.parentNode.insertBefore(li,s.ligneSelected.nextElementSibling);
+                }else if (( s.ligneSelected.parentNode.id !="variable" && s.ligneSelected.firstChild != null )||
+                 (s.ligneSelected.parentNode.id !="variable" && s.ligneSelected.firstChild.data != undefined && !s.ligneSelected.firstChild.data.startsWith("FIN"))){
 
                     s.ligneSelected.parentNode.insertBefore(li,s.ligneSelected.nextElementSibling);
                    
-                    console.log("im");
+                    console.log("3");
                 }else if(s.ligneSelected.firstChild.data != undefined && s.ligneSelected.firstChild.data.startsWith("FIN")){
-                    console.log("fin");
+                    console.log("4");
                    s.ligneSelected.parentNode.parentNode.appendChild(li); 
                 }
                 break;
             case "Supprimer Ligne":
-            console.log(event.target.text);
-            //var test = s.ligneSelected.firstChild;
-            //console.log(s.ligneSelected.firstChild.innerHTML);
-            //console.log(s.ligneSelected.firstChild.innerHTML.startsWith("<span"));
-
-           /* var e =s.ligneSelected.firstChild;
-            var yy = s.ligneSelected.nextElementSibling.localName;
-            console.log("newt : "+yy);
-            console.log("marouane: "+s.ligneSelected.firstChild);
-            */
-                if(s.ligneSelected.localName == "li" && s.ligneSelected.firstChild == null){
+            	
+            	if(s.ligneSelected.localName == "li" && s.ligneSelected.firstChild == null){
                     var supp = document.getElementById("s");
                         supp.parentNode.removeChild(supp);
                 }else if(document.getElementById("s") === null)
                     alert("Vueillez selectionnez un ligne !!");
+            	
                 else if(s.ligneSelected != null && s.ligneSelected.nextElementSibling != null && s.ligneSelected.nextElementSibling.localName === "ul"){
                     var eeee = s.ligneSelected;
                     console.log(s.ligneSelected.localName);
@@ -69,10 +66,6 @@
                         var azerty = li2.innerHTML.replace("Sinon ","");
                         var azerty = azerty.replace("elseif","if");
                         li2.innerHTML = azerty;
-                        //li2.outerText.replace("Sinon ","f");
-                        //li2.textContent
-                        //li2.innerHTML.replace("elseif","if");
-                        //li2.innerHTML.replace("Sinon ","");
                     }
                     var supp = s.ligneSelected.nextElementSibling;
                         supp.parentNode.removeChild(supp);
@@ -83,42 +76,13 @@
                 }else if( event.target.text =="Supprimer Ligne" && 
                     (s.ligneSelected.firstChild.data == undefined || !s.ligneSelected.firstChild.data.startsWith("FIN"))){
 
-                    console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
                     var supp = document.getElementById("s");
                         supp.parentNode.removeChild(supp);
                 }else if( s.ligneSelected.localName == "li" && s.ligneSelected.firstChild == null){
                     var supp = document.getElementById("s");
                         supp.parentNode.removeChild(supp);
                 }
-                /*else if(s.ligneSelected.firstChild != null && s.ligneSelected.firstChild.data != undefined && !s.ligneSelected.firstChild.data.startsWith("FIN")){
-                    // !s.ligneSelected.firstChild.data.startsWith("FIN") && !s.ligneSelected.firstChild.data.startsWith("DEBUT")){
-                    console.log("rrrrrrrrrrrrrrrr");
-                    if(document.getElementById("s")){    
-                        var supp = document.getElementById("s");
-                        supp.parentNode.removeChild(supp);
-                    }
-                }else if(s.ligneSelected.firstChild == null){
-                    if(document.getElementById("s")){    
-                        var supp = document.getElementById("s");
-                        supp.parentNode.removeChild(supp);
-                    }
-                    //alert("impossible");
-                }*/
                 s.ligneSelected = null;
-                /*else if(s.ligneSelected.firstChild === null || s.ligneSelected.firstChild.innerHTML.startsWith("<span") ||
-                    !s.ligneSelected.firstChild.data.startsWith("FIN") && !s.ligneSelected.firstChild.data.startsWith("DEBUT")){
-
-                    var result = confirm("étes vous sùr de supprimer se ligne!!!");
-                    if(result === true){
-                        if(document.getElementById("s")){
-                            var supp = document.getElementById("s");
-                            supp.parentNode.removeChild(supp);
-                        }else alert("Veuillez selectionner un ligne à supprimer !!");
-                    }
-                    s.ligneSelected = null;
-                }else{
-                    alert("impossible");
-                }*/
                 break;
             case "Declarer Variable":
                 document.getElementById("typeVariable").classList.toggle("show");
@@ -262,7 +226,7 @@
                 var datalist1 = document.getElementById("variables");
                 datalist1.innerHTML+="<option value='"+variableSelectionner+"'/>";
 
-                variable.innerHTML+="<li><span>"+variableSelectionner+"</span><span id='color'> EST_DU_TYPE </span><span>"+typeSelectionnez+"</span></li>";
+                variable.innerHTML+="<li>"+variableSelectionner+"<span id='color'> EST_DU_TYPE </span>"+typeSelectionnez+"</li>";
 
                 break;
 
@@ -407,17 +371,9 @@
         fermuture();
     }
 
-    function selectioLigne(event){
-        
-        /*var nomExercice = encodeURIComponent(document.getElementById("nameExercice").value);
-                console.log(nomExercice);
-        var exercice = encodeURIComponent(document.getElementById("enoncer_exo").value);
-                console.log(exercice);
-        var variable = encodeURIComponent(document.getElementById("variable").innerHTML);
-                console.log(variable);
-        var code = encodeURIComponent(document.getElementById("code").innerHTML);
-                console.log(code);*/
-
+function selectioLigne(event){
+                /*if(event.target.id != "variable")
+                    console.log("hlkui");*/
 
         if(document.getElementById("s") && event.target.id != "color"){
             document.getElementById("s").removeAttribute("style");
@@ -425,19 +381,19 @@
             console.log("here!!");
         }
         console.log(document.getElementById("s"));
-        /*if(event.target.id==="variable" || event.target.id === "code"){
-            event.target.style.background="";
-        }else*/ 
+
+
         var o = event.target;
+        
         if(event.target.id != "variable"  && event.target.id != "" && event.target.id != "color" && event.target.id!="code" ){
-            console.log("e: "+event.target.id);
+            
             event.target.style.background = "#A4A4A4";
             event.target.id = "s";
-        }/*
-        if(event.target.id == ""){
-            console.log("entrez");
-            event.target.parentNode.style.background = "#A4A4A4";
-        }*/
+            console.log("id: "+event.target.id);
+            console.log("polot");
+
+        }
+        
         console.log("z: "+event.target.id);
         var test = event.target;
         if(event.target.id == "" && event.target.localName =="li" && event.target.localName !=="ul" && event.target.id!="code"
@@ -446,10 +402,6 @@
             event.target.style.background = "#A4A4A4";
             event.target.id = "s";
         }
-        
-        /*var t  = document.getElementById("s");
-        
-            console.log("1 : "+t.localName);*/
 
         if(document.getElementById("s") != null && document.getElementById("s").localName !="ul" &&( event.target.childElementCount>1 || (document.getElementById("s") != null 
             && document.getElementById("s").innerHTML.startsWith("<span")))){

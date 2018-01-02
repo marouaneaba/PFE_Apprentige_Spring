@@ -151,10 +151,10 @@ public class ExerciceService {
 			connaissances.add(mRepositoryConnaissance.findOne(Long.parseLong(connaissancesSelected.get(i))));
 		}
 		exercice.setConnaissance(connaissances);
-		List<Variable> variables = SaveVaribale(variable);
+		List<Variable> variables = null;/*SaveVaribale(variable);
 		for(int i=0;i<variables.size();i++){
 			System.out.println("mon objet varibale : "+variables.get(i));
-		}
+		}*/
 		exercice.setVariables(variables);
 		mRepositoryVariable.save(variables);
 		
