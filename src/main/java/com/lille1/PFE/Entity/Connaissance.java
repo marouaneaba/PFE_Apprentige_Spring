@@ -21,6 +21,7 @@ public class Connaissance {
 
 	@Column
 	private boolean valider;
+	
 	@ManyToOne
 	private Enseignant enseignant;
 

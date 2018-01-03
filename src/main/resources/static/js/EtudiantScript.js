@@ -1,5 +1,6 @@
 
     s = this;
+    var tab = []
     this.traitement = null;
     this.buttonBalise = document.getElementById("button_algo");
     
@@ -37,7 +38,7 @@
                     console.log("2");
                 }else if( s.ligneSelected.localName == "li" && s.ligneSelected.innerHTML === ""){
                     s.ligneSelected.parentNode.insertBefore(li,s.ligneSelected.nextElementSibling);
-                }else if (( s.ligneSelected.parentNode.id !="variable" && s.ligneSelected.firstChild != null )||
+                }else if (( s.ligneSelected.parentNode.id !="variable" && s.ligneSelected.firstChild != null && !s.ligneSelected.firstChild.data.startsWith("FIN")) ||
                  (s.ligneSelected.parentNode.id !="variable" && s.ligneSelected.firstChild.data != undefined && !s.ligneSelected.firstChild.data.startsWith("FIN"))){
 
                     s.ligneSelected.parentNode.insertBefore(li,s.ligneSelected.nextElementSibling);
@@ -50,22 +51,37 @@
                 break;
             case "Supprimer Ligne":
             	
+            	
             	if(s.ligneSelected.localName == "li" && s.ligneSelected.firstChild == null){
                     var supp = document.getElementById("s");
                         supp.parentNode.removeChild(supp);
-                }else if(document.getElementById("s") === null)
+                }else if(document.getElementById("s") === null){
                     alert("Vueillez selectionnez un ligne !!");
             	
-                else if(s.ligneSelected != null && s.ligneSelected.nextElementSibling != null && s.ligneSelected.nextElementSibling.localName === "ul"){
-                    var eeee = s.ligneSelected;
+                }else if(s.ligneSelected != null && s.ligneSelected.nextElementSibling != null && s.ligneSelected.nextElementSibling.localName === "ul"){
+                    
+                	var eeee = s.ligneSelected;
                     console.log(s.ligneSelected.localName);
-                    if(s.ligneSelected.innerHTML.startsWith("<li><if")){
+                    //if(s.ligneSelected.innerHTML.startsWith("<li><if")){
+                    if(s.ligneSelected.firstChild.localName == "if"){
+                    	console.log("suup IF ELSE");
                         var ul =  s.ligneSelected.nextElementSibling;
                         var li2 = ul.nextElementSibling;
                         
                         var azerty = li2.innerHTML.replace("Sinon ","");
-                        var azerty = azerty.replace("elseif","if");
+                        azerty = azerty.replace("elseif","if");
+                         aerty = azerty.replace("\"","'");
+                         console.log("eee : "+azerty);
                         li2.innerHTML = azerty;
+                        
+                        var balise = document.getElementsByTagName("li");
+                        for(i = 0 ;i<balise.length;i++){;
+                        	
+                        	if(balise[i].localName == "li" && balise[i].innerHTML =="" && balise[i].nextSibling != null && balise[i].nextSibling.firstChild.localName =="elseif")
+                        		balise[i].parentNode.removeChild(balise[i]);
+                        	//console.log("byb name : "+balise[i].localName);
+                        }
+
                     }
                     var supp = s.ligneSelected.nextElementSibling;
                         supp.parentNode.removeChild(supp);
@@ -73,8 +89,7 @@
                         supp.parentNode.removeChild(supp);
 
                    
-                }else if( event.target.text =="Supprimer Ligne" && 
-                    (s.ligneSelected.firstChild.data == undefined || !s.ligneSelected.firstChild.data.startsWith("FIN"))){
+                }else if(s.ligneSelected.firstChild.data == undefined || !s.ligneSelected.firstChild.data.startsWith("FIN")){
 
                     var supp = document.getElementById("s");
                         supp.parentNode.removeChild(supp);
@@ -204,30 +219,20 @@
                 var typeSelectionnez = variableTypeSelectionner.typeVariable.value;
                 fermuture();
                 s.dialog.close();
-                /*
-                var span2 = document.createElement("span");
-                span2.id="color";
-                span2.appendChild(document.createTextNode(" EST_DU_TYPE "));
+                
+                if( tab.includes(variableSelectionner) ==false && variableSelectionner !== ""){
 
-                var li = document.createElement("li");
-                li.id = "ch";
-
-                var span1 = document.createElement("span");
-                span1.appendChild(document.createTextNode(variableSelectionner));
-                li.appendChild(span1);
-                li.appendChild(span2);
-                var span3 = document.createElement("span");
-                span3.appendChild(document.createTextNode(typeSelectionnez));
-                li.appendChild(span3);
-                variable.appendChild(li);*/
-                var listVariable = document.getElementById("NameVariable");
-                listVariable.innerHTML+="<option>"+variableSelectionner+"</option>";
-
-                var datalist1 = document.getElementById("variables");
-                datalist1.innerHTML+="<option value='"+variableSelectionner+"'/>";
-
-                variable.innerHTML+="<li>"+variableSelectionner+"<span id='color'> EST_DU_TYPE </span>"+typeSelectionnez+"</li>";
-
+                	tab.push(variableSelectionner);
+	                var listVariable = document.getElementById("NameVariable");
+	                listVariable.innerHTML+="<option>"+variableSelectionner+"</option>";
+	
+	                var datalist1 = document.getElementById("variables");
+	                datalist1.innerHTML+="<option value='"+variableSelectionner+"'/>";
+	                
+	                variable.innerHTML+="<li>"+variableSelectionner+"<span id='color'> EST_DU_TYPE </span>"+typeSelectionnez+"</li>";
+                }else{
+                	alert("Variable existe Où le Champ est Vide.!!");
+                }
                 break;
 
             case "Lire Variable":
@@ -320,7 +325,8 @@
                         balise.id = "";
                         //document.getElementById("s").pa.insertBefore(ul,document.getElementById("s").parentNode.parentNode.parentNode.nextSibling);
                     }else{
-                        ligneSelected.innerHTML = "<li><if val1='"+nameSelectionnez+"' arith='"+arithmitique+"' val2='"+valeur+"'> <span id='color'>Si (</span> "
+                        //ligneSelected.innerHTML = "<li><if val1='"+nameSelectionnez+"' arith='"+arithmitique+"' val2='"+valeur+"'> <span id='color'>Si (</span> "
+                    	ligneSelected.innerHTML = "<li><if val1='"+nameSelectionnez+"' arith='\<' val2='"+valeur+"'> <span id='color'>Si (</span> "
                         +nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) Alors</span></li> <ul id='r'><li>DEBUT_SI</li><li></li><li>FIN_SI</li></ul></if>"
                     }
 
@@ -448,6 +454,8 @@ function selectioLigne(event){
         document.getElementById("fleche").classList.remove("show");
         document.getElementById("NameVariable").classList.remove("show"); 
         document.getElementById("nameVariable").classList.remove("show");
+
+        document.getElementById("button").classList.remove("show");
         
     }
 
@@ -470,4 +478,5 @@ function selectioLigne(event){
         }*/
     }
 
+   
 

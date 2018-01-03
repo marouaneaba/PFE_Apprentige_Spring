@@ -73,6 +73,8 @@ public class ControllerExercice {
 	@RequestMapping(value = "/AjouterExercice", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public RedirectView recupererExercice(HttpServletRequest request, ModelMap pModel) {
 
+		System.out.println("POST arrivé ");
+		
 		HttpSession session = request.getSession();
 		Personne personne = (Personne) session.getAttribute("user");
 		/**/
@@ -82,13 +84,14 @@ public class ControllerExercice {
 		String codeBrouillon = request.getParameter("code");
 		List<String> connaissancesSelected = Arrays.asList(request.getParameter("tab").split(","));
 
+		
 		/* enlevé les espace au début et la fin de la chaine */
 		exercice = exercice.trim();
 		variable = variable.trim();
 		codeBrouillon = codeBrouillon.trim().replaceAll("\"", "'");
 		SaxHandler mSaxHandler = new SaxHandler();
 		mSaxHandler.setResult("");
-		String codeNetoyer = new SaxHandler().parserString(codeBrouillon);
+		String codeNetoyer = new SaxHandler().parserString(codeBrouillon,"code");
 
 		if (nameExercice.equals("") || exercice.equals("") || variable.equals("") || codeBrouillon.equals("")
 				|| connaissancesSelected.size() == 0) {

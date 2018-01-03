@@ -68,9 +68,9 @@ public class ConnaissanceService {
 
 		if (connaissancesNonEtudiant == null || connaissancesNonEtudiant.size() == 0) {
 
-			List<Connaissance> Allconnaissances = mConnaissanceService.getAllConnaissance();
-			Allconnaissances.sort(comparator);
-			return "" + Allconnaissances.get(Allconnaissances.size());
+			//List<Connaissance> Allconnaissances = mConnaissanceService.getAllConnaissance();
+			//Allconnaissances.sort(comparator);
+			return null;
 
 		}
 		return "" + connaissancesNonEtudiant.get(0).getOrdre();

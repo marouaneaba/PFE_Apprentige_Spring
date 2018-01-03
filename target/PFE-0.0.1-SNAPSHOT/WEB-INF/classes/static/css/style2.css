@@ -1,0 +1,89 @@
+.show {
+    display: block;
+}
+.dropdown-content {
+    display: none;
+ 
+}
+
+#saisir{
+	background: #FFFFFF;
+	/*border:#FFFFFF 1px solid;*/
+	border: 3px blue dashed;
+	/*cursor:auto;*/
+}
+
+#sec{
+		margin-top: 0px;
+		margin-bottom: 30px;
+}
+
+head,body
+{
+	background: #eeeaea ;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    color: #181818;
+}
+#bloc_page{
+	left: 10%;
+	width: 80%;
+	height: 10%;
+}
+#select_button{
+	margin-top: 50px;
+}
+#connaissance{
+	
+	border: 3px #000000 solid;
+	border-radius: 30px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+#ac{
+	
+	border: 3px #000000 solid;
+	border-radius: 30px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+#validate{
+	top:30px;
+}
+table
+{
+    border-collapse: collapse;
+}
+td, th /* Mettre une bordure sur les td ET les th */
+{
+    border: 1px solid black;
+    padding: 10px;
+    
+}
+#btn{
+	width: 5px;
+}
+#exo{
+	width:800px;
+}
+#ecriture{
+	font-style: italic;
+	font-family:"Comic Sans Ms";
+	font-size: 12px;
+}
+#apprentissage{
+	font-size: 14px;
+	margin-bottom: 8px;	
+	width: 190px;
+	height: 35px;
+}
+
+#information {
+	top:50px;
+}
+#mes_amis{
+	top:50px;
+}
+span#color {
+	color: #0084ff;
+	font-weight: bold;
+}

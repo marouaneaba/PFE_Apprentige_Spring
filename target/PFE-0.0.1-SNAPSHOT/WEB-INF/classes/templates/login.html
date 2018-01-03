@@ -1,0 +1,48 @@
+<!--Author: Marouane Abakarim
+			Ahmed Idrissi
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Authentification</title>
+<link href="/css/login.css" rel="stylesheet" type="text/css" media="all"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!--web-fonts-->
+<!--<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css' />-->
+<!--web-fonts-->
+</head>
+
+<body">
+<!--header-->
+	<div class="header-w3l">
+		<h5> Authentification Etudiant</h5>
+		
+	</div>
+<!--//header-->
+
+<!--main-->
+<div class="main-content-agile">
+	<div class="sub-main-w3" >
+	{{#connected}} <span style ="color:red;"> pseudo ou mot de passe erroner</span>{{/connected}}
+		<form action="login"  method="post"  >
+			<input placeholder="Entrez Votre Nom" name="username" class="user" type="text" required=""><br>
+			<span id="ereur"></span><br/>
+			<input placeholder="Mot de passe" name="password" class="pass" type="password" required=""><br>
+			<p><a style ="color:#cc2d2d ;font-family: 'Open Sans', sans-serif;font-weight: bold;" href="/forgetPassword">Mot de passe oublié ?</a></p>
+			<input type="submit" value="">
+		</form>
+	</div>
+</div>
+<!--//main-->
+
+<!--footer-->
+<div class="footer">
+	<p>Design by <a href="#">Marouane Abakarim</a> & <a href="#">Ahmed Idrissi</a></p>
+</div>
+<!--//footer-->
+
+</body>
+
+</html>

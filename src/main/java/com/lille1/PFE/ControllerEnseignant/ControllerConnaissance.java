@@ -43,18 +43,23 @@ public class ControllerConnaissance {
 	@Resource(name = "globalSessionMessage")
 	ClassScope sessionGlobal;
 
+	private String message= "";
+	
 	@RequestMapping(value = "/Ajoutconnaissance", method = RequestMethod.GET)
 	public String getInterfaceAjoutConnaissance(ModelMap pModel) {
 
+			pModel.addAttribute("message", message);
+			message ="";
+		
 		return "connaissance";
 	}
 
 	@RequestMapping(value = "/Ajoutconnaissance", method = RequestMethod.POST)
 	public RedirectView ajoutConnaissance(HttpServletRequest request, @RequestParam("nom") String nom,
-			@RequestParam("ordre") int ordre, ModelMap pModel) {
+			@RequestParam("ordre") String ordreS, ModelMap pModel) {
 
 		HttpSession session = request.getSession();
-
+		message = "";
 		List<Connaissance> connaissanceNonValide = new ArrayList<>();
 		List<Connaissance> connaissances = mConnaissanceService
 				.convertIterableToList(mRepositoryConnaissance.findAll());
@@ -64,7 +69,15 @@ public class ControllerConnaissance {
 				trouver = false;
 			}
 		}
-
+		
+		int ordre;
+		try{
+			ordre = Integer.parseInt(ordreS);
+		}catch(NumberFormatException e){
+			message = "Veuillez bine remplir les champs !! ";
+			return new RedirectView("/Ajoutconnaissance");
+		}
+		
 		if (trouver && ((Personne) session.getAttribute("user")).getRole().equals("enseignant")) {
 
 			Connaissance co = new Connaissance(nom, ordre, false);

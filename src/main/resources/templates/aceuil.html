@@ -51,7 +51,10 @@
                 {{^screen}}
                 <center><h3>Votre Niveaux : {{niveaux}}</h3></center>
                 </div>
-                <br/><br/>
+                
+                {{#Suivant}}
+                <center>{{message}}</center><br/>
+                {{/Suivant}}
                 <article style="font-size: 16px;text-align: justify;text-indent: 50px;color: #2F4F4F;font-family:Comic Sans Ms" class ="col-lg-10 col-lg-push-1">
                     <b> Vous possédez les Connaissances Suivant: <br/><br/> {{#connaissanceEtu}}<li>{{ordre}} : {{nom}}</li>{{/connaissanceEtu}} <br/></b>
                     
@@ -60,11 +63,21 @@
                 
                 {{#screen}}
                 <center><h3>Votre Niveaux : {{screen.niveaux}}</h3></center>
+                
                 <article style="font-size: 16px;text-align: justify;text-indent: 50px;color: #2F4F4F;font-family:Comic Sans Ms" class ="col-lg-10 col-lg-push-1">
-                    <b>{{screen.Tete}}</b><br/>
-                    <b>{{screen.leMot}}</b>
+                    <br/><br/>
+                    <b> Vous possédez les Connaissances Suivant: <br/><br/> {{#connaissanceEtu}}<li>{{ordre}} : {{nom}}</li>{{/connaissanceEtu}} <br/></b>
                     
                 </article>
+                
+                
+                <article style="font-size: 16px;text-align: justify;text-indent: 50px;color: #2F4F4F;font-family:Comic Sans Ms" class ="col-lg-10 col-lg-push-1">
+                    <center>
+                    <b>{{screen.Tete}}</b><br/>
+                    <b>{{screen.leMot}}</b>
+                    </center>
+                </article>
+                
                 {{/screen}}
               
     
@@ -77,7 +90,9 @@
             <a href="/apprentisage" class="btn btn btn-block" style="background: #ffffff;margin-top: 10px;font-style: italic;font-family:Comic Sans Ms";>Cliquer ici pour Commancer l'apprentissage Niv : <span style="color:red;">{{niveaux2}}</span></a>
             {{/screen}}
             {{^screen}}
+            {{^Suivant}}
             <a href="/apprentisage" class="btn btn btn-block" style="background: #ffffff;margin-top: 10px;font-style: italic;font-family:Comic Sans Ms";>Cliquer ici pour Commancer l'apprentissage Niv : <span style="color:red;">{{niveauxSuivant}}</span></a>
+            {{/Suivant}}
             {{/screen}}
             </div>
            

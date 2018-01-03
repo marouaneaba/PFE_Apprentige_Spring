@@ -237,7 +237,7 @@
                /* if(!('show' in $dialog)){ 
                         document.getElementById('promptCompat').className = 'no_dialog'; 
                 } */
-                dialog.addEventListener('close', function() { 
+				dialog.addEventListener('close', function() { 
                     
                     document.getElementById("si").classList.remove('show');
                     document.getElementById("alors").classList.remove('show');
@@ -248,9 +248,16 @@
                     document.getElementById("typeVar").classList.remove("show");
                     document.getElementById("nameVariable").classList.remove("show");
 
-                    document.getElementById("tantque").classList.remove("show");
+                    document.getElementById("typeVariable").classList.remove("show");
                     document.getElementById("NameVariable").classList.remove("show");
-
+                    document.getElementById("fleche").classList.remove("show");
+                    document.getElementById("typeConditionSi").classList.remove("show");
+                    document.getElementById("input1").classList.remove("show");
+                    document.getElementById("input2").classList.remove("show");
+                    document.getElementById("checkbox").classList.remove("show");
+                    document.getElementById("choix_con").classList.remove("show");
+                    document.getElementById("saisie").classList.remove("show");
+                    document.getElementById("button").classList.remove("show");
                     //document.getElementById("sel").classList.remove('show');
                         //console.log('Fermeture. ', this.returnValue); 
                 });

@@ -114,9 +114,7 @@ public class Exercice { // peux etre faut instancier les deux List par = new
 
 	@Override
 	public String toString() {
-		return "Exercice [id_ex=" + id_ex + ", nomExercice=" + nomExercice + ", enonceExercice=" + enonceExercice
-				+ ", XMLSolution=" + XMLSolution + ", XMLSolutionNettoyer=" + XMLSolutionNettoyer + ", connaissance="
-				+ connaissance + ", variables=" + variables + ", enseignant=" + enseignant + "]";
+		return "Exercice [id_ex=" + id_ex + "]";
 	}
 
 }

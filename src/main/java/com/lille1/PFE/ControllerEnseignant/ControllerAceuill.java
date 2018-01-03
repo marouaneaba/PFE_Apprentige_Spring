@@ -1,5 +1,6 @@
 package com.lille1.PFE.ControllerEnseignant;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -16,10 +17,15 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.lille1.PFE.ControllerEtudiant.ResultExercice;
 import com.lille1.PFE.Entity.Connaissance;
 import com.lille1.PFE.Entity.Etudiant;
+import com.lille1.PFE.Entity.Exercice;
+import com.lille1.PFE.Entity.History;
 import com.lille1.PFE.Entity.Personne;
 import com.lille1.PFE.Repository.RepositoryConnaissance;
 import com.lille1.PFE.Repository.RepositoryEtudiant;
+import com.lille1.PFE.Repository.RepositoryExercice;
+import com.lille1.PFE.Repository.RepositoryHistory;
 import com.lille1.PFE.Service.ConnaissanceService;
+import com.lille1.PFE.Service.HistoryService;
 
 @Controller
 @RequestMapping("/aceuil")
@@ -29,10 +35,15 @@ public class ControllerAceuill {
 	private RepositoryConnaissance mRepositoryConnaissance;
 	@Autowired
 	private RepositoryEtudiant mRepositoryEtudiant;
-
+	@Autowired
+	private RepositoryExercice mRepositoryExercice;
 	@Autowired
 	private ConnaissanceService mConnaissanceService;
-
+	@Autowired
+	private RepositoryHistory mRepositoryHistory;
+	@Autowired
+	private HistoryService mHistoryService;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String GetAceuill(HttpServletRequest request, ModelMap pModel) {
 
@@ -44,20 +55,65 @@ public class ControllerAceuill {
 		String result = (String) session.getAttribute("result");
 		System.out.println("result : " + result);
 
-		if (result == null) {
-			int niveaux = Integer.parseInt(mConnaissanceService.getNiveaux(etudiant.getIdEns()));
-
-			List<Connaissance> connaissancesEtudiant = mRepositoryEtudiant
-					.findConnaissaceByEtudiant(etudiant.getIdEns());
-			Comparator<Connaissance> comparator = (x, y) -> (x.getOrdre() > y.getOrdre()) ? 1
-					: ((x.getOrdre() == y.getOrdre()) ? 0 : -1);
-			connaissancesEtudiant.sort(comparator);
-			pModel.addAttribute("connaissanceEtu", connaissancesEtudiant);
-			pModel.addAttribute("niveaux", niveaux - 1);
-			pModel.addAttribute("niveauxSuivant", niveaux);
+		List<Connaissance> connaissancesEtudiant = mRepositoryEtudiant.findConnaissaceByEtudiant(etudiant.getIdEns());
+		Comparator<Connaissance> comparator = (x, y) -> (x.getOrdre() > y.getOrdre()) ? 1
+				: ((x.getOrdre() == y.getOrdre()) ? 0 : -1);
+		connaissancesEtudiant.sort(comparator);
+		pModel.addAttribute("connaissanceEtu", connaissancesEtudiant);
+		
+		List<Connaissance> connaissancesNonEtudiant = mConnaissanceService.getAllConnaissance();
+		connaissancesNonEtudiant.removeAll(connaissancesEtudiant);
+		
+		List<Exercice> exercices = null;
+		for(int i=0;i<connaissancesNonEtudiant.size();i++){
+			
+			if(mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant.get(i)) != null 
+					&& mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant.get(i)).size()>0){
+				exercices = mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant.get(i));
+				//connaissanceREPLY = connaissancesNonEtudiant.get(i);
+				break;
+			}else if(mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant.get(i)) == null 
+					&& mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant.get(i)).size() == 0){
+				//arréter tous les connaissance et fait.
+				result = null;
+			}
 		}
-
-		if (result != null && result.equals("oui")) {
+		//List<Exercice> exercices = mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant);
+		
+		/* probléme dans la requet */
+		List<History> history = mRepositoryHistory.findByScoreAndEtudiant(1,etudiant);
+		List<Exercice> exercices1ByEtudiant = new ArrayList<Exercice>();
+		for(int i=0;i<history.size();i++){
+			exercices1ByEtudiant.add(history.get(i).getExercice());
+		}
+		
+		exercices.removeAll(exercices1ByEtudiant);
+		
+		System.out.println("eee : "+exercices.size());
+		exercices.removeAll(exercices1ByEtudiant);
+		System.out.println("eee : "+exercices.size());
+		System.out.println("oooo : "+exercices);
+		System.out.println("e2e3e4 : "+exercices1ByEtudiant);
+		
+		if (result == null || mConnaissanceService.getNiveaux(etudiant.getIdEns())== null || exercices == null ||exercices.size() == 0) {
+			
+			System.out.println("11 : ");
+			if(mConnaissanceService.getNiveaux(etudiant.getIdEns()) != null && exercices.size()>0){
+				int niveaux = Integer.parseInt(mConnaissanceService.getNiveaux(etudiant.getIdEns()));
+				System.out.println("22 : ");
+				
+				//pModel.addAttribute("connaissanceEtu", connaissancesEtudiant);
+				pModel.addAttribute("niveaux", niveaux - 1);
+				pModel.addAttribute("niveauxSuivant", niveaux);
+				pModel.addAttribute("Suivant", false);
+			}else if(mConnaissanceService.getNiveaux(etudiant.getIdEns())== null || exercices == null ||exercices.size() == 0){
+				System.out.println("33 : ");
+				pModel.addAttribute("connaissanceEtu", connaissancesEtudiant);
+				pModel.addAttribute("niveaux", connaissancesEtudiant.get(connaissancesEtudiant.size()-1).getOrdre());
+				pModel.addAttribute("Suivant", true);
+				pModel.addAttribute("message", "vous avez réussi tout les niveaux liée a nos exercice \n Veuillez Attendre une mise à jour !!");
+			}
+		}else if (result != null && result.equals("oui")) {
 			System.out.println("oui");
 			int niveaux = (int) session.getAttribute("niveaux");
 			String tete = "Félicitation : " + etudiant.getNom();
@@ -75,7 +131,7 @@ public class ControllerAceuill {
 
 			pModel.addAttribute("screen", mResultExercice);
 			pModel.addAttribute("niveaux2", niveaux + 1);
-		} else if (result != null && result.equals("finie")) {
+		} /*else if (result != null && result.equals("finie")) {
 			System.out.println("finie");
 			int niveaux = (int) session.getAttribute("niveaux");
 			String tete = "Félicitation";
@@ -84,7 +140,7 @@ public class ControllerAceuill {
 
 			pModel.addAttribute("screen", mResultExercice);
 			pModel.addAttribute("niveaux2", niveaux);
-		}
+		}*/
 
 		return "/aceuil";
 	}

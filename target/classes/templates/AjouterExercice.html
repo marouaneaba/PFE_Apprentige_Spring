@@ -125,7 +125,7 @@
                     <option>==</option>
                     <option><=</option>
                     <option>></option>
-                    <option>>=</option>
+                    <option><=</option>
                 </select>
 
                 <input style="height: 20px;width: 50px;" list="variables" type="text" id="saisie" class="dropdown-content ">
@@ -215,8 +215,31 @@
         </div>   
             <div class="col-xs-8 col-xs-offset-4" id="validate" style="font-size: 16px;text-align: center;color: #2F4F4F;font-family:Comic Sans Ms">
                 
-                <a id="transmettre"  class="col-xs-4 btn col-xs-offset-4 btn btn btn-success ">Transsmetre</a>
-
+				<a id="transmettre" class="col-xs-4 btn col-xs-offset-4 btn btn btn-success " href="javascript:var 
+							form = document.createElement('form');
+							nomExercice = document.createElement('input');
+							nomExercice.setAttribute('type', 'hidden');
+							nomExercice.setAttribute('name', 'nomExercice');
+							nomExercice.setAttribute('value', document.getElementById('nameExercice').value);
+							form.appendChild(nomExercice);exercice = document.createElement('input');
+							exercice.setAttribute('type', 'hidden');exercice.setAttribute('name', 'exercice');
+							exercice.setAttribute('value', document.getElementById('enoncer_exo').value);
+							form.appendChild(exercice);variable = document.createElement('input');
+							variable.setAttribute('type', 'hidden');variable.setAttribute('name', 'variable');
+							variable.setAttribute('value', document.getElementById('variable').innerHTML);
+							form.appendChild(variable);code = document.createElement('input');
+							code.setAttribute('type', 'hidden');code.setAttribute('name', 'code');
+							code.setAttribute('value', document.getElementById('code').innerHTML);
+							form.appendChild(code);
+							connaissance = document.createElement('input');
+							connaissance.setAttribute('type', 'hidden');
+							connaissance.setAttribute('name', 'tab');
+							connaissance.setAttribute('value', check(document.getElementsByName('connaissancesSelect')));
+							form.appendChild(connaissance);		 
+							form.method='post';
+							form.action='/AjouterExercice';
+							document.body.appendChild(form);
+							form.submit();">Transsmetre</a>
             </div>
 
             
@@ -248,73 +271,19 @@
 
 
 <script> 
-			function getXMLHttpRequest() {
-				var xhr = null;
-				
-				if (window.XMLHttpRequest || window.ActiveXObject) {
-					if (window.ActiveXObject) {
-						try {
-							xhr = new ActiveXObject("Msxml2.XMLHTTP");
-						} catch(e) {
-							xhr = new ActiveXObject("Microsoft.XMLHTTP");
-						}
-					} else {
-						xhr = new XMLHttpRequest(); 
-					}
-				} else {
-					alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
-					return null;
-				}
-				
-				return xhr;
+function check(listName){
+	var tab = [];
+	var check = document.getElementsByName("connaissancesSelect");
+		for(var i=0;i<check.length;i++){
+			if(check[i].checked === true){
+				tab.push(check[i].id);
 			}
+		}
+		return tab;
+}
 			
-			function request() {
-				
-				var xhr   = getXMLHttpRequest();
-				
-				xhr.onreadystatechange = function() {
-					if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-						
-					} else if (xhr.readyState < 4) {
-					}
-				};
-				/*var nomExercice = encodeURIComponent(document.getElementById("nameExercice").value);
-				var exercice = encodeURIComponent(document.getElementById("enoncer_exo").value);
-				var variable = encodeURIComponent(document.getElementById("variable").innerHTML);
-				var code = encodeURIComponent(document.getElementById("code").innerHTML);*/
-				
-				var nomExercice = document.getElementById("nameExercice").value;
-				var exercice =  document.getElementById("enoncer_exo").value;				
-				var variable = document.getElementById("variable").innerHTML;
-				var code = document.getElementById("code").innerHTML;
-				document.getElementById("nameExercice").innerHTML = "";
-				document.getElementById("enoncer_exo").innerHTML="";
-				document.getElementById("variable").innerHTML="";
-				document.getElementById("code").innerHTML="";
-				
-				var tab = [];
-		         var check = document.getElementsByName("connaissancesSelect");
-		         for(var i=0;i<check.length;i++){
-		            if(check[i].checked === true){
-		                tab.push(check[i].id);
-		                console.log(check[i].id);
-		            }
-		         }
-				
-				//var connaissanceSel = document.getElementById("connaissances").value;
-				//console.log(connaissanceSel);
-				
-				xhr.open("POST", "/AjouterExercice", true);
-				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-				//xhr.send('IdEditor='+nomExercice+"&lorem="+exercice+"&name="+variable);
-				xhr.send('nomExercice='+nomExercice+"&exercice="+exercice+"&variable="+variable+"&code="+code+"&tab="+tab);
-				
-				s.ligneSelected = null;
-			}
 			
-			document.getElementById("transmettre").addEventListener("click",request);
-			//request();
+			
 			
     var dialog = document.getElementById('mydialog'); 
                /* if(!('show' in $dialog)){ 
@@ -331,9 +300,16 @@
                     document.getElementById("typeVar").classList.remove("show");
                     document.getElementById("nameVariable").classList.remove("show");
 
-                    document.getElementById("tantque").classList.remove("show");
+                    document.getElementById("typeVariable").classList.remove("show");
                     document.getElementById("NameVariable").classList.remove("show");
-
+                    document.getElementById("fleche").classList.remove("show");
+                    document.getElementById("typeConditionSi").classList.remove("show");
+                    document.getElementById("input1").classList.remove("show");
+                    document.getElementById("input2").classList.remove("show");
+                    document.getElementById("checkbox").classList.remove("show");
+                    document.getElementById("choix_con").classList.remove("show");
+                    document.getElementById("saisie").classList.remove("show");
+                    document.getElementById("button").classList.remove("show");
                     //document.getElementById("sel").classList.remove('show');
                         //console.log('Fermeture. ', this.returnValue); 
                 });

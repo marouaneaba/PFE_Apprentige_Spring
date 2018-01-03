@@ -20,6 +20,7 @@ import com.lille1.PFE.Repository.RepositoryConnaissance;
 import com.lille1.PFE.Repository.RepositoryEnseignant;
 import com.lille1.PFE.Repository.RepositoryExercice;
 import com.lille1.PFE.Repository.RepositoryVariable;
+import com.lille1.PFE.sax.SaxHandler;
 
 @Service
 public class ExerciceService {
@@ -35,7 +36,7 @@ public class ExerciceService {
 
 	private SAXBuilder sxb = new SAXBuilder();
 
-	public List<Variable> SaveVaribale(String value) {
+	/*public List<Variable> SaveVaribale(String value) {
 		value = "<doc>" + value + "</doc>";
 		List<Variable> varibales = new ArrayList<>();
 
@@ -67,6 +68,13 @@ public class ExerciceService {
 			}
 		}
 		return varibales;
+	}*/
+	
+	public List<Variable> SaveVaribale(String StringVariable){
+		SaxHandler mSaxHandler = new SaxHandler();
+		mSaxHandler.setResult("");
+		String codeNetoyer = new SaxHandler().parserString(StringVariable,"var");
+		return mSaxHandler.getVariable();
 	}
 
 	public List<Exercice> convertIterableToList(Iterable<Exercice> iterable) {
@@ -144,18 +152,18 @@ public class ExerciceService {
 				connaissances.add(mRepositoryConnaissance.findOne(Long.parseLong(connaissancesSelected.get(i))));
 		}
 		exercice.setConnaissance(connaissances);
-		List<Variable> variables = null;/*
-										 * SaveVaribale(variable); for(int
-										 * i=0;i<variables.size();i++){
-										 * System.out.
-										 * println("mon objet varibale : "
-										 * +variables.get(i)); }
-										 */
+		List<Variable> variables = SaveVaribale(variable); 
+		//System.out.println("mon objet varibale : "+codeNetoyer);
+		//for(int i=0;i<variables.size();i++){
+			//System.out.println("mon objet varibale : "+variables.get(i));
+		 //}
+
 		exercice.setVariables(variables);
 		mRepositoryVariable.save(variables);
 
 		enseignant.setExercices(exercice);
 		mRepositoryExercice.save(exercice);
+		System.out.println("exercice : "+exercice);
 
 	}
 
