@@ -59,7 +59,7 @@
                 </nav>
             </header>
             
-    <center style="color:red;">{{message}} </center>
+
             <section class="row" >
                 <div class="col-xs-12" style="margin-bottom:2 0px;">
                     <img height="92" width="72" src="images/algo.png" alt="" class="ico_categorie" />
@@ -102,6 +102,7 @@
                     <option><=</option>
                     <option>></option>
                     <option>>=</option>
+                    <option>!=</option>
                 </select>
 
                 <input style="height: 20px;width: 50px;" list="variables" type="text" id="choix_variables" class="dropdown-content ">
@@ -121,18 +122,14 @@
                 <input id="checkbox" type="checkbox" class="dropdown-content" placeholder="" />
                 
                 <select id="choix_con" class="dropdown-content list">
-                    <option><</option>
-                    <option>==</option>
-                    <option><=</option>
-                    <option>></option>
-                    <option><=</option>
+                    <option>+</option>
+                    <option>-</option>
+                    <option>*</option>
+                    <option>/</option>
                 </select>
 
-                <input style="height: 20px;width: 50px;" list="variables" type="text" id="saisie" class="dropdown-content ">
-                <datalist id="variables">
-                  <option value="var1">
-                  <option value="var2">
-                  <option value="var3">
+                <input style="height: 20px;width: 50px;" list="variables2" type="text" id="saisie" class="dropdown-content ">
+                <datalist id="variables2">
                 </datalist>
                 </center>
                 <center><div id ="button" class="boutons"><button onclick="Annuler()">Fermer</button>&nbsp;<button onclick="valider(document.getElementsByClassName('list'),document.getElementById('input1').value)">OK</button></div> </center>

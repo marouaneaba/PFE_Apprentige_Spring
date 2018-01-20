@@ -36,10 +36,14 @@
                     var ul = s.ligneSelected.nextElementSibling;
                     s.ligneSelected.nextElementSibling.insertBefore(li,ul.firstChild.nextElementSibling);
                     console.log("2");
-                }else if( s.ligneSelected.localName == "li" && s.ligneSelected.innerHTML === ""){
+                }else if( (s.ligneSelected.localName == "li" && s.ligneSelected.innerHTML == "") ||
+                	( s.ligneSelected.localName == "li" && s.ligneSelected.firstChild != null && s.ligneSelected.firstChild.data != undefined &&
+                 !s.ligneSelected.firstChild.data.startsWith("FIN")) || (s.ligneSelected.localName == "li" && s.ligneSelected.firstChild.data == undefined ) ||
+                	(s.ligneSelected.localName == "li" && s.ligneSelected.innerHTML === "")){
+
                     s.ligneSelected.parentNode.insertBefore(li,s.ligneSelected.nextElementSibling);
-                }else if (( s.ligneSelected.parentNode.id !="variable" && s.ligneSelected.firstChild != null && !s.ligneSelected.firstChild.data.startsWith("FIN")) ||
-                 (s.ligneSelected.parentNode.id !="variable" && s.ligneSelected.firstChild.data != undefined && !s.ligneSelected.firstChild.data.startsWith("FIN"))){
+                }else if (( s.ligneSelected.parentNode.id !="variable" && s.ligneSelected.firstChild != null && s.ligneSelected.firstChild.data != undefined && !s.ligneSelected.firstChild.data.startsWith("FIN")) ||
+                 (s.ligneSelected.parentNode.id !="variable" && s.ligneSelected.firstChild.data != undefined && s.ligneSelected.firstChild.data != undefined && !s.ligneSelected.firstChild.data.startsWith("FIN"))){
 
                     s.ligneSelected.parentNode.insertBefore(li,s.ligneSelected.nextElementSibling);
                    
@@ -67,13 +71,13 @@
                     	console.log("suup IF ELSE");
                         var ul =  s.ligneSelected.nextElementSibling;
                         var li2 = ul.nextElementSibling;
-                        
-                        var azerty = li2.innerHTML.replace("Sinon ","");
-                        azerty = azerty.replace("elseif","if");
-                         aerty = azerty.replace("\"","'");
-                         console.log("eee : "+azerty);
-                        li2.innerHTML = azerty;
-                        
+                        if(li2 != null){
+	                        var azerty = li2.innerHTML.replace("Sinon ","");
+	                        azerty = azerty.replace("elseif","if");
+	                         aerty = azerty.replace("\"","'");
+	                         console.log("eee : "+azerty);
+	                        li2.innerHTML = azerty;
+                        }
                         var balise = document.getElementsByTagName("li");
                         for(i = 0 ;i<balise.length;i++){;
                         	
@@ -107,104 +111,137 @@
                 ShowMessage();
                 break;
             case "Lire Variable":
-                document.getElementById("NameVariable").classList.toggle('show');
-                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
-                    alert("Veuillez selectionnez un ligne dans Algorithmezzzmmm!! ");
+            	if( tab.length > 0 ){
+	                document.getElementById("NameVariable").classList.toggle('show');
+	                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
+	                    alert("Veuillez selectionnez un ligne dans Algorithmezzzmmm!! ");
+	                }else{
+	                    
+	                    ShowMessage();
+	                }
                 }else{
-                    
-                    ShowMessage();
+                	alert(" Faut declarer des variables pour : "+event.target.text+" !!");
                 }
                 break;
             case "Aff valeur a une Variable":
-                document.getElementById("NameVariable").classList.toggle("show");
-                document.getElementById("choix_variables").classList.toggle("show");
-                document.getElementById("choix_con").classList.toggle("show");
-                document.getElementById("saisie").classList.toggle("show");
-                document.getElementById("fleche").classList.toggle("show");
-                document.getElementById("checkbox").classList.toggle("show");
+            	if( tab.length > 0 ){
+	                document.getElementById("NameVariable").classList.toggle("show");
+	                document.getElementById("choix_variables").classList.toggle("show");
+	                document.getElementById("choix_con").classList.toggle("show");
+	                document.getElementById("saisie").classList.toggle("show");
+	                document.getElementById("fleche").classList.toggle("show");
+	                document.getElementById("checkbox").classList.toggle("show");
 
-                var checkbox = document.getElementById("checkbox");
-                checkbox.checked = true;
-                document.getElementById("choix_con").disabled=true;
-                document.getElementById("saisie").disabled=true;
+	                var checkbox = document.getElementById("checkbox");
+	                checkbox.checked = true;
+	                document.getElementById("choix_con").disabled=true;
+	                document.getElementById("saisie").disabled=true;
 
-                checkbox.addEventListener("change",function(event){
-                    if(this.checked) {
-                        document.getElementById("choix_con").disabled=true;
-                        document.getElementById("saisie").disabled=true;
-                    } else {
-                        document.getElementById("choix_con").disabled=false;
-                        document.getElementById("saisie").disabled=false;
-                    }
-                });
+	                checkbox.addEventListener("change",function(event){
+	                    if(this.checked) {
+	                        document.getElementById("choix_con").disabled=true;
+	                        document.getElementById("saisie").disabled=true;
+	                    } else {
+	                        document.getElementById("choix_con").disabled=false;
+	                        document.getElementById("saisie").disabled=false;
+	                    }
+	                });
 
-                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
-                    alert("Veuillez selectionnez un ligne dans Algorithmezzz!! ");
+	                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
+	                    alert("Veuillez selectionnez un ligne dans Algorithmezzz!! ");
+	                }else{
+	                    
+	                    ShowMessage();
+	                }
                 }else{
-                    
-                    ShowMessage();
+                	alert(" Faut declarer des variables pour : "+event.target.text+" !!");
                 }
                 break;
             case "Afficher Variable":
-                console.log(event.target.text);
-                document.getElementById("NameVariable").classList.toggle('show');
-                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
-                    alert("Veuillez selectionnez un ligne dans Algorithmezzz!! ");
+            	if( tab.length > 0 ){
+	                console.log(event.target.text);
+	                document.getElementById("NameVariable").classList.toggle('show');
+	                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
+	                    alert("Veuillez selectionnez un ligne dans Algorithmezzz!! ");
+	                }else{
+	                    
+	                    ShowMessage();
+	                }
                 }else{
-                    
-                    ShowMessage();
+                	alert(" Faut declarer des variables pour : "+event.target.text+" !!");
                 }
                 break;
             case "Condition Si":
                 console.log(event.target.text);
+                if( tab.length > 0 ){
+	                document.getElementById("NameVariable").classList.toggle('show');
+	                document.getElementById("typeConditionSi").classList.toggle('show');  
+	                document.getElementById("choix_variables").classList.toggle('show'); 
+	                document.getElementById("si").classList.toggle('show'); 
+	                document.getElementById("alors").classList.toggle('show'); 
 
-                
-                
-                document.getElementById("NameVariable").classList.toggle('show');
-                document.getElementById("typeConditionSi").classList.toggle('show');  
-                document.getElementById("choix_variables").classList.toggle('show'); 
-                document.getElementById("si").classList.toggle('show'); 
-                document.getElementById("alors").classList.toggle('show'); 
-
-                
-                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
-                    alert("Veuillez selectionnez un ligne dans Algorithmezzz!! ");
+	                
+	                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
+	                    alert("Veuillez selectionnez un ligne dans Algorithmezzz!! ");
+	                }else{
+	                    
+	                    ShowMessage();
+	                }
                 }else{
-                    
-                    ShowMessage();
+                	alert(" Faut declarer des variables pour : "+event.target.text+" !!");
                 }
                 break;
-            case "Sinon Si":
+            case "Sinon si":
                 console.log(event.target.text);
-                // TODO //
+                if( tab.length > 0 ){
+	                document.getElementById("alors").classList.toggle('show'); 
+
+	                
+	                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
+	                    alert("Veuillez selectionnez un ligne dans Algorithmezzz!! ");
+	                }else{
+	                    
+	                    ShowMessage();
+	                }
+                }else{
+                	alert(" Faut declarer des variables pour : "+event.target.text+" !!");
+                }
                 break;
             case "Boucle Pour":
                 console.log(event.target.text);
-                document.getElementById("NameVariable").classList.toggle("show");
-                document.getElementById("input1").classList.toggle('show');
-                document.getElementById("input2").classList.toggle("show");
-                document.getElementById("de").classList.toggle("show");
-                document.getElementById("jusqu").classList.toggle("show");
-                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
-                    alert("Veuillez selectionnez un ligne dans Algorithmezzz!! ");
+                if( tab.length > 0 ){
+	                document.getElementById("NameVariable").classList.toggle("show");
+	                document.getElementById("input1").classList.toggle('show');
+	                document.getElementById("input2").classList.toggle("show");
+	                document.getElementById("de").classList.toggle("show");
+	                document.getElementById("jusqu").classList.toggle("show");
+	                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
+	                    alert("Veuillez selectionnez un ligne dans Algorithmezzz!! ");
+	                }else{
+	                    
+	                    ShowMessage();
+	                }
                 }else{
-                    
-                    ShowMessage();
+                	alert(" Faut declarer des variables pour : "+event.target.text+" !!");
                 }
                 break;
             case "Boucle Tant Que":
                 console.log(event.target.text);
-                document.getElementById("NameVariable").classList.toggle("show");
-                document.getElementById("typeConditionSi").classList.toggle("show");
-                document.getElementById("choix_variables").classList.toggle("show");
-                document.getElementById("tantque").classList.toggle("show");
-                document.getElementById("alors").classList.toggle("show");
+                if( tab.length > 0 ){
+	                document.getElementById("NameVariable").classList.toggle("show");
+	                document.getElementById("typeConditionSi").classList.toggle("show");
+	                document.getElementById("choix_variables").classList.toggle("show");
+	                document.getElementById("tantque").classList.toggle("show");
+	                document.getElementById("alors").classList.toggle("show");
 
-                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
-                    alert("Veuillez selectionnez un ligne dans Algorithmezzz!! ");
+	                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
+	                    alert("Veuillez selectionnez un ligne dans Algorithmezzz!! ");
+	                }else{
+	                    
+	                    ShowMessage();
+	                }
                 }else{
-                    
-                    ShowMessage();
+                	alert(" Faut declarer des variables pour : "+event.target.text+" !!");
                 }
                 break;
         }
@@ -256,15 +293,20 @@
 
                 var nameSelectionnez = variableTypeSelectionner.NameVariable.value;
                 console.log(nameSelectionnez);
+
                 var valeur = document.getElementById("choix_variables").value;
-                var test2 = document.getElementById("choix_variables");
                 console.log(valeur);
-                var arithmitique = document.getElementById("choix_con").value;
                 
+                var arithmitique = document.getElementById("choix_con").value;
                 console.log(arithmitique);  
+
                 var Valarithmitique = document.getElementById("saisie").value;
                 var test = document.getElementById("saisie");
                 console.log(Valarithmitique);
+
+                var Valarithmitique2 = document.getElementById("variables2").value;
+                var test2 = document.getElementById("variables2");
+                console.log(Valarithmitique2);
 
                 if(s.ligneSelected.firstChild == null ){ 
                     
@@ -307,7 +349,7 @@
                   
 
                     var nameSelectionnez = variableTypeSelectionner.NameVariable.value;
-                    var arithmitique = document.getElementById("choix_con").value;
+                    var arithmitique = document.getElementById("typeConditionSi").value;
                     var valeur = document.getElementById("choix_variables").value;
                    
 
@@ -326,14 +368,30 @@
                         //document.getElementById("s").pa.insertBefore(ul,document.getElementById("s").parentNode.parentNode.parentNode.nextSibling);
                     }else{
                         //ligneSelected.innerHTML = "<li><if val1='"+nameSelectionnez+"' arith='"+arithmitique+"' val2='"+valeur+"'> <span id='color'>Si (</span> "
-                    	ligneSelected.innerHTML = "<li><if val1='"+nameSelectionnez+"' arith='\<' val2='"+valeur+"'> <span id='color'>Si (</span> "
-                        +nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) Alors</span></li> <ul id='r'><li>DEBUT_SI</li><li></li><li>FIN_SI</li></ul></if>"
+                    	ligneSelected.innerHTML = "<li><if val1='"+nameSelectionnez+"' arith='<' val2='"+valeur+"'> <span id='color'>Si (</span> "
+                        +nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) Alors</span></if></li> <ul id='r'><li>DEBUT_SI</li><li></li><li>FIN_SI</li></ul></if>"
                     }
 
                 }
 
                 break;
-
+            case "Sinon si":
+            	s.dialog.close();
+                fermuture();
+            	if(document.getElementById("s").firstChild != null && document.getElementById("s").firstChild.data==="FIN_SI"){
+                        document.getElementById("s").removeChild(document.getElementById("s").firstChild);
+                        
+                        var balise = document.createElement("li");
+                        balise.innerHTML = "<li><else><span id='color'>Sinon </span> </li><ul id='r'><li>DEBUT_SINON</li><li></li><li>FIN_SINON</li></ul></else>";
+                        
+                        
+                        ligneSelected.innerText = "FIN_SI";
+                        var variableSearch = ligneSelected.parentNode;
+                        variableSearch.parentNode.insertBefore(balise,variableSearch.nextSibling);
+                        balise.id = "";
+                        //document.getElementById("s").pa.insertBefore(ul,document.getElementById("s").parentNode.parentNode.parentNode.nextSibling);
+                    }
+            	break;
             case "Boucle Pour":
                 console.log(event.target.text);
                 s.dialog.close();
@@ -359,7 +417,7 @@
                 
                 if(!document.getElementById("s").textContent.startsWith("FIN")){
                     var nameSelectionnez = variableTypeSelectionner.NameVariable.value;
-                    var arithmitique = document.getElementById("choix_con").value;
+                    var arithmitique = document.getElementById("typeConditionSi").value;
                     var valeur = document.getElementById("choix_variables").value;
 
                     ligneSelected.innerHTML = "<li><tantque val1='"+nameSelectionnez+"' arith='"+arithmitique+"' val2='"+valeur+

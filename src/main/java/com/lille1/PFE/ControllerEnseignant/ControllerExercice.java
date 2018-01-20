@@ -59,13 +59,13 @@ public class ControllerExercice {
 		pModel.addAttribute("connaissancesNonValider", connaissanceNONValider);
 		// pModel.addAttribute("connaissancesNonValider",sessionGlobal.getConnaissance());
 		System.out.println("i'm here 22 ");
-		if (message) {
+		/*if (message) {
 			System.out.println("i'm here 22 message : " + message);
 			pModel.addAttribute("message", "hhhhh");
 			message = false;
 		} else {
 			pModel.addAttribute("message", "");
-		}
+		}*/
 
 		return "AjouterExercice";
 	}
@@ -88,11 +88,21 @@ public class ControllerExercice {
 		/* enlevé les espace au début et la fin de la chaine */
 		exercice = exercice.trim();
 		variable = variable.trim();
-		codeBrouillon = codeBrouillon.trim().replaceAll("\"", "'");
+		codeBrouillon = codeBrouillon
+								.trim()
+								.replaceAll("\"", "'")
+								.replaceAll("'<'","'inf'")
+								.replaceAll("'>'","'sup'")
+								.replaceAll("'<='","'inf='")
+								.replaceAll("'>='","'sup='");
+		
+		System.out.println("- : "+codeBrouillon);
 		SaxHandler mSaxHandler = new SaxHandler();
 		mSaxHandler.setResult("");
 		String codeNetoyer = new SaxHandler().parserString(codeBrouillon,"code");
-
+		/*codeNetoyer.replaceAll("'inf'","'<'")
+				   .replaceAll("'sup'","'>'");
+		System.out.println("karim : "+codeNetoyer);*/
 		if (nameExercice.equals("") || exercice.equals("") || variable.equals("") || codeBrouillon.equals("")
 				|| connaissancesSelected.size() == 0) {
 			System.out.println("i'm here ");
