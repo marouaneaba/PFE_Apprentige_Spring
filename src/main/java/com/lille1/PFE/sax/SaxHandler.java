@@ -17,6 +17,7 @@ public class SaxHandler extends DefaultHandler {
 	private static String type = "";
 	private static boolean rec = false;
 	private static String nomVariable ="";
+	private static boolean write = false;
 	private static List<Variable> varibales = new ArrayList<Variable>();
 
 	/**
@@ -72,14 +73,13 @@ public class SaxHandler extends DefaultHandler {
 		 */
 		
 		if(type.equals("code")){
-			if (!localName.equals("li") && !localName.equals("span") && !localName.equals("ul")) {
-				result = result + "<" + localName;
-	
-				for (int index = 0; index < attributs.getLength(); index++, result = result + " ") { 
-					result = result + " " + attributs.getLocalName(index) + "='" + attributs.getValue(index) + "'";
-				}
-				result = result + ">";
+			if(!localName.equals("li") && !localName.equals("span") && !localName.equals("ul") && write == false){
+				result =result+ "<"+localName;
 			
+				for (int index = 0; index < attributs.getLength(); index++,result = result+" ") { // on parcourt la liste des attributs
+					result =result + " "+attributs.getLocalName(index)+"='"+attributs.getValue(index)+"'";
+				}
+				result=result+">";
 			}
 		}else if(type.equals("var")){
 			/*System.out.println("Ouverture de la balise : " + localName) ; 
@@ -109,8 +109,13 @@ public class SaxHandler extends DefaultHandler {
 		// System.out.println("Fermeture de la balise : " + localName);
 		
 		if(type.equals("code")){
-			if (!localName.equals("li") && !localName.equals("span") && !localName.equals("ul"))
-				result = result + "</" + localName + ">";
+			if(localName.equals("lire") || localName.equals("affectation") || localName.equals("afficher") || localName.equals("doc"))
+				result =result+ "</"+localName+">";
+			else if(write && !localName.equals("li") && !localName.equals("ul") && !localName.equals("span")){
+				result =result+ "</"+localName+">";
+				write = false; 
+				System.out.println("***************************************write : "+write);
+			}
 		}else if(type.equals("var")){
 			//System.out.println("Fermeture de la balise : " + localName);
 			if(localName.equals("li")){
@@ -145,6 +150,10 @@ public class SaxHandler extends DefaultHandler {
 				 this.varibales.add(new Variable(tab[0],tab[1]));
 			 }
 		 }
+			if(s.startsWith("FIN_")){
+				write = true;
+				System.out.println("***************************************write : "+write);
+			}
 	}
 
 	/**
@@ -201,6 +210,7 @@ public class SaxHandler extends DefaultHandler {
 		this.result = chaine;
 		this.type = chaine;
 		this.rec = false;
+		this.write = false;
 		this.varibales.clear();
 	}
 	

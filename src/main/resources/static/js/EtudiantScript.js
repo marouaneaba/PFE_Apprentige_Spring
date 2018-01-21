@@ -358,18 +358,18 @@
                         
                         var balise = document.createElement("li");
                         balise.innerHTML = "<li><elseif val1='"+nameSelectionnez+"' arith='"+arithmitique+"' val2='"+valeur+"'><span id='color'>Sinon SI (</span> "
-                        +nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) ALors</span> </li><ul id='r'><li>DEBUT_SINON_SI</li><li></li><li>FIN_SI</li></ul></elseif>";
+                        +nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) ALors</span> </elseif></li><ul id='r'><li>DEBUT_SINON_SI</li><li></li><li>FIN_SI</li></ul><elseif/>";
                         
                         
                         ligneSelected.innerText = "FIN_SI";
                         var variableSearch = ligneSelected.parentNode;
-                        variableSearch.parentNode.insertBefore(balise,variableSearch.nextSibling);
+                        variableSearch.parentNode.insertBefore(balise,variableSearch.nextSibling.nextSibling);
                         balise.id = "";
                         //document.getElementById("s").pa.insertBefore(ul,document.getElementById("s").parentNode.parentNode.parentNode.nextSibling);
                     }else{
                         //ligneSelected.innerHTML = "<li><if val1='"+nameSelectionnez+"' arith='"+arithmitique+"' val2='"+valeur+"'> <span id='color'>Si (</span> "
                     	ligneSelected.innerHTML = "<li><if val1='"+nameSelectionnez+"' arith='<' val2='"+valeur+"'> <span id='color'>Si (</span> "
-                        +nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) Alors</span></if></li> <ul id='r'><li>DEBUT_SI</li><li></li><li>FIN_SI</li></ul></if>"
+                        +nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) Alors</span></if></li> <ul id='r'><li>DEBUT_SI</li><li></li><li>FIN_SI</li></ul><if/>"
                     }
 
                 }
@@ -382,12 +382,12 @@
                         document.getElementById("s").removeChild(document.getElementById("s").firstChild);
                         
                         var balise = document.createElement("li");
-                        balise.innerHTML = "<li><else><span id='color'>Sinon </span> </li><ul id='r'><li>DEBUT_SINON</li><li></li><li>FIN_SINON</li></ul></else>";
+                        balise.innerHTML = "<li><else><span id='color'>Sinon </span> </else></li><ul id='r'><li>DEBUT_SINON</li><li></li><li>FIN_SINON</li></ul><else/>";
                         
                         
                         ligneSelected.innerText = "FIN_SI";
                         var variableSearch = ligneSelected.parentNode;
-                        variableSearch.parentNode.insertBefore(balise,variableSearch.nextSibling);
+                        variableSearch.parentNode.insertBefore(balise,variableSearch.nextSibling.nextSibling);
                         balise.id = "";
                         //document.getElementById("s").pa.insertBefore(ul,document.getElementById("s").parentNode.parentNode.parentNode.nextSibling);
                     }
@@ -404,7 +404,7 @@
                     
                     ligneSelected.innerHTML = "<li><pour var='"+nameVariable+"' de ='"+de+"' jusqua='"+jusqua+
                     "'> <span id='color'>variable :</span> "+nameVariable+" <span id='color'>allant de</span> "+de
-                    +" <span id='color'>jusqu'a</span> "+jusqua+" </li><ul id='r'><li>DEBUT_POUR</li><li></li><li>FIN_POUR</li></ul></pour>";
+                    +" <span id='color'>jusqu'a</span> "+jusqua+" </pour></li><ul id='r'><li>DEBUT_POUR</li><li></li><li>FIN_POUR</li></ul><pour/>";
                 }else{
                     alert("impossible");
                 }
@@ -421,7 +421,7 @@
                     var valeur = document.getElementById("choix_variables").value;
 
                     ligneSelected.innerHTML = "<li><tantque val1='"+nameSelectionnez+"' arith='"+arithmitique+"' val2='"+valeur+
-                    "'><span id='color'>Tant Que (</span> "+nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) faire </span></li><ul id='r'><li>DEBUT_TANT_QUE</li><li></li><li>FIN_TANT_QUE</li></ul></tantque>" ;
+                    "'><span id='color'>Tant Que (</span> "+nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) faire </span></tantque></li><ul id='r'><li>DEBUT_TANT_QUE</li><li></li><li>FIN_TANT_QUE</li></ul><tantque/>" ;
                 }else{
                     alert("impossible");
                 }

@@ -59,13 +59,13 @@ public class ControllerExercice {
 		pModel.addAttribute("connaissancesNonValider", connaissanceNONValider);
 		// pModel.addAttribute("connaissancesNonValider",sessionGlobal.getConnaissance());
 		System.out.println("i'm here 22 ");
-		/*if (message) {
+		if (message) {
 			System.out.println("i'm here 22 message : " + message);
-			pModel.addAttribute("message", "hhhhh");
+			pModel.addAttribute("message", "Veuillez bien saisier l'exercice !!");
 			message = false;
 		} else {
 			pModel.addAttribute("message", "");
-		}*/
+		}
 
 		return "AjouterExercice";
 	}
@@ -96,10 +96,11 @@ public class ControllerExercice {
 								.replaceAll("'<='","'inf='")
 								.replaceAll("'>='","'sup='");
 		
-		System.out.println("- : "+codeBrouillon);
+		
 		SaxHandler mSaxHandler = new SaxHandler();
 		mSaxHandler.setResult("");
 		String codeNetoyer = new SaxHandler().parserString(codeBrouillon,"code");
+		System.out.println("- : "+codeNetoyer);
 		/*codeNetoyer.replaceAll("'inf'","'<'")
 				   .replaceAll("'sup'","'>'");
 		System.out.println("karim : "+codeNetoyer);*/

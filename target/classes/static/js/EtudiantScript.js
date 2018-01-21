@@ -71,13 +71,13 @@
                     	console.log("suup IF ELSE");
                         var ul =  s.ligneSelected.nextElementSibling;
                         var li2 = ul.nextElementSibling;
-                        
-                        var azerty = li2.innerHTML.replace("Sinon ","");
-                        azerty = azerty.replace("elseif","if");
-                         aerty = azerty.replace("\"","'");
-                         console.log("eee : "+azerty);
-                        li2.innerHTML = azerty;
-                        
+                        if(li2 != null){
+	                        var azerty = li2.innerHTML.replace("Sinon ","");
+	                        azerty = azerty.replace("elseif","if");
+	                         aerty = azerty.replace("\"","'");
+	                         console.log("eee : "+azerty);
+	                        li2.innerHTML = azerty;
+                        }
                         var balise = document.getElementsByTagName("li");
                         for(i = 0 ;i<balise.length;i++){;
                         	
@@ -191,9 +191,21 @@
                 	alert(" Faut declarer des variables pour : "+event.target.text+" !!");
                 }
                 break;
-            case "Sinon Si":
+            case "Sinon si":
                 console.log(event.target.text);
-                // TODO //
+                if( tab.length > 0 ){
+	                document.getElementById("alors").classList.toggle('show'); 
+
+	                
+	                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
+	                    alert("Veuillez selectionnez un ligne dans Algorithmezzz!! ");
+	                }else{
+	                    
+	                    ShowMessage();
+	                }
+                }else{
+                	alert(" Faut declarer des variables pour : "+event.target.text+" !!");
+                }
                 break;
             case "Boucle Pour":
                 console.log(event.target.text);
@@ -337,7 +349,7 @@
                   
 
                     var nameSelectionnez = variableTypeSelectionner.NameVariable.value;
-                    var arithmitique = document.getElementById("choix_con").value;
+                    var arithmitique = document.getElementById("typeConditionSi").value;
                     var valeur = document.getElementById("choix_variables").value;
                    
 
@@ -346,24 +358,40 @@
                         
                         var balise = document.createElement("li");
                         balise.innerHTML = "<li><elseif val1='"+nameSelectionnez+"' arith='"+arithmitique+"' val2='"+valeur+"'><span id='color'>Sinon SI (</span> "
-                        +nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) ALors</span> </li><ul id='r'><li>DEBUT_SINON_SI</li><li></li><li>FIN_SI</li></ul></elseif>";
+                        +nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) ALors</span> </elseif></li><ul id='r'><li>DEBUT_SINON_SI</li><li></li><li>FIN_SI</li></ul><elseif/>";
                         
                         
                         ligneSelected.innerText = "FIN_SI";
                         var variableSearch = ligneSelected.parentNode;
-                        variableSearch.parentNode.insertBefore(balise,variableSearch.nextSibling);
+                        variableSearch.parentNode.insertBefore(balise,variableSearch.nextSibling.nextSibling);
                         balise.id = "";
                         //document.getElementById("s").pa.insertBefore(ul,document.getElementById("s").parentNode.parentNode.parentNode.nextSibling);
                     }else{
                         //ligneSelected.innerHTML = "<li><if val1='"+nameSelectionnez+"' arith='"+arithmitique+"' val2='"+valeur+"'> <span id='color'>Si (</span> "
                     	ligneSelected.innerHTML = "<li><if val1='"+nameSelectionnez+"' arith='<' val2='"+valeur+"'> <span id='color'>Si (</span> "
-                        +nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) Alors</span></li> <ul id='r'><li>DEBUT_SI</li><li></li><li>FIN_SI</li></ul></if>"
+                        +nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) Alors</span></if></li> <ul id='r'><li>DEBUT_SI</li><li></li><li>FIN_SI</li></ul><if/>"
                     }
 
                 }
 
                 break;
-
+            case "Sinon si":
+            	s.dialog.close();
+                fermuture();
+            	if(document.getElementById("s").firstChild != null && document.getElementById("s").firstChild.data==="FIN_SI"){
+                        document.getElementById("s").removeChild(document.getElementById("s").firstChild);
+                        
+                        var balise = document.createElement("li");
+                        balise.innerHTML = "<li><else><span id='color'>Sinon </span> </else></li><ul id='r'><li>DEBUT_SINON</li><li></li><li>FIN_SINON</li></ul><else/>";
+                        
+                        
+                        ligneSelected.innerText = "FIN_SI";
+                        var variableSearch = ligneSelected.parentNode;
+                        variableSearch.parentNode.insertBefore(balise,variableSearch.nextSibling.nextSibling);
+                        balise.id = "";
+                        //document.getElementById("s").pa.insertBefore(ul,document.getElementById("s").parentNode.parentNode.parentNode.nextSibling);
+                    }
+            	break;
             case "Boucle Pour":
                 console.log(event.target.text);
                 s.dialog.close();
@@ -376,7 +404,7 @@
                     
                     ligneSelected.innerHTML = "<li><pour var='"+nameVariable+"' de ='"+de+"' jusqua='"+jusqua+
                     "'> <span id='color'>variable :</span> "+nameVariable+" <span id='color'>allant de</span> "+de
-                    +" <span id='color'>jusqu'a</span> "+jusqua+" </li><ul id='r'><li>DEBUT_POUR</li><li></li><li>FIN_POUR</li></ul></pour>";
+                    +" <span id='color'>jusqu'a</span> "+jusqua+" </pour></li><ul id='r'><li>DEBUT_POUR</li><li></li><li>FIN_POUR</li></ul><pour/>";
                 }else{
                     alert("impossible");
                 }
@@ -389,11 +417,11 @@
                 
                 if(!document.getElementById("s").textContent.startsWith("FIN")){
                     var nameSelectionnez = variableTypeSelectionner.NameVariable.value;
-                    var arithmitique = document.getElementById("choix_con").value;
+                    var arithmitique = document.getElementById("typeConditionSi").value;
                     var valeur = document.getElementById("choix_variables").value;
 
                     ligneSelected.innerHTML = "<li><tantque val1='"+nameSelectionnez+"' arith='"+arithmitique+"' val2='"+valeur+
-                    "'><span id='color'>Tant Que (</span> "+nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) faire </span></li><ul id='r'><li>DEBUT_TANT_QUE</li><li></li><li>FIN_TANT_QUE</li></ul></tantque>" ;
+                    "'><span id='color'>Tant Que (</span> "+nameSelectionnez+"  "+arithmitique+"  "+valeur+" <span id='color'>) faire </span></tantque></li><ul id='r'><li>DEBUT_TANT_QUE</li><li></li><li>FIN_TANT_QUE</li></ul><tantque/>" ;
                 }else{
                     alert("impossible");
                 }
