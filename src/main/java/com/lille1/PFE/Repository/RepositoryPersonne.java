@@ -13,4 +13,6 @@ public interface RepositoryPersonne extends PersonneBaseRepository<Personne> {
 
 	@Query("select p from Personne p where p.nom = :nom")
 	public Personne findByNome(@Param("nom") String nom);
+	
+	public Personne findByNomAndEmail(String nom,String email);
 }
