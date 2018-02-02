@@ -43,7 +43,9 @@ public class ControllerPassword {
 	@RequestMapping(method = RequestMethod.GET)
 	public String GetLogin(ModelMap pModel) {
 
-		if(PostMethod) pModel.addAttribute("mesageError",messageErreurEmailOrPseudo );
+		if(!PostMethod) messageErreurEmailOrPseudo="";
+		pModel.addAttribute("mesageError",messageErreurEmailOrPseudo );
+		
 		PostMethod = false;
 		return "ForgetPassword";
 		
@@ -53,6 +55,7 @@ public class ControllerPassword {
 	public RedirectView POSTLogin(ModelMap pModel,@RequestParam("email") String email,@RequestParam("name") String name) {
 
 		Personne p = mRepositoryPersonne.findByNomAndEmail(name, email);
+		System.out.println("forget : "+p);
 		PostMethod = true;
 		if(p == null){
 			messageErreurEmailOrPseudo = " le Pseudo ou Email n'existe pas";

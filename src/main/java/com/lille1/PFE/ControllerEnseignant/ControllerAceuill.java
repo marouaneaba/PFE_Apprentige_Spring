@@ -87,18 +87,17 @@ public class ControllerAceuill {
 			exercices1ByEtudiant.add(history.get(i).getExercice());
 		}
 		
-		exercices.removeAll(exercices1ByEtudiant);
+		try{
+			exercices.removeAll(exercices1ByEtudiant);
+		}catch(NullPointerException e){
+			
+		}
 		
-		System.out.println("eee : "+exercices.size());
-		exercices.removeAll(exercices1ByEtudiant);
-		System.out.println("eee : "+exercices.size());
-		System.out.println("oooo : "+exercices);
-		System.out.println("e2e3e4 : "+exercices1ByEtudiant);
 		
 		if (result == null || mConnaissanceService.getNiveaux(etudiant.getIdEns())== null || exercices == null ||exercices.size() == 0) {
 			
 			System.out.println("11 : ");
-			if(mConnaissanceService.getNiveaux(etudiant.getIdEns()) != null && exercices.size()>0){
+			if(mConnaissanceService.getNiveaux(etudiant.getIdEns()) != null && exercices != null && exercices.size()>0){
 				int niveaux = Integer.parseInt(mConnaissanceService.getNiveaux(etudiant.getIdEns()));
 				System.out.println("22 : ");
 				

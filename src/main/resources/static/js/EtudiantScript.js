@@ -1,6 +1,9 @@
 
+
+
     s = this;
-    var tab = []
+    //var tab = []
+    console.log(tab);
     this.traitement = null;
     this.buttonBalise = document.getElementById("button_algo");
     
@@ -15,12 +18,15 @@
     this.ligneSelected = null;
     this.ulCourant = document.getElementById("s");
 
-
+ 
+    
+    
     this.buttonBalise.addEventListener("click",function(event){
         s.variable.addEventListener("click",selectioLigne);
         s.traitement = event.target.text;
         //console.log("click");
         //valider();
+        
         switch(event.target.text){
             case "Ajouter Ligne":
                 var li = document.createElement("li");
@@ -111,7 +117,7 @@
                 ShowMessage();
                 break;
             case "Lire Variable":
-            	if( tab.length > 0 ){
+            	if( tab.length > 0  ){
 	                document.getElementById("NameVariable").classList.toggle('show');
 	                if(s.ligneSelected === null || s.ligneSelected.parentNode.id === "variable" ){
 	                    alert("Veuillez selectionnez un ligne dans Algorithmezzzmmm!! ");

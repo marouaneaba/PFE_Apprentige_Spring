@@ -22,6 +22,7 @@ import com.lille1.PFE.Repository.RepositoryEtudiant;
 import com.lille1.PFE.Repository.RepositoryExercice;
 import com.lille1.PFE.Repository.RepositoryHistory;
 import com.lille1.PFE.Service.ConnaissanceService;
+import com.lille1.PFE.Service.ExerciceService;
 import com.lille1.PFE.sax.SaxHandler;
 
 @Controller
@@ -42,13 +43,18 @@ public class ControllerApprentissage {
 	@Autowired
 	private RepositoryHistory mRepositoryHistory;
 
+	@Autowired
+	private ExerciceService mExerciceService;
+	
 	int niveaux;
 	private Connaissance connaissanceREPLY;
 	private Exercice ExerciceREPLY;
 
 	@RequestMapping(value = "/apprentisage", method = RequestMethod.GET)
 	public String GetAceuill(HttpServletRequest request, ModelMap pModel) {
-
+		
+		pModel.addAttribute("etudiant",true);
+		
 		HttpSession session = request.getSession();
 		Personne personne = (Personne) session.getAttribute("user");
 		Etudiant etudiant = mRepositoryEtudiant.findOne(personne.getIdEns());
@@ -130,20 +136,28 @@ public class ControllerApprentissage {
 		String code = request.getParameter("code");
 		System.out.println("code : " + code);
 
-		code = code.trim().replaceAll("\"", "'");
+		//code = code.trim().replaceAll("\"", "'");
+		code = code
+				.trim()
+				.replaceAll("\"", "'")
+				.replaceAll("'<'","'inf'")
+				.replaceAll("'>'","'sup'")
+				.replaceAll("'<='","'inf='")
+				.replaceAll("'>='","'sup='");
 		System.out.println("code : " + code);
 
 		SaxHandler mSaxHandler = new SaxHandler();
 		mSaxHandler.setResult("");
 		String codeNetoyer = new SaxHandler().parserString(code,"code");
-
+		System.out.println("- : "+codeNetoyer+" , fin");
 		if (code.equals("")) {
 			System.out.println("vous avez rien saisier comme code ");
 		}
 
 		System.out.println("code Netoyer : " + codeNetoyer);
 		Etudiant etudiant = mRepositoryEtudiant.findOne(((Etudiant) session.getAttribute("user")).getIdEns());
-		if (true) { // solution correct
+		
+		if (mExerciceService.ExerciceComparTo(codeNetoyer, ExerciceREPLY.getXMLSolutionNettoyer())) { // solution correct
 
 			//Connaissance connaissance = mRepositoryConnaissance.findByOrdre(niveaux);
 			Connaissance connaissance = mRepositoryConnaissance.findOne(connaissanceREPLY.getId_ExEtu());
@@ -161,7 +175,7 @@ public class ControllerApprentissage {
 			history.setExercice(ExerciceREPLY);
 			mRepositoryHistory.save(history);
 
-		} else if (true) { // solution non correct
+		} else if (mExerciceService.ExerciceComparTo(codeNetoyer, ExerciceREPLY.getXMLSolutionNettoyer())) { // solution non correct
 
 			session.setAttribute("niveaux", niveaux - 1);
 			session.setAttribute("result", "non");

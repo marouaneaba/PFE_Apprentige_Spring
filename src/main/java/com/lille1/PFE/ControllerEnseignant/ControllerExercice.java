@@ -100,7 +100,7 @@ public class ControllerExercice {
 		SaxHandler mSaxHandler = new SaxHandler();
 		mSaxHandler.setResult("");
 		String codeNetoyer = new SaxHandler().parserString(codeBrouillon,"code");
-		System.out.println("- : "+codeNetoyer);
+		System.out.println("- : "+codeNetoyer+" , fin");
 		/*codeNetoyer.replaceAll("'inf'","'<'")
 				   .replaceAll("'sup'","'>'");
 		System.out.println("karim : "+codeNetoyer);*/

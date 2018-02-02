@@ -111,6 +111,7 @@
                     <option><=</option>
                     <option>></option>
                     <option>>=</option>
+                    <option>!=</option>
                 </select>
 
                 <input style="height: 20px;width: 50px;" list="variables" type="text" id="choix_variables" class="dropdown-content ">
@@ -130,18 +131,14 @@
                 <input id="checkbox" type="checkbox" class="dropdown-content" placeholder="" />
                 
                 <select id="choix_con" class="dropdown-content list">
-                    <option><</option>
-                    <option>==</option>
-                    <option><=</option>
-                    <option>></option>
-                    <option>>=</option>
+                    <option>+</option>
+                    <option>-</option>
+                    <option>*</option>
+                    <option>/</option>
                 </select>
 
-                <input style="height: 20px;width: 50px;" list="variables" type="text" id="saisie" class="dropdown-content ">
-                <datalist id="variables">
-                  <option value="var1">
-                  <option value="var2">
-                  <option value="var3">
+                <input style="height: 20px;width: 50px;" list="variables2" type="text" id="saisie" class="dropdown-content ">
+                <datalist id="variables2">
                 </datalist>
                 </center>
                 <center><div id ="button" class="boutons"><button onclick="Annuler()">Fermer</button>&nbsp;<button onclick="valider(document.getElementsByClassName('list'),document.getElementById('input1').value)">OK</button></div> </center>
@@ -225,14 +222,31 @@
         </div>
     </body>
 </html>
+<script>
+	var tab = [];
+	{{#exercice.variables}}
+		tab.push("{{Nom}}");
+		var listVariable = document.getElementById("NameVariable");
+        listVariable.innerHTML+="<option>"+"{{Nom}}"+"</option>";
+
+        var datalist1 = document.getElementById("variables");
+        datalist1.innerHTML+="<option value='"+"{{Nom}}"+"'/>";
+	{{/exercice.variables}}
+	/*
+	for(var i=0;i<{{exercice.variables}}.length;i++){
+		tab.push(exercice.variables.Nom);
+	}
+	console.log(tab.length);*/
+	//var etudiant = {{etudiant}};
+	
+	
+	
+</script>
 <script type="text/javascript" src="/js/EtudiantScript.js"></script>
 
 <script> 
 
-
-
-           
-            
+      
     var dialog = document.getElementById('mydialog'); 
                /* if(!('show' in $dialog)){ 
                         document.getElementById('promptCompat').className = 'no_dialog'; 

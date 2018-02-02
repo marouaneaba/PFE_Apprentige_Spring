@@ -166,5 +166,12 @@ public class ExerciceService {
 		System.out.println("exercice : "+exercice);
 
 	}
+	
+	public boolean ExerciceComparTo(String EtudiantSol,String EnseignantSol){
+		
+		
+		
+		return true;
+	}
 
 }
