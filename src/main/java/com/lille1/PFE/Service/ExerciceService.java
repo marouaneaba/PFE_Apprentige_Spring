@@ -1,12 +1,14 @@
 package com.lille1.PFE.Service;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -167,11 +169,67 @@ public class ExerciceService {
 
 	}
 	
-	public boolean ExerciceComparTo(String EtudiantSol,String EnseignantSol){
+	
+public boolean explorer(Element current1,Element current2){
 		
+		System.out.println("1 : "+current1.getName());
+		System.out.println("2 : "+current2.getName());
 		
+		List children1 = current1.getChildren();
+		List children2 = current2.getChildren();
+		
+		System.out.println("size 1 : "+children1.size());
+		System.out.println("size 2 : "+children2.size());
+		
+		Iterator iterator1 = children1.iterator();
+		Iterator iterator2 = children2.iterator();
+		
+		int sizeAttribute1 = current1.getAttributes().size();
+		int sizeAttribute2 = current2.getAttributes().size();
+		
+		if(children1.size() != children2.size() || !current1.getName().equals(current2.getName()) || sizeAttribute1 != sizeAttribute2){
+			return false;
+		}
+		
+		for(int i=0;i<sizeAttribute1;i++){
+			if(!current1.getAttributes().get(i).getName().trim().equals(current2.getAttributes().get(i).getName().trim()) || 
+					!current1.getAttributes().get(i).getValue().trim().equals(current2.getAttributes().get(i).getValue().trim()))
+				return false;
+		}
+		
+		while(iterator1.hasNext() && iterator2.hasNext()){
+			Element child1 = (Element) iterator1.next();
+			Element child2 = (Element) iterator2.next();
+			boolean r = explorer(child1,child2);
+			if(!r) return false;
+		}
 		
 		return true;
+		
+	}
+	
+	public boolean ExerciceComparTo(String EtudiantSol,String EnseignantSol){
+		
+		SAXBuilder sxb = new SAXBuilder();
+		String code1 ="<doc><lire var='nb' ></lire><affectation var='N'  val1='0'  arith=''  val2='' ></affectation><affectation var='nb'  val1='0'  arith=''  val2='' ></affectation><tantque val1='nb'  arith='inf'  val2='0' ><lire var='nb' ></lire><if val1='nb'  arith='inf'  val2='0' ><affectation var='i'  val1='i'  arith='+'  val2='' ></affectation></if><else><affectation var='N'  val1='N'  arith='+'  val2='' ></affectation></else></tantque></doc>";
+		String code2 ="<doc><lire var='nb' ></lire><affectation var='N'  val1='0'  arith=''  val2='' ></affectation><affectation var='nb'  val1='0'  arith=''  val2='' ></affectation><tantque val1='nb'  arith='inf'  val2='0' ><lire var='nb' ></lire><if val1='nb'  arith='inf'  val2='0' ><affectation var='i'  val1='i'  arith='+'  val2='' ></affectation></if><else><affectation var='N'  val1='N'  arith='+'  val2='' ></affectation></else></tantque></doc>";
+		Document document1 = null;
+		Document document2 = null;
+		boolean resultat = false;
+		try {
+			document1 = sxb.build(new ByteArrayInputStream(EtudiantSol.getBytes()));
+			document2 = sxb.build(new ByteArrayInputStream(EnseignantSol.getBytes()));
+			Element root1 = document1.getRootElement();
+			Element root2 = document2.getRootElement();
+			resultat = explorer(root1,root2);
+			
+			//nettoyer(document.getRootElement());
+		} catch (JDOMException e) {
+			System.out.println(e);
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		return resultat;
 	}
 
 }

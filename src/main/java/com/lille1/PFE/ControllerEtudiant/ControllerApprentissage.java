@@ -157,6 +157,8 @@ public class ControllerApprentissage {
 		System.out.println("code Netoyer : " + codeNetoyer);
 		Etudiant etudiant = mRepositoryEtudiant.findOne(((Etudiant) session.getAttribute("user")).getIdEns());
 		
+		System.out.println("la correction de la solution fournie : "+mExerciceService.ExerciceComparTo(codeNetoyer, ExerciceREPLY.getXMLSolutionNettoyer()));
+		
 		if (mExerciceService.ExerciceComparTo(codeNetoyer, ExerciceREPLY.getXMLSolutionNettoyer())) { // solution correct
 
 			//Connaissance connaissance = mRepositoryConnaissance.findByOrdre(niveaux);
