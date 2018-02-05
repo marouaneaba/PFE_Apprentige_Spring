@@ -1,6 +1,5 @@
 package com.lille1.PFE.ControllerEnseignant;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -22,7 +21,6 @@ import com.lille1.PFE.Repository.RepositoryAdmin;
 import com.lille1.PFE.Repository.RepositoryConnaissance;
 import com.lille1.PFE.Repository.RepositoryEnseignant;
 import com.lille1.PFE.Repository.RepositoryEtudiant;
-import com.lille1.PFE.Repository.RepositoryPersonne;
 import com.lille1.PFE.Service.EnseignantService;
 import com.lille1.PFE.Service.ExerciceService;
 
@@ -45,8 +43,7 @@ public class ControllerEnseignant {
 	@Autowired
 	private RepositoryAdmin mRepositoryAdmin;
 
-	@Autowired
-	private RepositoryPersonne mRepositoryPersonne;
+
 	@Autowired
 	private ExerciceService mExerciceService;
 

@@ -1,6 +1,5 @@
 package com.lille1.PFE.ControllerEnseignant;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,21 +19,15 @@ import com.lille1.PFE.Entity.Connaissance;
 import com.lille1.PFE.Entity.Enseignant;
 import com.lille1.PFE.Entity.Personne;
 import com.lille1.PFE.Repository.RepositoryConnaissance;
-import com.lille1.PFE.Repository.RepositoryEnseignant;
-import com.lille1.PFE.Service.ConnaissanceService;
 import com.lille1.PFE.Service.ExerciceService;
 import com.lille1.PFE.sax.SaxHandler;
 
 @Controller
 public class ControllerExercice {
 
-	@Autowired
-	private ConnaissanceService mConnaissanceService;
 
 	@Autowired
 	private ExerciceService mExerciceService;
-	@Autowired
-	private RepositoryEnseignant mRepositoryEnseignant;
 	@Autowired
 	private RepositoryConnaissance mRepositoryConnaissance;
 

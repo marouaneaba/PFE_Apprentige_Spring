@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.lille1.PFE.Entity.Etudiant;
+
 import com.lille1.PFE.Entity.Personne;
 import com.lille1.PFE.Service.ConnaissanceService;
 import com.lille1.PFE.Service.EtudiantService;
@@ -36,7 +36,7 @@ public class ControllerEtudiant {
 	public RedirectView setFormAjoutEtudiant(@RequestParam("pseudo") String name,
 			@RequestParam("password") String password, @RequestParam("email_address") String email, ModelMap pModel) {
 
-		Etudiant etudiant = mEtudiantService.addEtudiant(name, password, email, "etudiant");
+		//Etudiant etudiant = mEtudiantService.addEtudiant(name, password, email, "etudiant");
 
 		return new RedirectView("/admin");
 	}

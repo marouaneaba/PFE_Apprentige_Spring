@@ -36,7 +36,7 @@ public class ExerciceService {
 	@Autowired
 	private RepositoryVariable mRepositoryVariable;
 
-	private SAXBuilder sxb = new SAXBuilder();
+	//private SAXBuilder sxb = new SAXBuilder();
 
 	/*public List<Variable> SaveVaribale(String value) {
 		value = "<doc>" + value + "</doc>";
@@ -75,7 +75,7 @@ public class ExerciceService {
 	public List<Variable> SaveVaribale(String StringVariable){
 		SaxHandler mSaxHandler = new SaxHandler();
 		mSaxHandler.setResult("");
-		String codeNetoyer = new SaxHandler().parserString(StringVariable,"var");
+		//String codeNetoyer = new SaxHandler().parserString(StringVariable,"var");
 		return mSaxHandler.getVariable();
 	}
 

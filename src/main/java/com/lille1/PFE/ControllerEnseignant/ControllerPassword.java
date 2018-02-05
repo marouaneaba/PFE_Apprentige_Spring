@@ -1,20 +1,12 @@
 package com.lille1.PFE.ControllerEnseignant;
 
-import java.security.Principal;
-
-import javax.websocket.server.PathParam;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.lille1.PFE.Entity.Personne;
@@ -37,8 +29,8 @@ public class ControllerPassword {
 	// peux envoyer des piéce joint et des contenus complexe que 
 	// SimpleMailMessage
 	
-	@Autowired
-	private JavaMailSender sender;
+	//@Autowired
+	//private JavaMailSender sender;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String GetLogin(ModelMap pModel) {
@@ -52,9 +44,9 @@ public class ControllerPassword {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public RedirectView POSTLogin(ModelMap pModel,@RequestParam("email") String email,@RequestParam("name") String name) {
+	public RedirectView POSTLogin(ModelMap pModel,@RequestParam("email") String email) {
 
-		Personne p = mRepositoryPersonne.findByNomAndEmail(name, email);
+		Personne p = mRepositoryPersonne.findByEmail( email);
 		System.out.println("forget : "+p);
 		PostMethod = true;
 		if(p == null){
@@ -62,8 +54,8 @@ public class ControllerPassword {
 			return new RedirectView("/forgetPassword");
 		}else{
 			messageErreurEmailOrPseudo = "";
-			mLoginService.EnvoyerMessage(email,"["+name+"] mot de passe Oublier",
-					"Bonjour Mr."+name+", \n votre Mot de passe c'est : ");
+			mLoginService.EnvoyerMessage(email,"["+email+"] mot de passe Oublier",
+					"Bonjour Mr."+email+", \n votre Mot de passe c'est : ");
 		}
 		
 		return new RedirectView("/login");

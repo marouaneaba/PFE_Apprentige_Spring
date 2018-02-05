@@ -60,7 +60,7 @@ public class ControllerConnaissance {
 
 		HttpSession session = request.getSession();
 		message = "";
-		List<Connaissance> connaissanceNonValide = new ArrayList<>();
+		//List<Connaissance> connaissanceNonValide = new ArrayList<>();
 		List<Connaissance> connaissances = mConnaissanceService
 				.convertIterableToList(mRepositoryConnaissance.findAll());
 		boolean trouver = true;

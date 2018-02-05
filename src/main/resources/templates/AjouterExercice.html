@@ -1,63 +1,11 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="css/style2.css" />
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-        <title>Apprentissage Algorithme</title>
-        <link href="bootstarp/css/bootstrap.css" rel="stylesheet">
-        <!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">-->
-
-    </head>
+    {{>common/head}}
     
     <body style="background: #eeeaea ;">
             <div id="bloc_page" class ="col-xs-12">
-              
-            <!--    <div style=" overflow:scroll;width:300; height:200 border:#000000 1px solid;">
-     
-                Code html
              
-            </div> -->
-          <header class ="row">
-                <div id="titre_principal" class ="col-xs-12">
-                    <div id="logo" class ="row">
-                        <img class ="col-xs-2" height="122" width="142" src="images/lille_logo1.png" alt="Logo d'univérsité lille 1" />
-                        <h1 class ="col-xs-12">Universit&egrave; Lille 1</h1>    
-                        <h2>Science Technologie</h2>
-                    </div>
-                    
-                </div>
-
-                <div id="exercice" class="col-xs-offset-6">
-                    <div id="banniere_description">
-                        Université Lille 1 Science Technologie
-                        <a href="http://www.fil.univ-lille1.fr/portail/index.php?dipl=MInfo&sem=ESERVICE&ue=ACCUEIL&label=Pr%C3%A9sentation" class="bouton_rouge">Acceder au Formation <img height="22" width="22" src="images/flesh.png" alt="" /></a>
-                    </div>
-                </div>
-
-                <!--<nav class ="col-xs-push-3 col-xs-12" >
-                    <ul class="nav nav-pills" >
-                        <li class="active"><a href="#accueil">Accueil</a></li>
-                        <li><a href="#livres">Livres</a></li>
-                        <li><a href="#temoignages">Témoignages</a></li>
-                    </ul>
-                    <ul id="menu">
-                        <li><a href="#">Accueil</a></li>
-                        <li><a href="#">propos</a></li>
-                        <li><a href="#">Deconexion</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>-->
-                <nav class ="col-xs-push-1 col-xs-12" style="margin-bottom:40px;margin-top:20px;">
-                    <ul class="nav nav-pills" id="menu">
-                        <li class="active"><a href="/dashbord">Accueil</a></li>
-                        <li class="disabled"><a href="#">propos</a></li>
-                        <li><a href="/logout">Deconexion</a></li>
-                        <li ><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
-            </header>
+          {{>common/navbar}}
             
 			<center style="color:red;">{{message}}</center>
             <section class="row" >
@@ -75,7 +23,7 @@
                 
                 
             </section>
-<div class="boutons"><!-- <button onclick="$dialog.showModal()">Ouvrir en mode modal</button></div>  -->
+<div class="boutons">
    
 
     
@@ -115,7 +63,7 @@
                 <label id="nameVariable" class="dropdown-content">Name Variable : </label>
                 <input id="input1" class="dropdown-content" placeholder="" />
                 
-                <label id="jusqu" class="dropdown-content">Jusqu'aù :</label>
+                <label id="jusqu" class="dropdown-content">Jusqu'a� :</label>
                 
                 <input id="input2" class="dropdown-content" placeholder="" />
 
@@ -264,6 +212,10 @@
         </div>
     </body>
 </html>
+<script>
+	var tab = [];
+
+</script>
 <script type="text/javascript" src="js/EtudiantScript.js"></script>
 
 

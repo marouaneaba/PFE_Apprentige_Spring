@@ -3,7 +3,7 @@
 
     s = this;
     //var tab = []
-    console.log(tab);
+    //console.log(tab);
     this.traitement = null;
     this.buttonBalise = document.getElementById("button_algo");
     

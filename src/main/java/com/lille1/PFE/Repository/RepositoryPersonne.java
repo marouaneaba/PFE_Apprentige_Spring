@@ -15,4 +15,7 @@ public interface RepositoryPersonne extends PersonneBaseRepository<Personne> {
 	public Personne findByNome(@Param("nom") String nom);
 	
 	public Personne findByNomAndEmail(String nom,String email);
+	
+	
+	public Personne findByEmail(String email);
 }

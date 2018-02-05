@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lille1.PFE.Entity.Exercice;
 import com.lille1.PFE.Entity.History;
 import com.lille1.PFE.Repository.RepositoryHistory;
 

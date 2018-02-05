@@ -1,7 +1,5 @@
 package com.lille1.PFE.ControllerEnseignant;
 
-import java.security.Principal;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,7 +16,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.lille1.PFE.MainController;
 import com.lille1.PFE.Entity.Personne;
-import com.lille1.PFE.Repository.RepositoryAdmin;
 import com.lille1.PFE.Repository.RepositoryConnaissance;
 import com.lille1.PFE.Service.AdminService;
 

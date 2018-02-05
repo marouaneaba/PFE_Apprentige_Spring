@@ -3,15 +3,11 @@ package com.lille1.PFE.ControllerEnseignant;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lille1.PFE.Entity.*;
-import com.lille1.PFE.Repository.RepositoryConnaissance;
 
 public class ClassScope {
 
-	@Autowired
-	private RepositoryConnaissance mRepositoryConnaissance;
 
 	public List<Connaissance> connaisances;
 

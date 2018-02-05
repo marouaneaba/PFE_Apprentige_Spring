@@ -14,7 +14,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.lille1.PFE.Entity.Exercice;
 import com.lille1.PFE.Entity.Personne;
-import com.lille1.PFE.Repository.RepositoryEnseignant;
 import com.lille1.PFE.Service.ConnaissanceService;
 import com.lille1.PFE.Service.ExerciceService;
 
@@ -26,8 +25,6 @@ public class ControllerConsulterExercice {
 	private ExerciceService mExerciceService;
 	@Autowired
 	private ConnaissanceService mConnaissanceService;
-	@Autowired
-	private RepositoryEnseignant mRepositoryEnseignant;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String recupererExercice(HttpServletRequest request, ModelMap pModel) {

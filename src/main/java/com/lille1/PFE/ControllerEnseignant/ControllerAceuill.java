@@ -12,27 +12,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.lille1.PFE.ControllerEtudiant.ResultExercice;
 import com.lille1.PFE.Entity.Connaissance;
 import com.lille1.PFE.Entity.Etudiant;
 import com.lille1.PFE.Entity.Exercice;
 import com.lille1.PFE.Entity.History;
-import com.lille1.PFE.Entity.Personne;
-import com.lille1.PFE.Repository.RepositoryConnaissance;
 import com.lille1.PFE.Repository.RepositoryEtudiant;
 import com.lille1.PFE.Repository.RepositoryExercice;
 import com.lille1.PFE.Repository.RepositoryHistory;
 import com.lille1.PFE.Service.ConnaissanceService;
-import com.lille1.PFE.Service.HistoryService;
 
 @Controller
 @RequestMapping("/aceuil")
 public class ControllerAceuill {
 
-	@Autowired
-	private RepositoryConnaissance mRepositoryConnaissance;
 	@Autowired
 	private RepositoryEtudiant mRepositoryEtudiant;
 	@Autowired
@@ -41,8 +35,6 @@ public class ControllerAceuill {
 	private ConnaissanceService mConnaissanceService;
 	@Autowired
 	private RepositoryHistory mRepositoryHistory;
-	@Autowired
-	private HistoryService mHistoryService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String GetAceuill(HttpServletRequest request, ModelMap pModel) {
