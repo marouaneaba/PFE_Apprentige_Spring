@@ -3,7 +3,6 @@
   <groupId>com.lille1</groupId>
   <artifactId>PFE</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
   
   
    <parent>
@@ -110,18 +109,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <url>http://localhost:8080/manager/text</url>
-                    <server>your_server</server>
-                    <path>/project_algo</path>
-                    <username>mavenuser</username>
-                    <password>pass@word1</password>                 
-                </configuration>
             </plugin>
         </plugins>
     </build>
