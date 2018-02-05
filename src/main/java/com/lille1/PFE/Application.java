@@ -12,9 +12,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.lille1.PFE.Repository.RepositoryConnaissance;
+import com.lille1.PFE.Repository.RepositoryEnseignant;
 import com.lille1.PFE.Repository.RepositoryEtudiant;
 import com.lille1.PFE.Repository.RepositoryExercice;
 import com.lille1.PFE.ControllerEnseignant.ClassScope;
+import com.lille1.PFE.Entity.Enseignant;
 
 
 @SpringBootApplication
@@ -46,9 +48,13 @@ public class Application extends SpringBootServletInitializer{
 
 	@Bean
 	public CommandLineRunner loadexercices(RepositoryExercice mRepositoryExercice,
-			RepositoryConnaissance mRepositoryConnaissance, RepositoryEtudiant mRepositoryEtudiant) {
+			RepositoryConnaissance mRepositoryConnaissance, RepositoryEnseignant mRepositoryEnseignant ,RepositoryEtudiant mRepositoryEtudiant) {
 		return (args) -> {
 
+			mRepositoryEnseignant.deleteAll();
+			Enseignant ens = new Enseignant("ens", "ens","ens@ens.ens","enseignant");
+			mRepositoryEnseignant.save(ens);
+			
 			// mRepositoryEtudiant.deleteAll();
 			// mRepositoryConnaissance.deleteAll();
 
