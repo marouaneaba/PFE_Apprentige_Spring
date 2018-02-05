@@ -2,7 +2,10 @@ package com.lille1.PFE;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.Banner.Mode;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -19,10 +22,22 @@ import com.lille1.PFE.ControllerEnseignant.ClassScope;
 
 @SpringBootApplication
 @EnableJpaRepositories
-public class Application {
+public class Application extends SpringBootServletInitializer{
 
+	
+	@Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        //return application.sources(Application.class);
+        return configureApplication (application);
+    }
+	
+	private static SpringApplicationBuilder configureApplication(SpringApplicationBuilder builder) {
+        return builder.sources(Application.class).bannerMode(Mode.OFF);
+    }
+	
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		//SpringApplication.run(Application.class, args);
+		configureApplication(new SpringApplicationBuilder()).run(args);
 	}
 
 
