@@ -100,7 +100,13 @@ public class ControllerAceuill {
 			}else if(mConnaissanceService.getNiveaux(etudiant.getIdEns())== null || exercices == null ||exercices.size() == 0){
 				System.out.println("33 : ");
 				pModel.addAttribute("connaissanceEtu", connaissancesEtudiant);
-				pModel.addAttribute("niveaux", connaissancesEtudiant.get(connaissancesEtudiant.size()-1).getOrdre());
+				if(connaissancesEtudiant.size() == 0){
+					pModel.addAttribute("niveaux", 0);
+					pModel.addAttribute("message", " Veuillez Attendre la mise à jour des connaissances !!");
+				}else{
+					pModel.addAttribute("niveaux", connaissancesEtudiant.get(connaissancesEtudiant.size()-1).getOrdre());
+					pModel.addAttribute("message", "vous avez réussi tout les niveaux liée a nos exercice \n Veuillez Attendre une mise à jour !!");
+				}
 				pModel.addAttribute("Suivant", true);
 				pModel.addAttribute("message", "vous avez réussi tout les niveaux liée a nos exercice \n Veuillez Attendre une mise à jour !!");
 			}

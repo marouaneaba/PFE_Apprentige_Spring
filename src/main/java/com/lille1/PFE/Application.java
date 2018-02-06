@@ -18,6 +18,7 @@ import com.lille1.PFE.Repository.RepositoryEtudiant;
 import com.lille1.PFE.Repository.RepositoryExercice;
 import com.lille1.PFE.ControllerEnseignant.ClassScope;
 import com.lille1.PFE.Entity.Admin;
+import com.lille1.PFE.Entity.Connaissance;
 import com.lille1.PFE.Entity.Enseignant;
 
 
@@ -60,6 +61,10 @@ public class Application extends SpringBootServletInitializer{
 			mRepositoryAdmin.deleteAll();
 			Admin admin = new Admin("admin","admin","admin@admin.admin","admin");
 			mRepositoryAdmin.save(admin);
+			
+			mRepositoryConnaissance.deleteAll();
+			Connaissance con = new Connaissance("if", 1,false);
+			mRepositoryConnaissance.save(con);
 			
 			// mRepositoryEtudiant.deleteAll();
 			// mRepositoryConnaissance.deleteAll();
