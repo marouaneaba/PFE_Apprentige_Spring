@@ -54,14 +54,14 @@
                         <td class="col-lg-7">{{#connaissances}}<a href="/viewConnaissance/view/{{id_ExEtu}}">*{{nom}}</a><br/>{{/connaissances}}</td>
                         {{/consulter}}
                         {{#consulter}}
-                        <td><a href="/listAdmin/update/{{idEns}}" class="btn btn-success" id="ecriture">Modifier la connaissance</a></td>
-                        <td><a href="/listAdmin/delete/{{idEns}}" class="btn btn-success" id="ecriture">Supprimer la connaissance</a></td>
+                        <td><a href="/listAdmin/update/{{idEns}}" class="btn btn-success" id="ecriture">Modifier Admin</a></td>
+                        <td><a href="/listAdmin/delete/{{idEns}}" class="btn btn-success" id="ecriture">Supprimer Admin</a></td>
                     	{{/consulter}}
                     </tr>
                     {{/admin}}
                 </table>
                 {{^admin}}
-                    <p>aucun connaissances existe </p>
+                    <p>aucun Admin existe </p>
                 {{/admin}}
             </div>
          </div>   

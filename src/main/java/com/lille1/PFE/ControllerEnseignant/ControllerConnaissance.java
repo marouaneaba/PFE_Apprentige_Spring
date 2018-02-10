@@ -44,11 +44,13 @@ public class ControllerConnaissance {
 	ClassScope sessionGlobal;
 
 	private String message= "";
-	
+	boolean trouver = false;
 	@RequestMapping(value = "/Ajoutconnaissance", method = RequestMethod.GET)
 	public String getInterfaceAjoutConnaissance(ModelMap pModel) {
 
 			pModel.addAttribute("message", message);
+			pModel.addAttribute("addConnaissance", trouver);
+			trouver = false;
 			message ="";
 		
 		return "connaissance";
@@ -63,10 +65,10 @@ public class ControllerConnaissance {
 		//List<Connaissance> connaissanceNonValide = new ArrayList<>();
 		List<Connaissance> connaissances = mConnaissanceService
 				.convertIterableToList(mRepositoryConnaissance.findAll());
-		boolean trouver = true;
+		//boolean trouver = false;
 		for (int i = 0; i < connaissances.size(); i++) {
 			if (nom.replaceAll(" ", "").equals(connaissances.get(i).getNom().replaceAll(" ", ""))) {
-				trouver = false;
+				trouver = true;
 			}
 		}
 		
@@ -74,11 +76,11 @@ public class ControllerConnaissance {
 		try{
 			ordre = Integer.parseInt(ordreS);
 		}catch(NumberFormatException e){
-			message = "Veuillez bine remplir les champs !! ";
+			message = "Veuillez bien remplir les champs !! ";
 			return new RedirectView("/Ajoutconnaissance");
 		}
 		
-		if (trouver && ((Personne) session.getAttribute("user")).getRole().equals("enseignant")) {
+		if (!trouver && ((Personne) session.getAttribute("user")).getRole().equals("enseignant")) {
 
 			Connaissance co = new Connaissance(nom, ordre, false);
 			mRepositoryConnaissance.save(co);
@@ -88,12 +90,13 @@ public class ControllerConnaissance {
 			System.out.println("con : " + co);
 			sessionGlobal.addConnaissance(co);
 			return new RedirectView("/enseignant");
-		} else if (trouver && ((Personne) session.getAttribute("user")).getRole().equals("admin")) {
+		} else if (!trouver && ((Personne) session.getAttribute("user")).getRole().equals("admin")) {
 
 			mRepositoryConnaissance.save(new Connaissance(nom, ordre, true));
 			return new RedirectView("/admin");
 		} else {
 			pModel.addAttribute("addConnaissance", trouver);
+			System.out.println("trouver : "+trouver);
 			return new RedirectView("/Ajoutconnaissance");
 		}
 

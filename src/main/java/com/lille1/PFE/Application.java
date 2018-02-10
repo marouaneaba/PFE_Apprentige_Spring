@@ -49,7 +49,7 @@ public class Application extends SpringBootServletInitializer{
 		return new ClassScope();
 	}
 
-	/*@Bean
+	@Bean
 	public CommandLineRunner loadexercices(RepositoryExercice mRepositoryExercice,
 			RepositoryConnaissance mRepositoryConnaissance, RepositoryAdmin mRepositoryAdmin,RepositoryEnseignant mRepositoryEnseignant ,RepositoryEtudiant mRepositoryEtudiant) {
 		return (args) -> {
@@ -90,10 +90,10 @@ public class Application extends SpringBootServletInitializer{
 			 * etudiant.setConnaissances(connaissances2);
 			 * mRepositoryConnaissance.save(connaissances2);
 			 * 
-			 * }
+			 * }*/
 			 
 
 		};
-	}*/
+	}
 
 }
