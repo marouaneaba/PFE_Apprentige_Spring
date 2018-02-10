@@ -104,7 +104,7 @@ public class ControllerExercice {
 			return new RedirectView("/AjouterExercice");
 
 		}
-
+		System.out.println("varibale : ** : "+variable);
 		mExerciceService.saveExercice(nameExercice, exercice, variable, codeBrouillon, codeNetoyer,
 				connaissancesSelected, personne);
 

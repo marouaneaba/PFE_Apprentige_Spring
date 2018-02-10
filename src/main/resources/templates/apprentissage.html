@@ -181,12 +181,14 @@
 	var tab = [];
 	{{#exercice.variables}}
 		tab.push("{{Nom}}");
+		console.log("{{Nom}}");
 		var listVariable = document.getElementById("NameVariable");
         listVariable.innerHTML+="<option>"+"{{Nom}}"+"</option>";
 
         var datalist1 = document.getElementById("variables");
         datalist1.innerHTML+="<option value='"+"{{Nom}}"+"'/>";
 	{{/exercice.variables}}
+	
 	/*
 	for(var i=0;i<{{exercice.variables}}.length;i++){
 		tab.push(exercice.variables.Nom);

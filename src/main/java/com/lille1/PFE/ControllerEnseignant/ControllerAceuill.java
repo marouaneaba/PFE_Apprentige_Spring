@@ -73,7 +73,9 @@ public class ControllerAceuill {
 		//List<Exercice> exercices = mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant);
 		
 		/* probléme dans la requet */
+		
 		List<History> history = mRepositoryHistory.findByScoreAndEtudiant(1,etudiant);
+		
 		List<Exercice> exercices1ByEtudiant = new ArrayList<Exercice>();
 		for(int i=0;i<history.size();i++){
 			exercices1ByEtudiant.add(history.get(i).getExercice());

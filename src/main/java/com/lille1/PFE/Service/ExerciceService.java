@@ -69,13 +69,17 @@ public class ExerciceService {
 				System.out.println("type : " + types[i]);
 			}
 		}
-		return varibales;
+		
+		for(int i=0;i<variables.length;i++){
+			System.out.println(variables[i]);
+		}
+		return null;
 	}*/
 	
 	public List<Variable> SaveVaribale(String StringVariable){
 		SaxHandler mSaxHandler = new SaxHandler();
 		mSaxHandler.setResult("");
-		//String codeNetoyer = new SaxHandler().parserString(StringVariable,"var");
+		String codeNetoyer = new SaxHandler().parserString(StringVariable,"var");
 		return mSaxHandler.getVariable();
 	}
 
@@ -156,9 +160,10 @@ public class ExerciceService {
 		exercice.setConnaissance(connaissances);
 		List<Variable> variables = SaveVaribale(variable); 
 		//System.out.println("mon objet varibale : "+codeNetoyer);
-		//for(int i=0;i<variables.size();i++){
-			//System.out.println("mon objet varibale : "+variables.get(i));
-		 //}
+		System.out.println("++++++ la size  des varibale : "+variables.size());
+		for(int i=0;i<variables.size();i++){
+			System.out.println("mon objet varibale : "+variables.get(i));
+		 }
 
 		exercice.setVariables(variables);
 		mRepositoryVariable.save(variables);

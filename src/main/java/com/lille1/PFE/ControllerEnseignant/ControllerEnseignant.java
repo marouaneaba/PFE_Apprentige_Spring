@@ -76,17 +76,20 @@ public class ControllerEnseignant {
 
 		List<Exercice> exercices = mExerciceService.getAllExercices();
 		int nbrExercice = 0;
+		
 		for (int i = 0; i < exercices.size(); i++) {
+			System.out.println("******");
 			if (exercices.get(i).getConnaissance().size() == 0)
 				nbrExercice++;
 		}
-
+		
 		pModel.addAttribute("nombreExerciceZeroConnaissance", nbrExercice); // nbr
 																			// des
 																			// exercices
 																			// n'a
 																			// aucun
 																			// connaissance.
+		
 		return "enseignant";
 	}
 

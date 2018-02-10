@@ -14,8 +14,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.lille1.PFE.Entity.Exercice;
 import com.lille1.PFE.Entity.Personne;
+import com.lille1.PFE.Repository.RepositoryHistory;
 import com.lille1.PFE.Service.ConnaissanceService;
 import com.lille1.PFE.Service.ExerciceService;
+import com.lille1.PFE.Service.HistoryService;
 
 @Controller
 @RequestMapping("/consulterExercice")
@@ -25,7 +27,10 @@ public class ControllerConsulterExercice {
 	private ExerciceService mExerciceService;
 	@Autowired
 	private ConnaissanceService mConnaissanceService;
-
+	@Autowired
+	private HistoryService mHistoryService;
+	
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String recupererExercice(HttpServletRequest request, ModelMap pModel) {
 
@@ -58,7 +63,10 @@ public class ControllerConsulterExercice {
 
 	@RequestMapping(value = "/delete/{id_ex}", method = RequestMethod.GET)
 	public RedirectView deleteExerciceGet(Model model, @PathVariable("id_ex") Long idEx) {
-
+		
+		
+		
+		mHistoryService.setNULLExerciceHistory(idEx);
 		mExerciceService.deleteExercice(idEx);
 
 		model.addAttribute("exercices", mExerciceService.getAllExercices());

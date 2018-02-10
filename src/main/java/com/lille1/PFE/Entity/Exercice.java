@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
@@ -22,8 +23,10 @@ public class Exercice { // peux etre faut instancier les deux List par = new
 	private String nomExercice;
 	@Column
 	private String enonceExercice;
+	@Lob
 	@Column
 	private String XMLSolution;
+	@Lob
 	@Column
 	private String XMLSolutionNettoyer;
 	@ManyToMany
