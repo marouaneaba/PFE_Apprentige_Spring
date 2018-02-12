@@ -39,10 +39,7 @@ public class ControllerExercice {
 	@RequestMapping(value = "/AjouterExercice", method = RequestMethod.GET)
 	public String getPage(HttpServletRequest request, ModelMap pModel) {
 
-		/*
-		 * List<Connaissance> connaissances =
-		 * mConnaissanceService.getAllConnaissance();
-		 */
+
 		HttpSession session = request.getSession();
 		Enseignant enseignant = (Enseignant) session.getAttribute("user");
 
@@ -50,7 +47,6 @@ public class ControllerExercice {
 		List<Connaissance> connaissanceNONValider = mRepositoryConnaissance
 				.findConnaissanceByEnseignantAndValider(enseignant, false);
 		pModel.addAttribute("connaissancesNonValider", connaissanceNONValider);
-		// pModel.addAttribute("connaissancesNonValider",sessionGlobal.getConnaissance());
 		System.out.println("i'm here 22 ");
 		if (message) {
 			System.out.println("i'm here 22 message : " + message);
@@ -108,31 +104,7 @@ public class ControllerExercice {
 		mExerciceService.saveExercice(nameExercice, exercice, variable, codeBrouillon, codeNetoyer,
 				connaissancesSelected, personne);
 
-		/*
-		 * System.out.println("post4 : "+new SaxHandler().parserString(
-		 * codeBrouillon)); System.out.println("post1 : "+nameExercice);
-		 * System.out.println("post2 : "+exercice);
-		 * System.out.println("post3 : "+variable); for(int
-		 * i=0;i<connaissancesSelected.size();i++){
-		 * System.out.println("post3-3 : "+connaissancesSelected.get(i)); }
-		 */
 
-		/*
-		 * mExerciceService.addExerciceRepository(nameExercice,exercice,
-		 * codeBrouillon ,codeNetoyer,null,null,personne);
-		 */
-		/*
-		 * List<Connaissance> connaissances = new ArrayList<>();
-		 * connaissances.add(new Connaissance("nom1","ordre1","score1",true));
-		 * connaissances.add(new Connaissance("nom2","ordre2","score2",true));
-		 * mExerciceService.addExerciceEnseigantRepository(nameExercice,exercice
-		 * ,codeBrouillon
-		 * ,codeNetoyer,connaissances,null,personne);//connaissance,variable
-		 * System.out.println("----: "+mRepositoryEnseignant.findOne(personne.
-		 * getIdEns())); System.out.println("arivé terminer fin ligne ");
-		 * pModel.addAttribute("connaissances",mConnaissanceService.
-		 * getAllConnaissance());
-		 */
 		System.out.println("passé");
 		return new RedirectView("/enseignant");
 	}

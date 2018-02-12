@@ -1,4 +1,4 @@
-package com.lille1.PFE;
+package com.lille1.PFE.security;
 
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 

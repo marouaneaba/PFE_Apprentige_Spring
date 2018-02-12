@@ -28,9 +28,7 @@ public class ControllerPassword {
 	// la différence entre SimpleMailMessage et MimeMessage : MimeMessage on 
 	// peux envoyer des piéce joint et des contenus complexe que 
 	// SimpleMailMessage
-	
-	//@Autowired
-	//private JavaMailSender sender;
+
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String GetLogin(ModelMap pModel) {

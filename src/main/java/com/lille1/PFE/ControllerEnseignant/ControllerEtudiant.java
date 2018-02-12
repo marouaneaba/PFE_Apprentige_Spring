@@ -36,7 +36,6 @@ public class ControllerEtudiant {
 	public RedirectView setFormAjoutEtudiant(@RequestParam("pseudo") String name,
 			@RequestParam("password") String password, @RequestParam("email_address") String email, ModelMap pModel) {
 
-		//Etudiant etudiant = mEtudiantService.addEtudiant(name, password, email, "etudiant");
 
 		return new RedirectView("/admin");
 	}
@@ -53,13 +52,6 @@ public class ControllerEtudiant {
 		}
 
 		model.addAttribute("etudiants", mEtudiantService.getAllEtudiant());
-		/*
-		 * List<Etudiant> etudiants =
-		 * mEtudiantService.convertIterableToList(mEtudiantService.
-		 * getAllEtudiant()); for(Etudiant etudiant : etudiants){
-		 * System.out.println("etu : "+etudiant+
-		 * ", size connaissance :"+etudiant.getConnaissances().size()); }
-		 */
 		return "listerEtudiants";
 	}
 

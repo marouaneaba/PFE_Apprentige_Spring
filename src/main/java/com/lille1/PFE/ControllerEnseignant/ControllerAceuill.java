@@ -62,7 +62,6 @@ public class ControllerAceuill {
 			if(mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant.get(i)) != null 
 					&& mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant.get(i)).size()>0){
 				exercices = mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant.get(i));
-				//connaissanceREPLY = connaissancesNonEtudiant.get(i);
 				break;
 			}else if(mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant.get(i)) == null 
 					&& mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant.get(i)).size() == 0){
@@ -70,7 +69,6 @@ public class ControllerAceuill {
 				result = null;
 			}
 		}
-		//List<Exercice> exercices = mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant);
 		
 		/* probléme dans la requet */
 		
@@ -95,7 +93,6 @@ public class ControllerAceuill {
 				int niveaux = Integer.parseInt(mConnaissanceService.getNiveaux(etudiant.getIdEns()));
 				System.out.println("22 : ");
 				
-				//pModel.addAttribute("connaissanceEtu", connaissancesEtudiant);
 				pModel.addAttribute("niveaux", niveaux - 1);
 				pModel.addAttribute("niveauxSuivant", niveaux);
 				pModel.addAttribute("Suivant", false);
@@ -130,16 +127,7 @@ public class ControllerAceuill {
 
 			pModel.addAttribute("screen", mResultExercice);
 			pModel.addAttribute("niveaux2", niveaux + 1);
-		} /*else if (result != null && result.equals("finie")) {
-			System.out.println("finie");
-			int niveaux = (int) session.getAttribute("niveaux");
-			String tete = "Félicitation";
-			String mot = "Vous avez réussie tout les connaissances \n Veuillez attendre une mise à jour des connaissances";
-			ResultExercice mResultExercice = new ResultExercice(niveaux, tete, mot, false);
-
-			pModel.addAttribute("screen", mResultExercice);
-			pModel.addAttribute("niveaux2", niveaux);
-		}*/
+		}
 
 		return "/aceuil";
 	}

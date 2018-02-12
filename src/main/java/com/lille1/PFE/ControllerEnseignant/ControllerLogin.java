@@ -21,13 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/login")
 public class ControllerLogin {
 
-	/*
-	 * @Autowired private EtudiantService mEtudiantService;
-	 * 
-	 * @Autowired private EnseignantService mEnseignantService;
-	 * 
-	 * @Autowired private RepositoryAdmin mRepositoryAdmin;
-	 */
+
 
 	@Autowired
 	private RepositoryPersonne mRepositoryPersonne;
@@ -52,12 +46,6 @@ public class ControllerLogin {
 
 		HttpSession session = request.getSession();
 
-		/*
-		 * Etudiant etudiant = mEtudiantService.VerifyEtudiant(pseudo,
-		 * password); Enseignant enseignant =
-		 * mEnseignantService.VerifyEnseignant(pseudo, password); Admin admin =
-		 * mRepositoryAdmin.findAdminByNomAndPassword(pseudo,password);
-		 */
 		Personne personne = mRepositoryPersonne.findByNomAndPassword(pseudo, password);
 
 		if (personne != null && personne.getNom().equals(pseudo) && personne.getPassword().equals(password)) {

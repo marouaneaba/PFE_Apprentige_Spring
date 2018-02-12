@@ -67,12 +67,7 @@ public class ControllerEnseignant {
 				nbr++;
 		}
 
-		pModel.addAttribute("nombreConnaissanceFalseUser", nbr); // nbr
-																	// connaissance
-																	// n'est pas
-																	// valider
-																	// par
-																	// admin.
+		pModel.addAttribute("nombreConnaissanceFalseUser", nbr); // nbr connaissance n'est pas valider par admin.
 
 		List<Exercice> exercices = mExerciceService.getAllExercices();
 		int nbrExercice = 0;
@@ -83,12 +78,7 @@ public class ControllerEnseignant {
 				nbrExercice++;
 		}
 		
-		pModel.addAttribute("nombreExerciceZeroConnaissance", nbrExercice); // nbr
-																			// des
-																			// exercices
-																			// n'a
-																			// aucun
-																			// connaissance.
+		pModel.addAttribute("nombreExerciceZeroConnaissance", nbrExercice); // nbr des exercices n'a aucun connaissance.
 		
 		return "enseignant";
 	}
@@ -131,7 +121,6 @@ public class ControllerEnseignant {
 			userExiste = true;
 			return new RedirectView("/ajouterPersonne");
 		}
-		// mEnseignantService.setEnseignant(name,password,email,"enseignant");
 		if (role.equals("admin")) {
 			mRepositoryAdmin.save(new Admin(name, password, email, role));
 		} else if (role.equals("enseignant")) {
@@ -167,7 +156,6 @@ public class ControllerEnseignant {
 		return new RedirectView("/listerEns");
 	}
 
-	/**/
 	@RequestMapping(value = "/listerEns/update/{idEns}", method = RequestMethod.GET)
 	public String updateEns(ModelMap pModel, @PathVariable("idEns") Long id) {
 

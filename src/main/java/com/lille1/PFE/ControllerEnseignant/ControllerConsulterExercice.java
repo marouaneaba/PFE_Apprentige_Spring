@@ -14,7 +14,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.lille1.PFE.Entity.Exercice;
 import com.lille1.PFE.Entity.Personne;
-import com.lille1.PFE.Repository.RepositoryHistory;
 import com.lille1.PFE.Service.ConnaissanceService;
 import com.lille1.PFE.Service.ExerciceService;
 import com.lille1.PFE.Service.HistoryService;

@@ -62,10 +62,8 @@ public class ControllerConnaissance {
 
 		HttpSession session = request.getSession();
 		message = "";
-		//List<Connaissance> connaissanceNonValide = new ArrayList<>();
 		List<Connaissance> connaissances = mConnaissanceService
 				.convertIterableToList(mRepositoryConnaissance.findAll());
-		//boolean trouver = false;
 		for (int i = 0; i < connaissances.size(); i++) {
 			if (nom.replaceAll(" ", "").equals(connaissances.get(i).getNom().replaceAll(" ", ""))) {
 				trouver = true;
@@ -102,12 +100,7 @@ public class ControllerConnaissance {
 
 	}
 
-	@RequestMapping(value = "/consultConnaissance", method = RequestMethod.GET) // les
-																				// connaissance
-																				// non
-																				// valider
-																				// par
-																				// admin
+	@RequestMapping(value = "/consultConnaissance", method = RequestMethod.GET) // les connaissance non valider par admin
 	public String consulterConnaissances(HttpServletRequest request, Model pModel) {
 
 		HttpSession session = request.getSession();
@@ -117,9 +110,6 @@ public class ControllerConnaissance {
 		} else if (personne.getRole().equals("enseignant")) {
 			pModel.addAttribute("consulter", true);
 		}
-		// Enseignant enseignant =
-		// mEnseignantService.getEnseignantById(personne.getIdEns());
-		// pModel.addAttribute("connaissances",mEnseignantService.getAllConnaissaneEnseignantById(enseignant.getIdEns()));
 		List<Connaissance> Allconnaissances = mRepositoryConnaissance.findConnaissanceByValider(false); // sessionGlobal.getConnaissance();
 		List<Connaissance> connaissances = new ArrayList<>();
 		for (int i = 0; i < Allconnaissances.size(); i++) {
@@ -150,8 +140,6 @@ public class ControllerConnaissance {
 			pModel.addAttribute("consulter", false);
 		}
 
-		// Enseignant enseignant =
-		// mEnseignantService.getEnseignantById(personne.getIdEns());
 		pModel.addAttribute("connaissances", mRepositoryConnaissance.findConnaissanceByValider(true));
 
 		return "ConsulterConnaissances";
@@ -170,8 +158,6 @@ public class ControllerConnaissance {
 			pModel.addAttribute("consulter", false);
 		}
 
-		// Enseignant enseignant =
-		// mEnseignantService.getEnseignantById(personne.getIdEns());
 		pModel.addAttribute("connaissances", mRepositoryConnaissance.findConnaissanceByValider(false));
 
 		return "ConsulterConnaissances";
@@ -229,8 +215,6 @@ public class ControllerConnaissance {
 				break;
 			}
 		}
-		// exercice.getConnaissance().clear();
-		// exercice.setConnaissance(null);
 		exercice.setConnaissance(connaissances);
 		mRepositoryExercice.save(exercice);
 

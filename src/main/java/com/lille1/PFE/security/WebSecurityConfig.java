@@ -1,4 +1,4 @@
-package com.lille1.PFE;
+package com.lille1.PFE.security;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;

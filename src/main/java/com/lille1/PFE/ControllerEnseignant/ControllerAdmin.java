@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.lille1.PFE.MainController;
 import com.lille1.PFE.Entity.Personne;
 import com.lille1.PFE.Repository.RepositoryConnaissance;
 import com.lille1.PFE.Service.AdminService;
+import com.lille1.PFE.security.MainController;
 
 @Controller
 public class ControllerAdmin extends MainController {

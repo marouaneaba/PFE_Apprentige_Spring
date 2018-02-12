@@ -1,10 +1,8 @@
 package com.lille1.PFE.ControllerEnseignant;
 
 import java.security.Principal;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
-
 import com.lille1.PFE.Entity.Admin;
 import com.lille1.PFE.Entity.Enseignant;
 import com.lille1.PFE.Entity.Etudiant;
@@ -40,15 +37,7 @@ public class ControllerDashbord {
 	@RequestMapping(method = RequestMethod.GET)
 	public RedirectView VerifyLogin(HttpServletRequest request, ModelMap pModel, Principal principal) {
 
-		// Enseignant enseignant =
-		// mRepositoryEnseignant.findByNome(principal.getName());
-		/*
-		 * System.out.println("ens : dachbord : "+enseignant); List<Exercice>
-		 * exercices =
-		 * mExerciceService.convertIterableToList(mRepositoryExercice.findAll())
-		 * ; for(int i=0;i<exercices.size();i++){
-		 * System.out.println("exercice : "+exercices.get(i)); }
-		 */
+
 
 		Etudiant etudiant = mRepositoryEtudiant.findByNome(principal.getName());
 		Enseignant enseignant = mRepositoryEnseignant.findByNome(principal.getName());
