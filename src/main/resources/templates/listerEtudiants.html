@@ -21,7 +21,7 @@
                 <h1 class ="col-lg-12"><img height="92" width="72" src="images/algo.png" alt="" class="ico_categorie" />Appretissage d'algorithme</h1>
                 <article style="font-size: 16px;text-align: justify;text-indent: 50px;color: #2F4F4F;font-family:Comic Sans Ms" class ="col-lg-10 col-lg-push-1">
                     
-                    <b> Veuillez choisie une fonctionnalité !</b><br/>
+                    <b> Consultation Etudiants !</b><br/>
                 </article>
                 
             </section>
@@ -63,8 +63,8 @@
                     </tr>
                     {{/etudiants}}
                 </table>
-                {{^etudiants}}
-                    <p>aucun  existe </p>
+                {{^etudiants}}<br/>
+                    <div class="alert alert-danger" role="alert">aucun Etudiant n'existe</div>
                 {{/etudiants}}
             </div>
          </div>   

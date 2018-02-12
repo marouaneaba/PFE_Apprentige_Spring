@@ -32,6 +32,10 @@ public class ControllerDashbord {
 	@Autowired
 	private RepositoryEnseignant mRepositoryEnseignant;
 
+	@GetMapping(value="/")
+	public RedirectView forward(){
+		return new RedirectView("/login");
+	}
 
 
 	@RequestMapping(method = RequestMethod.GET)

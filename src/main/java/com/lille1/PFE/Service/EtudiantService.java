@@ -8,14 +8,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lille1.PFE.Entity.Etudiant;
+import com.lille1.PFE.Entity.History;
 import com.lille1.PFE.Repository.RepositoryEtudiant;
+import com.lille1.PFE.Repository.RepositoryHistory;
 
 @Service
 public class EtudiantService {
 
 	@Autowired
 	private RepositoryEtudiant mRepositoryEtudiant;
-
+	@Autowired
+	private RepositoryHistory mRepositoryHistory;
+	
 	@Transactional
 	public Etudiant addEtudiant(String pseudo, String password, String email, String type) {
 		return mRepositoryEtudiant.save(new Etudiant(pseudo, password, email, type));
@@ -42,6 +46,11 @@ public class EtudiantService {
 
 	@Transactional
 	public void deleteEtudiantById(Long id) {
+		
+		List<History> historys =  mRepositoryHistory.findByEtudiant(mRepositoryEtudiant.findOne(id));
+		
+		mRepositoryHistory.delete(historys);
+		
 		mRepositoryEtudiant.delete(id);
 	}
 

@@ -19,10 +19,13 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.lille1.PFE.Entity.Connaissance;
 import com.lille1.PFE.Entity.Exercice;
+import com.lille1.PFE.Entity.History;
 import com.lille1.PFE.Entity.Personne;
 import com.lille1.PFE.Repository.RepositoryConnaissance;
 import com.lille1.PFE.Repository.RepositoryEnseignant;
+import com.lille1.PFE.Repository.RepositoryEtudiant;
 import com.lille1.PFE.Repository.RepositoryExercice;
+import com.lille1.PFE.Repository.RepositoryHistory;
 import com.lille1.PFE.Service.ConnaissanceService;
 
 @Controller
@@ -39,6 +42,12 @@ public class ControllerConnaissance {
 
 	@Autowired
 	private RepositoryEnseignant mRepositoryEnseignant;
+	
+	@Autowired
+	private RepositoryHistory mRepositoryHistory;
+	
+	@Autowired
+	private RepositoryEtudiant mRepositoryEtudiant;
 
 	@Resource(name = "globalSessionMessage")
 	ClassScope sessionGlobal;
@@ -165,7 +174,11 @@ public class ControllerConnaissance {
 
 	@RequestMapping(value = "/consultConnaissance/delete/{id_ExEtu}", method = RequestMethod.GET)
 	public RedirectView supprimerConnaissances(Model pModel, @PathVariable("id_ExEtu") Long idCon) {
-
+		
+		List<History> historys =  mRepositoryHistory.findByConnaissance(mRepositoryConnaissance.findOne(idCon));
+		
+		mRepositoryHistory.delete(historys);
+		
 		mConnaissanceService.supprimerConnaissances(idCon);
 		sessionGlobal.deleteConnaissance(idCon);
 		pModel.addAttribute("connaissances", mConnaissanceService.getAllConnaissance());
