@@ -179,6 +179,12 @@ public class ControllerConnaissance {
 		
 		mRepositoryHistory.delete(historys);
 		
+		List<Exercice> exercices = mRepositoryExercice.findByConnaissance(mRepositoryConnaissance.findOne(idCon));
+		for(int i=0;i<exercices.size();i++){
+			exercices.get(i).getConnaissance().clear();
+		}
+		mRepositoryExercice.save(exercices);
+		
 		mConnaissanceService.supprimerConnaissances(idCon);
 		sessionGlobal.deleteConnaissance(idCon);
 		pModel.addAttribute("connaissances", mConnaissanceService.getAllConnaissance());

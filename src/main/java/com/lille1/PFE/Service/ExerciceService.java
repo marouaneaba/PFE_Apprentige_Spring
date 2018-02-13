@@ -102,9 +102,10 @@ public class ExerciceService {
 
 	public void deleteExercice(Long id) {
 		List<Variable> variables = mRepositoryExercice.findOne(id).getVariables();
-		for (int i = 0; i < variables.size(); i++) {
+		/*for (int i = 0; i < variables.size(); i++) {
 			mRepositoryVariable.delete(variables.get(i).getId());
-		}
+		}*/
+		mRepositoryVariable.delete(variables);
 		mRepositoryExercice.delete(mRepositoryExercice.findOne(id));
 	}
 

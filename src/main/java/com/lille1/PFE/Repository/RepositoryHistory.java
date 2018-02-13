@@ -18,7 +18,7 @@ public interface RepositoryHistory extends CrudRepository<History, Long>  {
 	List<Exercice> findByScoreAndEtudiant(@Param("score")int score,@Param("etudiant")Long etudiant);*/
 	
 	List<History> findByScoreAndEtudiant(int score,Etudiant etudiant);
-	History findByExercice(Exercice ex);
+	List<History> findByExercice(Exercice ex);
 	
 	List<History> findByEtudiant(Etudiant etu);
 	List<History> findByConnaissance(Connaissance connaissances);

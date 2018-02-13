@@ -41,8 +41,7 @@ public class HistoryService {
 	public void setNULLExerciceHistory(Long idEx){
 		
 		Exercice exercice = mExerciceService.getExerciceById(idEx);
-		History history = mRepositoryHistory.findByExercice(exercice);
-		history.setExercice(null);
-		mRepositoryHistory.save(history);
+		List<History> history = mRepositoryHistory.findByExercice(exercice);
+		mRepositoryHistory.delete(history);		
 	}
 }

@@ -1,5 +1,7 @@
 package com.lille1.PFE.ControllerEnseignant;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.lille1.PFE.Entity.Enseignant;
 import com.lille1.PFE.Entity.Exercice;
+import com.lille1.PFE.Entity.History;
 import com.lille1.PFE.Entity.Personne;
+import com.lille1.PFE.Repository.RepositoryEnseignant;
+import com.lille1.PFE.Repository.RepositoryExercice;
+import com.lille1.PFE.Repository.RepositoryHistory;
 import com.lille1.PFE.Service.ConnaissanceService;
 import com.lille1.PFE.Service.ExerciceService;
 import com.lille1.PFE.Service.HistoryService;
@@ -28,6 +35,13 @@ public class ControllerConsulterExercice {
 	private ConnaissanceService mConnaissanceService;
 	@Autowired
 	private HistoryService mHistoryService;
+	@Autowired
+	private RepositoryEnseignant mRepositoryEnseignant;
+	@Autowired
+	private RepositoryHistory mRepositoryHistory;
+	@Autowired
+	private RepositoryExercice mRepositoryExercice;
+	
 	
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -61,12 +75,22 @@ public class ControllerConsulterExercice {
 	}
 
 	@RequestMapping(value = "/delete/{id_ex}", method = RequestMethod.GET)
-	public RedirectView deleteExerciceGet(Model model, @PathVariable("id_ex") Long idEx) {
+	public RedirectView deleteExercice( Model model, @PathVariable("id_ex") Long idEx) {
 		
+		List<History> historys = mRepositoryHistory.findByExercice(mRepositoryExercice.findOne(idEx));
+		mRepositoryHistory.delete(historys);
 		
+		List<Enseignant> ens = mRepositoryEnseignant.finByExercices2(idEx);
+		for(int i=0;i<ens.size();i++){
+			ens.get(i).getExercices().clear();
+		}
+		mRepositoryEnseignant.save(ens);
+		//mRepositoryEnseignant
+		//mRepositoryHistory
+		//RepositoryExercice
 		
-		mHistoryService.setNULLExerciceHistory(idEx);
-		mExerciceService.deleteExercice(idEx);
+		//mHistoryService.setNULLExerciceHistory(idEx);
+		//mExerciceService.deleteExercice(idEx);
 
 		model.addAttribute("exercices", mExerciceService.getAllExercices());
 		return new RedirectView("/consulterExercice");
