@@ -56,9 +56,9 @@ public class ControllerConnaissance {
 	boolean trouver = false;
 	
 	/**
-	 * 
-	 * @param pModel
-	 * @return
+	 * interface permet d'ajouter une nouveux connaissance
+	 * @param pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return interface sur le quel on saisie la connaissance à ajouter
 	 */
 	@RequestMapping(value = "/Ajoutconnaissance", method = RequestMethod.GET)
 	public String getInterfaceAjoutConnaissance(ModelMap pModel) {
@@ -73,11 +73,11 @@ public class ControllerConnaissance {
 
 	/**
 	 * 
-	 * @param request
-	 * @param nom
-	 * @param ordreS
-	 * @param pModel
-	 * @return
+	 * @param request request nos permet de récuperer les données envoyé par l'utilisateur
+	 * @param nom nom de connaissance à ajouter
+	 * @param ordreS ordre de la connaissance a ajouter
+	 * @param pModel pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return si la connaissance et bien ajoute retourne interface d'acceuil sinon interface d'ajout pour la resaisir de la connaissance
 	 */
 	@RequestMapping(value = "/Ajoutconnaissance", method = RequestMethod.POST)
 	public RedirectView ajoutConnaissance(HttpServletRequest request, @RequestParam("nom") String nom,

@@ -35,11 +35,11 @@ public class ControllerDashbord {
 	
 
 	/**
-	 * 
-	 * @param request
-	 * @param pModel
-	 * @param principal
-	 * @return
+	 * permet à l'utilisateur de retourner à l'interface d'acceuil
+	 * @param request request nos permet de récuperer les données envoyé par l'utilisateur
+	 * @param pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @param principal un objet contient l'identifiant de l'utilisateur authentifier
+	 * @return retourne la page d'acceuil
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public RedirectView VerifyLogin(HttpServletRequest request, ModelMap pModel, Principal principal) {
@@ -76,8 +76,8 @@ public class ControllerDashbord {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * afficher une description de notre PFE
+	 * @return  intrface contient une description sur notre PFE
 	 */
 	@GetMapping("/propos")
 	public String getApropos(){

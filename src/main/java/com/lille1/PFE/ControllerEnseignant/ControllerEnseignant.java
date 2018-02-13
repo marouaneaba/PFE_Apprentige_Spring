@@ -54,10 +54,10 @@ public class ControllerEnseignant {
 	private boolean userExiste = false;
 
 	/**
-	 * 
-	 * @param request
-	 * @param pModel
-	 * @return
+	 * permet à l'enseignant de sortir à la page d'acceuil
+	 * @param request request nos permet de récuperer les données envoyé par l'utilisateur
+	 * @param pModel pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return interface contient tous les fonctionnalité de l'admin
 	 */
 	@RequestMapping(value = "/enseignant", method = RequestMethod.GET)
 	public String GetInterfaceEns(HttpServletRequest request, ModelMap pModel) {
@@ -90,9 +90,9 @@ public class ControllerEnseignant {
 	}
 
 	/**
-	 * 
-	 * @param pModel
-	 * @return
+	 * ajouter des personne soit etudiant ou Enseignant , admin
+	 * @param pModel pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return interface pour ajouter admin ou etudiant ou enseignant
 	 */
 	@RequestMapping(value = "/ajouterPersonne", method = RequestMethod.GET)
 	public String GetAjoutEns(ModelMap pModel) {
@@ -114,10 +114,10 @@ public class ControllerEnseignant {
 	}
 
 	/**
-	 * 
-	 * @param request
-	 * @param pModel
-	 * @return
+	 * récuper les données saisie par administrateur pour l'ajout d'un admin, enseignant ou etudiant
+	 * @param request request nos permet de récuperer les données envoyé par l'utilisateur
+	 * @param pModel pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return interface d'acceuil fournie à l'enseignant d'utiliser tous ces fonctionnalité
 	 */
 	@RequestMapping(value = "/ajouterPersonne", method = RequestMethod.POST)
 	public RedirectView POSTAjoutEns(HttpServletRequest request, ModelMap pModel) {
@@ -150,10 +150,10 @@ public class ControllerEnseignant {
 	}
 
 	/**
-	 * 
-	 * @param request
-	 * @param pModel
-	 * @return
+	 * lister tous les enseignement enregistrer
+	 * @param request request nos permet de récuperer les données envoyé par l'utilisateur
+	 * @param pModel pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return return la liste de tous les enseignant enregistrer dans la base
 	 */
 	@RequestMapping(value = "/listerEns", method = RequestMethod.GET)
 	public String ListerEns(HttpServletRequest request, ModelMap pModel) {
@@ -172,10 +172,10 @@ public class ControllerEnseignant {
 	}
 
 	/**
-	 * 
-	 * @param pModel
-	 * @param id
-	 * @return
+	 * supprimer un enseignant à partir son ID
+	 * @param pModel pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface
+	 * @param id ID d'enseignant à supprimer
+	 * @return aprés la suppression affiche tous les enseignents enregister
 	 */
 	@RequestMapping(value = "/listerEns/delete/{idEns}", method = RequestMethod.GET)
 	public RedirectView deleteEns(ModelMap pModel, @PathVariable("idEns") Long id) {
@@ -186,10 +186,10 @@ public class ControllerEnseignant {
 	}
 
 	/**
-	 * 
-	 * @param pModel
-	 * @param id
-	 * @return
+	 * fournie un interface de modifier un enseignant
+	 * @param pModel pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface
+	 * @param id ID de'enseignent à modifier
+	 * @return interface de modifier un enseignant
 	 */
 	@RequestMapping(value = "/listerEns/update/{idEns}", method = RequestMethod.GET)
 	public String updateEns(ModelMap pModel, @PathVariable("idEns") Long id) {
@@ -200,13 +200,13 @@ public class ControllerEnseignant {
 	}
 
 	/**
-	 * 
-	 * @param pModel
-	 * @param id
-	 * @param nom
-	 * @param password
-	 * @param email
-	 * @return
+	 * interface pour la modification de l'enseignant selectionner
+	 * @param pModel pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface
+	 * @param id ID de l'enseignant à modifier
+	 * @param nom le nouveaux nom qui remplace l'ancien nom de l'enseignant à modifier
+	 * @param password le nouveaux password qui remplace l'ancien nom de l'enseignant à modifier
+	 * @param email le nouveaux email qui remplace l'ancien nom de l'enseignant à modifier
+	 * @return list de tous les enseignants enregistrer
 	 */
 	@RequestMapping(value = "/listerEns/update/{idEns}", method = RequestMethod.POST)
 	public RedirectView POSTupdateEns(ModelMap pModel, @PathVariable("idEns") Long id, @RequestParam("name") String nom,

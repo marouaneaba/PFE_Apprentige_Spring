@@ -37,10 +37,10 @@ public class ControllerAceuill {
 	private RepositoryHistory mRepositoryHistory;
 	
 	/**
-	 * 
-	 * @param request
-	 * @param pModel
-	 * @return
+	 * permet de retourner à l'interface d'acceuil
+	 * @param request request nos permet de récuperer les données envoyé par l'utilisateur
+	 * @param pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return l'interface d'acceuil de l'utilisateur
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String GetAceuill(HttpServletRequest request, ModelMap pModel) {

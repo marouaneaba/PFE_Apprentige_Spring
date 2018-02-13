@@ -44,10 +44,10 @@ public class ControllerConsulterExercice {
 	
 	
 	/**
-	 * 
-	 * @param request
-	 * @param pModel
-	 * @return
+	 * interface list tous les exercices enregistrer
+	 * @param request request nos permet de récuperer les données envoyé par l'utilisateur
+	 * @param pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return la liste des exerice enregister
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String recupererExercice(HttpServletRequest request, ModelMap pModel) {
@@ -66,10 +66,10 @@ public class ControllerConsulterExercice {
 	}
 
 	/**
-	 * 
-	 * @param model
-	 * @param idEx
-	 * @return
+	 * intrface sur le quel modifier exercice
+	 * @param model   sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @param idEx identifiant de l'exercice à modifier
+	 * @return l'exercice à modifier
 	 */
 	@RequestMapping(value = "/update/{id_ex}", method = RequestMethod.GET)
 	public String editExerciceGet(Model model, @PathVariable("id_ex") Long idEx) {
@@ -86,10 +86,10 @@ public class ControllerConsulterExercice {
 	}
 
 	/**
-	 * 
-	 * @param model
-	 * @param idEx
-	 * @return
+	 * interface contient tous les exerice enregister
+	 * @param model sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @param idEx identifiant de l'exercice à supprimer
+	 * @return la liste de tous les exercice enregistrer
 	 */
 	@RequestMapping(value = "/delete/{id_ex}", method = RequestMethod.GET)
 	public RedirectView deleteExercice( Model model, @PathVariable("id_ex") Long idEx) {

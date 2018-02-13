@@ -33,8 +33,8 @@ public class ControllerAdmin extends MainController {
 	private AdminService mAdminService;
 
 	/**
-	 * 
-	 * @return
+	 * permet de retourner à l'interface d'acceuil
+	 * @return le dashbord interface d'acceuil de l'utilisateur contient tous les fonctionnalité de l'application
 	 */
 	@GetMapping(value="/")
 	public RedirectView forward(){
@@ -42,10 +42,10 @@ public class ControllerAdmin extends MainController {
 	}
 	
 	/**
-	 * 
-	 * @param request
-	 * @param pModel
-	 * @return
+	 * permet à l'admin de retourner à l'interface d'acceuil qui contient les fonctionnalité de l'application
+	 * @param request request nos permet de récuperer les données envoyé par l'utilisateur
+	 * @param pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return interface d'acceuil contient les fonctionnalité de l'application
 	 */
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String GetAdmin(HttpServletRequest request, ModelMap pModel) {
@@ -59,10 +59,10 @@ public class ControllerAdmin extends MainController {
 	}
 
 	/**
-	 * 
-	 * @param request
-	 * @param pModel
-	 * @return
+	 * lister tous les administrateur enregister
+	 * @param request request nos permet de récuperer les données envoyé par l'utilisateur
+	 * @param pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return la liste tous les administrateur enregister
 	 */
 	@RequestMapping(value = "/listAdmin", method = RequestMethod.GET)
 	public String listerAdmin(HttpServletRequest request, ModelMap pModel) {
@@ -74,10 +74,10 @@ public class ControllerAdmin extends MainController {
 	}
 
 	/**
-	 * 
-	 * @param id
-	 * @param pModel
-	 * @return
+	 * interface pour la modification de l'administrateur
+	 * @param id ID de Administrateur à modifier
+	 * @param pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return interface pour la modification de l'administrateur
 	 */
 	@RequestMapping(value = "/listAdmin/update/{id}", method = RequestMethod.GET)
 	public String updateAdmin(@PathVariable("id") Long id, Model pModel) {
@@ -87,12 +87,12 @@ public class ControllerAdmin extends MainController {
 	}
 
 	/**
-	 * 
-	 * @param id
-	 * @param pseudo
-	 * @param password
-	 * @param email
-	 * @return
+	 * fournie interface pour la modification d'administrateur
+	 * @param id ID de Administrateur à modifier
+	 * @param pseudo Pseudo de Administrateur à modifier
+	 * @param password Password de Administrateur à modifier
+	 * @param email Email de Administrateur à modifier
+	 * @return afficher administrateur à modifier
 	 */
 	@RequestMapping(value = "/listAdmin/update/{id}", method = RequestMethod.POST)
 	public RedirectView POSTupdateEtudiant(@PathVariable("id") Long id, @RequestParam("name") String pseudo,
@@ -104,9 +104,9 @@ public class ControllerAdmin extends MainController {
 	}
 
 	/**
-	 * 
-	 * @param id
-	 * @return
+	 * supprimer un administrateur à partir son ID
+	 * @param id id ID de Administrateur à modifier
+	 * @return la liste des administrateurs
 	 */
 	@RequestMapping(value = "/listAdmin/delete/{id}", method = RequestMethod.GET)
 	public RedirectView deleteEtudiant(@PathVariable("id") Long id) {

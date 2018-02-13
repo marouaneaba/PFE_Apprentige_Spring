@@ -78,7 +78,7 @@ public class ControllerEtudiant {
 	/**
 	 * interface permet de modifier un enseignant
 	 * @param id id de l'étudiant à modifier
-	 * @param pModel request nos permet de récuperer les données envoyé par l'utilisateur
+	 * @param pModel pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
 	 * @return interface contient tout les données pour la modification d'un etudiant
 	 */
 	@RequestMapping(value = "/listEtudiant/update/{id}", method = RequestMethod.GET)
