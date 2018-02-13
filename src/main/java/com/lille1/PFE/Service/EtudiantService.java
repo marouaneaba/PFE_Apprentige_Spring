@@ -20,30 +20,36 @@ public class EtudiantService {
 	@Autowired
 	private RepositoryHistory mRepositoryHistory;
 	
+	// ajouter un Etudiant
 	@Transactional
 	public Etudiant addEtudiant(String pseudo, String password, String email, String type) {
 		return mRepositoryEtudiant.save(new Etudiant(pseudo, password, email, type));
 	}
 
+	//retourner tous les Etudiants stocker dans la base de données
 	@Transactional
 	public Iterable<Etudiant> getAllEtudiant() {
 		return mRepositoryEtudiant.findAll();
 	}
 
+	// récupérer un Etudiant à partir son Pseudo et password
 	@Transactional
 	public Etudiant VerifyEtudiant(String pseudo, String password) {
 		return mRepositoryEtudiant.findByNomAndPassword(pseudo, password);
 	}
 
+	// retourner un Etudiant à partir son ID
 	public Etudiant getEtudiantById(Long id) {
 		return mRepositoryEtudiant.findOne(id);
 	}
 
+	//modification un Etudaint 
 	@Transactional
 	public void updateEtudiant(Long id, String pseudo, String password, String email) {
 		mRepositoryEtudiant.updateEtudiant(id, pseudo, password, email);
 	}
 
+	//supprimer un etudiant
 	@Transactional
 	public void deleteEtudiantById(Long id) {
 		
@@ -54,6 +60,7 @@ public class EtudiantService {
 		mRepositoryEtudiant.delete(id);
 	}
 
+	//transformer un Iterable des etudiants à une list des etudiants
 	public List<Etudiant> convertIterableToList(Iterable<Etudiant> iterable) {
 		if (iterable instanceof List) {
 			return (List<Etudiant>) iterable;

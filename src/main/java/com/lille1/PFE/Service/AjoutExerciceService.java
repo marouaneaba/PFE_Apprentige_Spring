@@ -17,6 +17,7 @@ public class AjoutExerciceService {
 
 	SAXBuilder sxb = new SAXBuilder();
 
+	// nettoyer les varibale ajouter par enseignant pour l'enregistrer dans la base de données
 	public List<Variable> SaveVaribale(String value) {
 		value = "<doc>" + value + "</doc>";
 		List<Variable> varibales = new ArrayList<>();
@@ -51,6 +52,8 @@ public class AjoutExerciceService {
 		return varibales;
 	}
 
+	// nettoyer la solution d'un exercice saisie par enseignant pour l'enregistrer dans la base de données
+	// ou la solution fournie par l'etudiant pour le comparer avec la solution fournie par l'enseignant.
 	public void SaveCode(String code) {
 		code = "<doc>" + code + "</doc>";
 
@@ -75,18 +78,13 @@ public class AjoutExerciceService {
 			while (index2.hasNext()) {
 				Element courantLI = (Element) index2.next();
 				XML_file(courantLI);
-				// System.out.println(courantLI.getName());
-				// System.out.println(courantLI.getAttributes().get(0).getName());
 			}
-			// System.out.println(courant.getName());
 
 		}
 
-		// System.out.println(code);
 	}
 
 	public void XML_file(Element element) {
-		// classes.get(0).getChild("attribut");
 		Element racine = new Element("doc");
 		Document document = new Document(racine);
 		switch (element.getName()) {

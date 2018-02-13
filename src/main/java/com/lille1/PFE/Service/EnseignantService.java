@@ -16,34 +16,41 @@ public class EnseignantService {
 	@Autowired
 	private RepositoryEnseignant mRepositoryEnseignant;
 
+	// ajout un enseignant
 	@Transactional
 	public Enseignant setEnseignant(String name, String password, String email, String type) {
 		return mRepositoryEnseignant.save(new Enseignant(name, password, email, type));
 	}
 
+	//retourner tous les Enseignant
 	@Transactional
 	public Iterable<Enseignant> getAllEnseignant() {
 		return mRepositoryEnseignant.findAll();
 	}
 
+	// retourner un Enseignant à partir son Pseudo et Paswword
 	@Transactional
 	public Enseignant VerifyEnseignant(String pseudo, String password) {
 		return mRepositoryEnseignant.findByNomAndPassword(pseudo, password);
 	}
 
+	// supprimer un Enseignat à partir son ID
 	public void deleteEns(Long id) {
 		mRepositoryEnseignant.delete(id);
 	}
 
+	// retourner un Enseignant à partir son ID
 	public Enseignant getEnseignantById(Long id) {
 		return mRepositoryEnseignant.findOne(id);
 	}
 
+	// modification un Enseignant
 	@Transactional
 	public void updateEnseignant(Long id, String nom, String password, String email) {
 		mRepositoryEnseignant.updateEnseignantById(id, nom, password, email);
 	}
 
+	// transformer un Iterable de connaissance à une List de Connaissance
 	public List<Connaissance> getAllConnaissaneEnseignantById(Long id) {
 		Enseignant enseignant = mRepositoryEnseignant.findOne(id);
 		List<Connaissance> connaissances = new ArrayList<>();

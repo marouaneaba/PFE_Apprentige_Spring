@@ -18,6 +18,7 @@ public class LoginService {
 		@Autowired
 		private JavaMailSender sender;
 	
+	// quand un utilisateur oublier son mot de passe , peux le récuperer dans sa boite d'email
 	public void EnvoyerMessage(String destinateur,String objet,String msg){
 		
 		MimeMessage message = sender.createMimeMessage();

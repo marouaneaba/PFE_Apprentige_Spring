@@ -88,7 +88,6 @@ public class ControllerApprentissage {
 				//arréter tous les connaissance et fait.
 			}
 		}
-		//List<Exercice> exercices = mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant);
 		List<History> history = mRepositoryHistory.findByScoreAndEtudiant(1,etudiant);
 		List<Exercice> exercices1ByEtudiant = new ArrayList<Exercice>();
 		for(int i=0;i<history.size();i++){
@@ -97,11 +96,6 @@ public class ControllerApprentissage {
 		exercicees.removeAll(exercices1ByEtudiant);
 		
 		
-		//connaissanceREPLY = connaissancesNonEtudiant.get(0);
-		//niveaux = connaissancesNonEtudiant.get(0).getOrdre();
-		//System.out.println("niveaux : " + niveaux);
-		// peux etre aucun exercice n'est liée avec se exercice.
-		//List<Exercice> exercice = mRepositoryExercice.findByConnaissanceOrdre(niveaux);
 
 		if (connaissancesNonEtudiant == null || connaissancesNonEtudiant.size() == 0 || exercicees.size() == 0) {
 			session.setAttribute("result", "finie");
@@ -112,10 +106,6 @@ public class ControllerApprentissage {
 			// Veuillez Attendre la mise à jour des nouvelle connaissances à
 			// faire.
 		} else {
-			// niveaux = connaissancesNonEtudiant.get(0).getOrdre();
-			// System.out.println("niveaux : " +niveaux);
-			// List<Exercice> exercice =
-			// mRepositoryExercice.findByConnaissanceOrdre(niveaux);
 			System.out.println("exercice by Ordre : " + exercicees);
 			Collections.shuffle(exercicees);
 			System.out.println("exercice by Ordre : " + exercicees);
@@ -161,7 +151,6 @@ public class ControllerApprentissage {
 		
 		if (mExerciceService.ExerciceComparTo(codeNetoyer, ExerciceREPLY.getXMLSolutionNettoyer())) { // solution correct
 
-			//Connaissance connaissance = mRepositoryConnaissance.findByOrdre(niveaux);
 			Connaissance connaissance = mRepositoryConnaissance.findOne(connaissanceREPLY.getId_ExEtu());
 			
 			etudiant.setConnaissances(connaissance);
@@ -169,7 +158,7 @@ public class ControllerApprentissage {
 			session.setAttribute("result", "oui");
 			session.setAttribute("niveaux", niveaux);
 			
-			/**/
+			
 			History history = new History(1);
 			mRepositoryHistory.save(history);
 			history.setEtudiant(etudiant);

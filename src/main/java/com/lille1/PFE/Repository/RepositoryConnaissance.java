@@ -24,11 +24,7 @@ public interface RepositoryConnaissance extends CrudRepository<Connaissance, Lon
 
 	public List<Connaissance> findConnaissanceByEnseignantAndValider(Enseignant enseignant, boolean valider);
 
-	// @Query("select c from Connaissance c where c.id_ExEtu != (select
-	// ec.id_ExEtu from Etudiant e JOIN e.connaissances ec)")
-	// @Query("select distinct c from Etudiant e inner JOIN e.connaissances ec ,
-	// Connaissance c where c != ec")
-	// @Query("select ec from Etudiant e JOIN e.connaissances ec")
+
 	@Query("select distinct ec from Etudiant e inner JOIN e.connaissances ec where ec != connai ")
 	public List<Connaissance> findConnaissaceNonEtudiant(@Param("connai") List<Connaissance> connaissanceEtudiant);
 

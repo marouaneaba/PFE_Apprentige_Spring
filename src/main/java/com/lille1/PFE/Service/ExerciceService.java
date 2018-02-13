@@ -36,46 +36,8 @@ public class ExerciceService {
 	@Autowired
 	private RepositoryVariable mRepositoryVariable;
 
-	//private SAXBuilder sxb = new SAXBuilder();
-
-	/*public List<Variable> SaveVaribale(String value) {
-		value = "<doc>" + value + "</doc>";
-		List<Variable> varibales = new ArrayList<>();
-
-		Document document = null;
-		String[] variables = null;
-		String[] types = null;
-		try {
-
-			document = sxb.build(new ByteArrayInputStream(value.getBytes()));
-		} catch (Exception e) {
-		}
-
-		Element racine = document.getRootElement();
-
-		List listEtudiants = racine.getChildren("li");
-		Iterator index = listEtudiants.iterator();
-		while (index.hasNext()) {
-
-			Element courant = (Element) index.next();
-			List<Element> nomVariableElement = courant.getChildren();
-
-			variables = nomVariableElement.get(0).getText().trim().split("\n");
-			types = nomVariableElement.get(2).getText().trim().split("\n");
-
-			for (int i = 0; i < variables.length; i++) {
-				varibales.add(new Variable(variables[i], types[i]));
-				System.out.println("var : " + variables[i]);
-				System.out.println("type : " + types[i]);
-			}
-		}
-		
-		for(int i=0;i<variables.length;i++){
-			System.out.println(variables[i]);
-		}
-		return null;
-	}*/
 	
+	// à partir HTML de saisie des varibale d'un enseignant, on récupérer un XML nettoyer des varibale 
 	public List<Variable> SaveVaribale(String StringVariable){
 		SaxHandler mSaxHandler = new SaxHandler();
 		mSaxHandler.setResult("");
@@ -83,6 +45,7 @@ public class ExerciceService {
 		return mSaxHandler.getVariable();
 	}
 
+	// transformer un Iterable des exercices à une list des exercices
 	public List<Exercice> convertIterableToList(Iterable<Exercice> iterable) {
 		if (iterable instanceof List) {
 			return (List<Exercice>) iterable;
@@ -96,38 +59,36 @@ public class ExerciceService {
 		return list;
 	}
 
+	// retourner tous les exercice enregistrer
 	public List<Exercice> getAllExercices() {
 		return convertIterableToList(mRepositoryExercice.findAll());
 	}
 
+	// supprimer un exercice à partir de son ID
 	public void deleteExercice(Long id) {
 		List<Variable> variables = mRepositoryExercice.findOne(id).getVariables();
-		/*for (int i = 0; i < variables.size(); i++) {
-			mRepositoryVariable.delete(variables.get(i).getId());
-		}*/
+
 		mRepositoryVariable.delete(variables);
 		mRepositoryExercice.delete(mRepositoryExercice.findOne(id));
 	}
 
+	//récupérer un exercice à partir son ID
 	public Exercice getExerciceById(Long id) {
 		return mRepositoryExercice.findOne(id);
 	}
 
+	//ajouter un exercice
 	public void addExerciceRepository(String nomExercice, String enonceExercice, String XMLSolution,
 			String XMLSolutionNettoyer, List<Connaissance> connaissances, List<Variable> variables,
 			Enseignant enseignant) {
 
 		Exercice exercice = new Exercice(nomExercice, enonceExercice, XMLSolution, XMLSolutionNettoyer);
 		mRepositoryExercice.save(exercice);
-		// exercice.setConnaissance(connaissances);
-		// mRepositoryConnaissance.save(connaissances);
-		// exercice.setVariables(variables);
-		// mRepositoryVariable.save(variables);
-		// exercice.setEnseignant(enseignant);
-		// mRepositoryPersonne.save(enseignant);
+
 
 	}
 
+	// liée un exercice à un enseignant
 	public void addExerciceEnseigantRepository(String nomExercice, String enonceExercice, String XMLSolution,
 			String XMLSolutionNettoyer, List<Connaissance> connaissances, List<Variable> variables, Personne personne) {
 
@@ -142,10 +103,12 @@ public class ExerciceService {
 
 	}
 
+	// retourner un exercice à partir son ID
 	public List<Exercice> getExerciceEnseignant(Long id) {
 		return mRepositoryEnseignant.findOne(id).getExercices();
 	}
 
+	//enregistrer in exercice
 	public void saveExercice(String nameExercice, String ennoncer_exercice, String variable, String codeBrouillon,
 			String codeNetoyer, List<String> connaissancesSelected, Personne personne) {
 
@@ -160,7 +123,6 @@ public class ExerciceService {
 		}
 		exercice.setConnaissance(connaissances);
 		List<Variable> variables = SaveVaribale(variable); 
-		//System.out.println("mon objet varibale : "+codeNetoyer);
 		System.out.println("++++++ la size  des varibale : "+variables.size());
 		for(int i=0;i<variables.size();i++){
 			System.out.println("mon objet varibale : "+variables.get(i));
@@ -175,8 +137,9 @@ public class ExerciceService {
 
 	}
 	
-	
-public boolean explorer(Element current1,Element current2){
+	// comparer deux XML , solution d'un exercice fournie par l'enseignant , et la soulution saisie par l'étudiant 
+	// pour savoir si l'etudiant à bien reponder sur l'exercice.
+	public boolean explorer(Element current1,Element current2){
 		
 		System.out.println("1 : "+current1.getName());
 		System.out.println("2 : "+current2.getName());
@@ -214,11 +177,12 @@ public boolean explorer(Element current1,Element current2){
 		
 	}
 	
+	
 	public boolean ExerciceComparTo(String EtudiantSol,String EnseignantSol){
 		
 		SAXBuilder sxb = new SAXBuilder();
-		String code1 ="<doc><lire var='nb' ></lire><affectation var='N'  val1='0'  arith=''  val2='' ></affectation><affectation var='nb'  val1='0'  arith=''  val2='' ></affectation><tantque val1='nb'  arith='inf'  val2='0' ><lire var='nb' ></lire><if val1='nb'  arith='inf'  val2='0' ><affectation var='i'  val1='i'  arith='+'  val2='' ></affectation></if><else><affectation var='N'  val1='N'  arith='+'  val2='' ></affectation></else></tantque></doc>";
-		String code2 ="<doc><lire var='nb' ></lire><affectation var='N'  val1='0'  arith=''  val2='' ></affectation><affectation var='nb'  val1='0'  arith=''  val2='' ></affectation><tantque val1='nb'  arith='inf'  val2='0' ><lire var='nb' ></lire><if val1='nb'  arith='inf'  val2='0' ><affectation var='i'  val1='i'  arith='+'  val2='' ></affectation></if><else><affectation var='N'  val1='N'  arith='+'  val2='' ></affectation></else></tantque></doc>";
+		//String code1 ="<doc><lire var='nb' ></lire><affectation var='N'  val1='0'  arith=''  val2='' ></affectation><affectation var='nb'  val1='0'  arith=''  val2='' ></affectation><tantque val1='nb'  arith='inf'  val2='0' ><lire var='nb' ></lire><if val1='nb'  arith='inf'  val2='0' ><affectation var='i'  val1='i'  arith='+'  val2='' ></affectation></if><else><affectation var='N'  val1='N'  arith='+'  val2='' ></affectation></else></tantque></doc>";
+		//String code2 ="<doc><lire var='nb' ></lire><affectation var='N'  val1='0'  arith=''  val2='' ></affectation><affectation var='nb'  val1='0'  arith=''  val2='' ></affectation><tantque val1='nb'  arith='inf'  val2='0' ><lire var='nb' ></lire><if val1='nb'  arith='inf'  val2='0' ><affectation var='i'  val1='i'  arith='+'  val2='' ></affectation></if><else><affectation var='N'  val1='N'  arith='+'  val2='' ></affectation></else></tantque></doc>";
 		Document document1 = null;
 		Document document2 = null;
 		boolean resultat = false;
@@ -229,7 +193,6 @@ public boolean explorer(Element current1,Element current2){
 			Element root2 = document2.getRootElement();
 			resultat = explorer(root1,root2);
 			
-			//nettoyer(document.getRootElement());
 		} catch (JDOMException e) {
 			System.out.println(e);
 		} catch (IOException e) {

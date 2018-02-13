@@ -85,12 +85,6 @@ public class ControllerConsulterExercice {
 			ens.get(i).getExercices().clear();
 		}
 		mRepositoryEnseignant.save(ens);
-		//mRepositoryEnseignant
-		//mRepositoryHistory
-		//RepositoryExercice
-		
-		//mHistoryService.setNULLExerciceHistory(idEx);
-		//mExerciceService.deleteExercice(idEx);
 
 		model.addAttribute("exercices", mExerciceService.getAllExercices());
 		return new RedirectView("/consulterExercice");

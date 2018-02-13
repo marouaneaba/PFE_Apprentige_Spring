@@ -16,7 +16,8 @@ public class AdminService {
 
 	@Autowired
 	private RepositoryAdmin mRepositoryAdmin;
-
+	
+	// transformer Iterable à une list des admin
 	public List<Admin> convertIterableToList(Iterable<Admin> iterable) {
 		if (iterable instanceof List) {
 			return (List<Admin>) iterable;
@@ -30,21 +31,25 @@ public class AdminService {
 		return list;
 	}
 
+	// returner tous les admin
 	public List<Admin> getAllAdmin() {
 
 		return convertIterableToList(mRepositoryAdmin.findAll());
 	}
 
+	// retourner admin pas son ID
 	public Admin getAdminById(Long id) {
 		System.out.println("update service debut : ");
 		return mRepositoryAdmin.findOne(id);
 	}
 
+	// modification un admin
 	@Transactional
 	public void updateAdmin(Long id, String pseudo, String password, String email) {
 		mRepositoryAdmin.updateConnaissanceById(id, pseudo, password, email);
 	}
 
+	//supprimer un admin
 	@Transactional
 	public void deleteAdmin(Long id) {
 		mRepositoryAdmin.delete(id);

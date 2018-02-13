@@ -65,12 +65,11 @@ public class ControllerAceuill {
 				break;
 			}else if(mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant.get(i)) == null 
 					&& mRepositoryExercice.findByConnaissance(connaissancesNonEtudiant.get(i)).size() == 0){
-				//arréter tous les connaissance et fait.
+				
 				result = null;
 			}
 		}
 		
-		/* probléme dans la requet */
 		
 		List<History> history = mRepositoryHistory.findByScoreAndEtudiant(1,etudiant);
 		

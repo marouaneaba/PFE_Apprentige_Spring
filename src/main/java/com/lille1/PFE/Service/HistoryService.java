@@ -20,6 +20,7 @@ public class HistoryService {
 	@Autowired
 	private ExerciceService mExerciceService;
 	
+	//transformer un Iterable des historie à list des histories
 	public List<History> convertIterableToList(Iterable<History> mRepositoryHistory) {
 		if (mRepositoryHistory instanceof List) {
 			return (List<History>) mRepositoryHistory;
@@ -33,10 +34,12 @@ public class HistoryService {
 		return list;
 	}
 	
+	// retourner tout les histories enregistrer
 	public List<History> getAllHistory(){
 		return convertIterableToList(mRepositoryHistory.findAll());
 	}
 	
+	// supprimer un historier liée à un exercice , quand on veux supprimer un etudiant
 	@Transactional
 	public void setNULLExerciceHistory(Long idEx){
 		

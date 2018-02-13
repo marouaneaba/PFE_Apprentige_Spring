@@ -6,11 +6,7 @@ import com.lille1.PFE.Entity.*;
 import java.util.*;
 import java.io.StringReader;
 
-/**
- * @author yves.roos
- *
- *         Exemple d'implementation d'un ContentHandler.
- */
+
 public class SaxHandler extends DefaultHandler {
 
 	private static String result = "";
@@ -29,7 +25,7 @@ public class SaxHandler extends DefaultHandler {
 	 * @see org.xml.sax.ContentHandler#startDocument()
 	 */
 	public void startDocument() throws SAXException {
-		// System.out.println("Debut du document");
+		
 	}
 
 	/**
@@ -41,7 +37,7 @@ public class SaxHandler extends DefaultHandler {
 	 * @see org.xml.sax.ContentHandler#endDocument()
 	 */
 	public void endDocument() throws SAXException {
-		// System.out.println("Fin du document" );
+		
 	}
 
 	/**
@@ -63,14 +59,7 @@ public class SaxHandler extends DefaultHandler {
 	 */
 	public void startElement(String nameSpaceURI, String localName, String rawName, Attributes attributs)
 			throws SAXException {
-		/*
-		 * System.out.println("Ouverture de la balise : " + localName) ; if
-		 * (attributs.getLength() != 0)
-		 * System.out.println("  Attributs de la balise : ") ; for (int index =
-		 * 0; index < attributs.getLength(); index++) { // on parcourt la liste
-		 * des attributs System.out.println("     - " +
-		 * attributs.getLocalName(index) + " = " + attributs.getValue(index)); }
-		 */
+
 		
 		if(type.equals("code")){
 			if(!localName.equals("li") && !localName.equals("span") && !localName.equals("ul") && write == false){
@@ -82,14 +71,7 @@ public class SaxHandler extends DefaultHandler {
 				result=result+">";
 			}
 		}else if(type.equals("var")){
-			/*System.out.println("Ouverture de la balise : " + localName) ; 
-			
-			if(attributs.getLength() != 0){
-			 System.out.println("  Attributs de la balise : ") ; 
-				for (int index = 0; index < attributs.getLength(); index++) { // on parcourt la liste des attributs 
-					System.out.println("     - " +attributs.getLocalName(index) + " = " + attributs.getValue(index));
-				}
-			}*/
+
 			if(localName.equals("li")){
 				this.rec = true;
 				this.nomVariable = "";
@@ -106,7 +88,7 @@ public class SaxHandler extends DefaultHandler {
 	 *      java.lang.String, java.lang.String)
 	 */
 	public void endElement(String nameSpaceURI, String localName, String rawName) throws SAXException {
-		// System.out.println("Fermeture de la balise : " + localName);
+
 		
 		if(type.equals("code")){
 			if(localName.equals("lire") || localName.equals("affectation") || localName.equals("afficher") || localName.equals("doc"))
@@ -117,7 +99,6 @@ public class SaxHandler extends DefaultHandler {
 				System.out.println("***************************************write : "+write);
 			}
 		}else if(type.equals("var")){
-			//System.out.println("Fermeture de la balise : " + localName);
 			if(localName.equals("li")){
 				this.rec = false;
 			}else if(localName.equals("span")){
@@ -141,12 +122,10 @@ public class SaxHandler extends DefaultHandler {
 	 */
 	public void characters(char[] ch, int start, int length) throws SAXException {
 		String s = new String(ch, start, length).trim();
-		 //if (s.length() > 0) System.out.println(" Contenu : |" + s + "|");
 		 if(this.rec){
 			 this.nomVariable = this.nomVariable +s+",";
 			 String[] tab = this.nomVariable.split(",");
 			 if(tab.length == 2){
-				 //System.out.println("mes variable : "+ this.nomVariable);
 				 this.varibales.add(new Variable(tab[0],tab[1]));
 			 }
 		 }
@@ -171,8 +150,8 @@ public class SaxHandler extends DefaultHandler {
 	 * @see org.xml.sax.ContentHandler#ignorableWhitespace(char[], int, int)
 	 */
 	public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {
-		// System.out.println("espaces inutiles rencontres : ..." + new
-		// String(ch, start, length) + "...");
+
+
 	}
 
 	/**
@@ -187,8 +166,7 @@ public class SaxHandler extends DefaultHandler {
 	 *      java.lang.String)
 	 */
 	public void processingInstruction(String target, String data) throws SAXException {
-		// System.out.println("Instruction de traitement : " + target);
-		// System.out.println(" dont les arguments sont : " + data);
+
 	}
 
 	public String parserString(String chaine, String type) {
@@ -199,7 +177,6 @@ public class SaxHandler extends DefaultHandler {
 			XMLReader saxReader = XMLReaderFactory.createXMLReader();
 			saxReader.setContentHandler(new SaxHandler());
 			saxReader.parse(new InputSource(new StringReader(chaine)));
-			// System.out.println("result : "+this.result);
 		} catch (Exception t) {
 			t.printStackTrace();
 		}

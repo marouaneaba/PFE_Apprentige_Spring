@@ -32,10 +32,7 @@ public class ControllerDashbord {
 	@Autowired
 	private RepositoryEnseignant mRepositoryEnseignant;
 
-	@GetMapping(value="/")
-	public RedirectView forward(){
-		return new RedirectView("/login");
-	}
+	
 
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -48,7 +45,7 @@ public class ControllerDashbord {
 		Admin admin = mRepositoryAdmin.findByNome(principal.getName());
 
 		HttpSession session = request.getSession();
-		Personne personne = null;// mRepositoryPersonne.findByNome(principal.getName());
+		Personne personne = null;
 
 		if (etudiant != null) {
 			personne = (Personne) etudiant;

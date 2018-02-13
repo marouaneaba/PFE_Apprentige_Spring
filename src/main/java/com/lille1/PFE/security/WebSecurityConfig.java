@@ -30,15 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.jdbcAuthentication().dataSource(dataSource)
 				.usersByUsernameQuery("select nom, password, enabled from personne where nom=?")
 				.authoritiesByUsernameQuery("select nom, role from personne where nom=?");
-		// .usersByUsernameQuery(
-		// "select username, password, enabled from users where username=?")
-		// .authoritiesByUsernameQuery(
-		// "select username, role from user_roles where username=?");
+
 	}
-	/*
-	 * @Autowired public void configureGlobal(AuthenticationManagerBuilder auth)
-	 * throws Exception { auth .inMemoryAuthentication()
-	 * .withUser("user").password("password").roles("USER"); }
-	 */
+
 
 }

@@ -90,9 +90,7 @@ public class ControllerExercice {
 		mSaxHandler.setResult("");
 		String codeNetoyer = new SaxHandler().parserString(codeBrouillon,"code");
 		System.out.println("- : "+codeNetoyer+" , fin");
-		/*codeNetoyer.replaceAll("'inf'","'<'")
-				   .replaceAll("'sup'","'>'");
-		System.out.println("karim : "+codeNetoyer);*/
+		
 		if (nameExercice.equals("") || exercice.equals("") || variable.equals("") || codeBrouillon.equals("")
 				|| connaissancesSelected.size() == 0) {
 			System.out.println("i'm here ");

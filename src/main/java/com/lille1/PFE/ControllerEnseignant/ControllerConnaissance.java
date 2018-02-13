@@ -188,7 +188,6 @@ public class ControllerConnaissance {
 		mConnaissanceService.supprimerConnaissances(idCon);
 		sessionGlobal.deleteConnaissance(idCon);
 		pModel.addAttribute("connaissances", mConnaissanceService.getAllConnaissance());
-		// return new RedirectView("/consultConnaissance");
 		return new RedirectView("/dashbord");
 	}
 
@@ -208,7 +207,7 @@ public class ControllerConnaissance {
 		sessionGlobal.updateConnaissance(idCon, nom, ordre);
 		pModel.addAttribute("connaissances", mConnaissanceService.getAllConnaissance());
 
-		// return new RedirectView("/consultConnaissance");
+		
 		return new RedirectView("/dashbord");
 	}
 

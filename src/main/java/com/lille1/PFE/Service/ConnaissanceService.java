@@ -22,6 +22,7 @@ public class ConnaissanceService {
 	@Autowired
 	private ConnaissanceService mConnaissanceService;
 
+	// transformer un Iterable à une list de Connaissance
 	public List<Connaissance> convertIterableToList(Iterable<Connaissance> iterable) {
 		if (iterable instanceof List) {
 			return (List<Connaissance>) iterable;
@@ -35,29 +36,35 @@ public class ConnaissanceService {
 		return list;
 	}
 
+	//retourner tous les Connaissances
 	public List<Connaissance> getAllConnaissance() {
 
 		return convertIterableToList(mRepositoryConnaissance.findAll());
 	}
 
+	// supprimer une Connaissances à partir ID
 	public void supprimerConnaissances(Long id) {
 		mRepositoryConnaissance.delete(id);
 	}
 
+	// retourner une Connaissance à partir ID
 	public Connaissance getConnaissances(Long id) {
 		return mRepositoryConnaissance.findOne(id);
 	}
 
+	// modifier la Connaissance
 	@Transactional
 	public void updateConnaissance(Long id, String nom, int ordre) {
 		mRepositoryConnaissance.updateConnaissanceById(id, nom, ordre);
 	}
 
+	//modifier l'attribut confirmer de connaissance à true
 	@Transactional
 	public void updateConnaissanceToTrue(Long id) {
 		mRepositoryConnaissance.updateConnaissanceById(id);
 	}
 
+	// retourner le niveaux d'un étudiant
 	public String getNiveaux(Long idEtudiant) {
 		List<Connaissance> connaissancesEtudiant = mRepositoryEtudiant.findConnaissaceByEtudiant(idEtudiant);
 		List<Connaissance> connaissancesNonEtudiant = mConnaissanceService.getAllConnaissance();
@@ -68,8 +75,7 @@ public class ConnaissanceService {
 
 		if (connaissancesNonEtudiant == null || connaissancesNonEtudiant.size() == 0) {
 
-			//List<Connaissance> Allconnaissances = mConnaissanceService.getAllConnaissance();
-			//Allconnaissances.sort(comparator);
+
 			return null;
 
 		}
