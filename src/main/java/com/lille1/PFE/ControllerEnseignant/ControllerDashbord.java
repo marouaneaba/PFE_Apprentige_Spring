@@ -34,7 +34,13 @@ public class ControllerDashbord {
 
 	
 
-
+	/**
+	 * 
+	 * @param request
+	 * @param pModel
+	 * @param principal
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public RedirectView VerifyLogin(HttpServletRequest request, ModelMap pModel, Principal principal) {
 
@@ -69,6 +75,10 @@ public class ControllerDashbord {
 
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	@GetMapping("/propos")
 	public String getApropos(){
 		return "apropos";

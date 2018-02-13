@@ -32,12 +32,21 @@ public class ControllerAdmin extends MainController {
 	@Autowired
 	private AdminService mAdminService;
 
-	
+	/**
+	 * 
+	 * @return
+	 */
 	@GetMapping(value="/")
 	public RedirectView forward(){
 		return new RedirectView("/dashbord");
 	}
 	
+	/**
+	 * 
+	 * @param request
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String GetAdmin(HttpServletRequest request, ModelMap pModel) {
 
@@ -49,6 +58,12 @@ public class ControllerAdmin extends MainController {
 
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/listAdmin", method = RequestMethod.GET)
 	public String listerAdmin(HttpServletRequest request, ModelMap pModel) {
 
@@ -58,6 +73,12 @@ public class ControllerAdmin extends MainController {
 		return "listerAdmin";
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/listAdmin/update/{id}", method = RequestMethod.GET)
 	public String updateAdmin(@PathVariable("id") Long id, Model pModel) {
 
@@ -65,6 +86,14 @@ public class ControllerAdmin extends MainController {
 		return "modifierEnseignant";
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @param pseudo
+	 * @param password
+	 * @param email
+	 * @return
+	 */
 	@RequestMapping(value = "/listAdmin/update/{id}", method = RequestMethod.POST)
 	public RedirectView POSTupdateEtudiant(@PathVariable("id") Long id, @RequestParam("name") String pseudo,
 			@RequestParam("password") String password, @RequestParam("email_address") String email) {
@@ -74,6 +103,11 @@ public class ControllerAdmin extends MainController {
 		return new RedirectView("/listAdmin");
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/listAdmin/delete/{id}", method = RequestMethod.GET)
 	public RedirectView deleteEtudiant(@PathVariable("id") Long id) {
 

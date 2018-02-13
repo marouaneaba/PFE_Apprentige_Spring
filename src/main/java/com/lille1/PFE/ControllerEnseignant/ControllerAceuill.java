@@ -36,6 +36,12 @@ public class ControllerAceuill {
 	@Autowired
 	private RepositoryHistory mRepositoryHistory;
 	
+	/**
+	 * 
+	 * @param request
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String GetAceuill(HttpServletRequest request, ModelMap pModel) {
 

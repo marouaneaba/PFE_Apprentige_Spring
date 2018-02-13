@@ -53,6 +53,12 @@ public class ControllerEnseignant {
 	private boolean message = false;
 	private boolean userExiste = false;
 
+	/**
+	 * 
+	 * @param request
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/enseignant", method = RequestMethod.GET)
 	public String GetInterfaceEns(HttpServletRequest request, ModelMap pModel) {
 
@@ -83,6 +89,11 @@ public class ControllerEnseignant {
 		return "enseignant";
 	}
 
+	/**
+	 * 
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/ajouterPersonne", method = RequestMethod.GET)
 	public String GetAjoutEns(ModelMap pModel) {
 
@@ -102,6 +113,12 @@ public class ControllerEnseignant {
 		return "ajouterPersonne";
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/ajouterPersonne", method = RequestMethod.POST)
 	public RedirectView POSTAjoutEns(HttpServletRequest request, ModelMap pModel) {
 
@@ -132,6 +149,12 @@ public class ControllerEnseignant {
 		return new RedirectView("/admin");
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/listerEns", method = RequestMethod.GET)
 	public String ListerEns(HttpServletRequest request, ModelMap pModel) {
 
@@ -148,6 +171,12 @@ public class ControllerEnseignant {
 		return "/consulterEns";
 	}
 
+	/**
+	 * 
+	 * @param pModel
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/listerEns/delete/{idEns}", method = RequestMethod.GET)
 	public RedirectView deleteEns(ModelMap pModel, @PathVariable("idEns") Long id) {
 
@@ -156,6 +185,12 @@ public class ControllerEnseignant {
 		return new RedirectView("/listerEns");
 	}
 
+	/**
+	 * 
+	 * @param pModel
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/listerEns/update/{idEns}", method = RequestMethod.GET)
 	public String updateEns(ModelMap pModel, @PathVariable("idEns") Long id) {
 
@@ -164,6 +199,15 @@ public class ControllerEnseignant {
 		return "/modifierEnseignant";
 	}
 
+	/**
+	 * 
+	 * @param pModel
+	 * @param id
+	 * @param nom
+	 * @param password
+	 * @param email
+	 * @return
+	 */
 	@RequestMapping(value = "/listerEns/update/{idEns}", method = RequestMethod.POST)
 	public RedirectView POSTupdateEns(ModelMap pModel, @PathVariable("idEns") Long id, @RequestParam("name") String nom,
 			@RequestParam("password") String password, @RequestParam("email_address") String email) {

@@ -54,6 +54,12 @@ public class ControllerConnaissance {
 
 	private String message= "";
 	boolean trouver = false;
+	
+	/**
+	 * 
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/Ajoutconnaissance", method = RequestMethod.GET)
 	public String getInterfaceAjoutConnaissance(ModelMap pModel) {
 
@@ -65,6 +71,14 @@ public class ControllerConnaissance {
 		return "connaissance";
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @param nom
+	 * @param ordreS
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/Ajoutconnaissance", method = RequestMethod.POST)
 	public RedirectView ajoutConnaissance(HttpServletRequest request, @RequestParam("nom") String nom,
 			@RequestParam("ordre") String ordreS, ModelMap pModel) {
@@ -109,6 +123,12 @@ public class ControllerConnaissance {
 
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/consultConnaissance", method = RequestMethod.GET) // les connaissance non valider par admin
 	public String consulterConnaissances(HttpServletRequest request, Model pModel) {
 
@@ -136,6 +156,12 @@ public class ControllerConnaissance {
 		return "ConsulterConnaissances";
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/consultAllConnaissance", method = RequestMethod.GET)
 	public String consulterAllConnaissances(HttpServletRequest request, Model pModel) {
 
@@ -154,6 +180,12 @@ public class ControllerConnaissance {
 		return "ConsulterConnaissances";
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/validerConnaissance", method = RequestMethod.GET)
 	public String consulterConnaissancesNonValider(HttpServletRequest request, Model pModel) {
 
@@ -172,6 +204,12 @@ public class ControllerConnaissance {
 		return "ConsulterConnaissances";
 	}
 
+	/**
+	 * 
+	 * @param pModel
+	 * @param idCon
+	 * @return
+	 */
 	@RequestMapping(value = "/consultConnaissance/delete/{id_ExEtu}", method = RequestMethod.GET)
 	public RedirectView supprimerConnaissances(Model pModel, @PathVariable("id_ExEtu") Long idCon) {
 		
@@ -191,6 +229,12 @@ public class ControllerConnaissance {
 		return new RedirectView("/dashbord");
 	}
 
+	/**
+	 * 
+	 * @param pModel
+	 * @param idCon
+	 * @return
+	 */
 	@RequestMapping(value = "/consultConnaissance/update/{id_ExEtu}", method = RequestMethod.GET)
 	public String modifierConnaissances(Model pModel, @PathVariable("id_ExEtu") Long idCon) {
 
@@ -199,6 +243,14 @@ public class ControllerConnaissance {
 		return "modifierConnaissance";
 	}
 
+	/**
+	 * 
+	 * @param idCon
+	 * @param nom
+	 * @param ordre
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/consultConnaissance/update/{id_ExEtu}", method = RequestMethod.POST)
 	public RedirectView PostmodifierConnaissances(@PathVariable("id_ExEtu") Long idCon, @RequestParam("nom") String nom,
 			@RequestParam("ordre") int ordre, ModelMap pModel) {
@@ -211,6 +263,12 @@ public class ControllerConnaissance {
 		return new RedirectView("/dashbord");
 	}
 
+	/**
+	 * 
+	 * @param idCon
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/consultConnaissance/valider/{id_ExEtu}", method = RequestMethod.GET)
 	public RedirectView ValiderConnaissanceAdmin(@PathVariable("id_ExEtu") Long idCon, ModelMap pModel) {
 
@@ -219,6 +277,13 @@ public class ControllerConnaissance {
 		return new RedirectView("/validerConnaissance");
 	}
 
+	/**
+	 * 
+	 * @param idCon
+	 * @param idExercice
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(value = "/consultConnaissance/deleteOfExercice/{id_ExEtu}/{idExercice}", method = RequestMethod.GET)
 	public RedirectView SuuprimerConnaissanceOfExercice(@PathVariable("id_ExEtu") Long idCon,
 			@PathVariable("idExercice") Long idExercice, ModelMap pModel) {

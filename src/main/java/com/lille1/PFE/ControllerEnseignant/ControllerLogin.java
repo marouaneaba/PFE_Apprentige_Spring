@@ -26,6 +26,14 @@ public class ControllerLogin {
 	@Autowired
 	private RepositoryPersonne mRepositoryPersonne;
 
+	/**
+	 * recupérer l'interface de l'authentification
+	 * @param principal un objet nos permet de stocker des données vas etre accéder par tout les types de l'utilisateur
+	 * @param pModel pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @param logout nos permet de savoir si l'utilisateur a quitter sa session ou non
+	 * @param error nos permet de savoir si utilisateur à pas reussie l'authntification
+	 * @return fournie un interface de l'authentification
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String GetLogin(Principal principal, ModelMap pModel, @PathParam(value = "logout") String logout,
 			@PathParam("error") String error) {
@@ -40,6 +48,14 @@ public class ControllerLogin {
 
 	}
 
+	/**
+	 * verifier les information envoyer par l'utilisateur pour l'authentification
+	 * @param request nos permet de récuperer les données envoyé par l'utilisateur
+	 * @param pseudo pseudo saisie par l'utilisateur pour l'authentification
+	 * @param password mot de pass saisie par l'utilisateur pour l'authentification
+	 * @param pModel pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public RedirectView VerifyLogin(HttpServletRequest request, @RequestParam("username") String pseudo,
 			@RequestParam("password") String password, ModelMap pModel) {

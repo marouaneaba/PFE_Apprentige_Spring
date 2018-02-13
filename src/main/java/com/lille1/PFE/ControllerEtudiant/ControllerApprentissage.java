@@ -50,6 +50,14 @@ public class ControllerApprentissage {
 	private Connaissance connaissanceREPLY;
 	private Exercice ExerciceREPLY;
 
+	/**
+	 * permet à l'etudiant de fair l'apprentissage des exerice
+	 * l'etudiant vas recevoir un interface contient les connaissance reussite par l'etudiant 
+	 * et proposer à commencer l'apprentissage d'algorthime liée à des connaissance qu'il ne possede pas encore
+	 * @param request contient une session , nos permet de savoir le type d'utilisateur connecter ( Admin , Enseignant , Etudiant)
+	 * @param pModel sur le quel enregitre le niveaux attient par l'etudiant , et les connaissance qu'il posséde pour l'envoie à la vue présenter à l'etudiant
+	 * @return
+	 */
 	@RequestMapping(value = "/apprentisage", method = RequestMethod.GET)
 	public String GetAceuill(HttpServletRequest request, ModelMap pModel) {
 		
@@ -116,6 +124,12 @@ public class ControllerApprentissage {
 		return "apprentissage";
 	}
 
+	/**
+	 * récupérer tout les données envoyer par l'etudaint
+	 * @param request nos permetre de récuperer tous les données nevoyer par l'etudiant
+	 * @param pModel sur la quel on peux mettre les données on veux l'afficher sur l'interface , félicitation si l'etudiant il a réssuie son niveaux
+	 * @return
+	 */
 	@RequestMapping(value = "/apprentisage", method = RequestMethod.POST)
 	public RedirectView POSTApprentissage(HttpServletRequest request, ModelMap pModel) {
 

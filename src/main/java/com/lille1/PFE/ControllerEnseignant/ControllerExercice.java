@@ -36,6 +36,12 @@ public class ControllerExercice {
 
 	private boolean message = false;
 
+	/**
+	 * envoyer un interface à l'enseignant pour ajouter un exercice
+	 * @param request nos permet de récuperer les données envoyé par l'utilisateur
+	 * @param pModel pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return afficher un interface de saisie de l'exercice à l'utilisateur
+	 */
 	@RequestMapping(value = "/AjouterExercice", method = RequestMethod.GET)
 	public String getPage(HttpServletRequest request, ModelMap pModel) {
 
@@ -59,6 +65,13 @@ public class ControllerExercice {
 		return "AjouterExercice";
 	}
 
+	/**
+	 * verifier les informations envoyer par l'utilisateur pour ajouter un exercice , nettoyer les doonées envoyer par l'utilisateur
+	 * ajouter l'exercice dans la base de données.
+	 * @param request request nos permet de récuperer les données envoyé par l'utilisateur : nom d'exercice , ennocer et la solution sous forme XML
+	 * @param pModel pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @return aprés la saisie de l'exercice par l'enseignement , un interface de l'acceuil envoyé à l'enseignant
+	 */
 	@RequestMapping(value = "/AjouterExercice", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public RedirectView recupererExercice(HttpServletRequest request, ModelMap pModel) {
 

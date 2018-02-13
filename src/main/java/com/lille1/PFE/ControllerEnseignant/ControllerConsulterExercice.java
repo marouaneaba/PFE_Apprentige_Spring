@@ -43,7 +43,12 @@ public class ControllerConsulterExercice {
 	private RepositoryExercice mRepositoryExercice;
 	
 	
-	
+	/**
+	 * 
+	 * @param request
+	 * @param pModel
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String recupererExercice(HttpServletRequest request, ModelMap pModel) {
 
@@ -60,6 +65,12 @@ public class ControllerConsulterExercice {
 		return "ConsulterExercices";
 	}
 
+	/**
+	 * 
+	 * @param model
+	 * @param idEx
+	 * @return
+	 */
 	@RequestMapping(value = "/update/{id_ex}", method = RequestMethod.GET)
 	public String editExerciceGet(Model model, @PathVariable("id_ex") Long idEx) {
 
@@ -74,6 +85,12 @@ public class ControllerConsulterExercice {
 		return "ModifierExercice";
 	}
 
+	/**
+	 * 
+	 * @param model
+	 * @param idEx
+	 * @return
+	 */
 	@RequestMapping(value = "/delete/{id_ex}", method = RequestMethod.GET)
 	public RedirectView deleteExercice( Model model, @PathVariable("id_ex") Long idEx) {
 		

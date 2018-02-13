@@ -29,7 +29,11 @@ public class ControllerPassword {
 	// peux envoyer des piéce joint et des contenus complexe que 
 	// SimpleMailMessage
 
-
+	/**
+	 * récuper l'interface de la saisie de l'email , quand l'utilisateur à oublier son mot de passe
+	 * @param pModel utiliser pour afficher un message a l'utilisateur ,quand il saisait un email n'est pas correct
+	 * @return interface de saisie Email sur le quel vas recevoir ces information de l'authentification
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String GetLogin(ModelMap pModel) {
 
@@ -41,6 +45,12 @@ public class ControllerPassword {
 		
 	}
 	
+	/**
+	 * l'authentification de l'utilisateur
+	 * @param pModel sur le quel on peux enregistrer des données à l'afficher sur l'interface 
+	 * @param email email de l'utilisateur à oublier son mot de pass
+	 * @return interface de login , pour faire l'authentification
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public RedirectView POSTLogin(ModelMap pModel,@RequestParam("email") String email) {
 
